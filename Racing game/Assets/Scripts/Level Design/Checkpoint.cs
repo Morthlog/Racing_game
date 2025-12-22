@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class checkpoint : MonoBehaviour
+public class Checkpoint : MonoBehaviour
 {
     [Header("Tags to check")]
     [SerializeField] string[] allowedTags = {"Player"};
@@ -19,7 +19,7 @@ public class checkpoint : MonoBehaviour
     {
         foreach (string tag in allowedTags)
         {
-            if (other.CompareTag(contactOn) && getParentTag(other.gameObject) == tag)
+            if (other.CompareTag(contactOn) && GameLoopManager.instance.getParentTag(other.gameObject) == tag)
             {
                 GameLoopManager.instance.OnCheckpointHit(other.gameObject, ID);
             }
@@ -27,16 +27,4 @@ public class checkpoint : MonoBehaviour
         
     }
 
-    private string getParentTag(GameObject obj)
-    {
-        Transform current = obj.transform;
-        Transform prev = null;
-        while (current != null)
-        {
-            prev = current;
-            current = current.parent;
-        }
-
-        return prev.tag;
-    }
 }

@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4561932985464768040}
   - component: {fileID: 159799079795511621}
   m_Layer: 0
-  m_Name: Props_10
+  m_Name: Spikes_moving_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
