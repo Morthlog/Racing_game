@@ -79,7 +79,6 @@ public class GameLoopManager : MonoBehaviour
 
     public void toLastCheckpoint()
     {
-        // call player reset movement
         Transform tr = player.GetComponent<Transform>();
         tr.position = playerSpawnPoint;
         Vector3 r = checkpoints[playerLastCheckpointID].transform.parent.transform.localEulerAngles;
