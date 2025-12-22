@@ -10,7 +10,7 @@ public class Checkpoint : MonoBehaviour
     private int id;
 
     public int ID { get { return id; } }
-    void Start()
+    void Awake()
     {
         id = int.Parse(this.name[^1].ToString());
     }
