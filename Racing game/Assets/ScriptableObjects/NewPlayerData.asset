@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e80214096869fc4184ca1425ec3b26a, type: 3}
   m_Name: NewPlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  playerPrefab: {fileID: 0}
-  playerName: 
+  chosenCar: {fileID: 1968583919225113155, guid: a39a923810de08f4c8bbb4d98ed40977, type: 3}
