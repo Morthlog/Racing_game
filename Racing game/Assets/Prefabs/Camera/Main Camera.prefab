@@ -76,7 +76,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.5
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 5.64, z: -13.97}
+  FollowOffset: {x: 0, y: 2.7, z: -8.6}
 --- !u!114 &337363098730929793
 MonoBehaviour:
   m_ObjectHideFlags: 0
