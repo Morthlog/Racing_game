@@ -31,6 +31,11 @@ public class CarPrefabSetup:MonoBehaviour
             {
                 collider.convex = true;
             }
+
+            if (collider.name.Equals("body"))
+            {
+                collider.gameObject.tag = "Body";
+            }
         }
     }
 
