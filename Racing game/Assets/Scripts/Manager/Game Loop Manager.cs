@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class GameLoopManager : MonoBehaviour
@@ -6,7 +8,10 @@ public class GameLoopManager : MonoBehaviour
     public static GameLoopManager instance;
     private float time;
     private int frames;
-    private int playerLastCheckpoint = 0;
+    private int playerLastCheckpointID = 0;
+    private GameObject player;
+    private Vector3 playerSpawnPoint;
+    private Dictionary<int, Checkpoint> checkpoints;
 
     private void Awake()
     {
@@ -25,6 +30,17 @@ public class GameLoopManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Checkpoint");
+        checkpoints = new Dictionary<int, Checkpoint>(gos.Length);
+        for (int i = 0; i < gos.Length; i++)
+        {
+            Checkpoint ch = gos[i].GetComponentInChildren<Checkpoint>();
+            checkpoints[ch.ID] = ch;
+        }
+
+        playerSpawnPoint = player.GetComponent<Transform>().position;
+
         time = Time.time;
         frames = 0;
     }
@@ -49,14 +65,40 @@ public class GameLoopManager : MonoBehaviour
     public void OnCheckpointHit(GameObject go, int checkpointID)
     {
         Debug.Log($"Triggered by {go.name} on {checkpointID}");
-        if (checkpointID - playerLastCheckpoint == 1)
+        if (checkpointID - playerLastCheckpointID == 1)
         {
             Debug.Log("Hit correct checkpoint");
-            playerLastCheckpoint++;
+            playerLastCheckpointID++;
+            playerSpawnPoint = checkpoints[checkpointID].GetComponent<Transform>().position;
         }
         else
         {
             Debug.Log("Checkpoint was hit too soon");
         }
+    }
+
+    public void toLastCheckpoint()
+    {
+        // call player reset movement
+        Transform tr = player.GetComponent<Transform>();
+        tr.position = playerSpawnPoint;
+        Vector3 r = checkpoints[playerLastCheckpointID].transform.parent.transform.localEulerAngles;
+        r.y += 90f; // world coord difference
+        tr.localEulerAngles = r;
+
+        player.GetComponentInChildren<CarControl>().MovementReset();
+    }
+
+    public string getParentTag(GameObject obj)
+    {
+        Transform current = obj.transform;
+        Transform prev = null;
+        while (current != null)
+        {
+            prev = current;
+            current = current.parent;
+        }
+
+        return prev.tag;
     }
 }
