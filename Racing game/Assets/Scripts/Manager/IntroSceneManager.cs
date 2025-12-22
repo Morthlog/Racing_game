@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,17 +8,14 @@ public class IntroSceneManager : MonoBehaviour
     GameObject menuCamvas, choiceCanvas;
     [SerializeField]
     GameObject nextBtn, previousBtn;
+
+    [SerializeField]
+    TextMeshProUGUI carNameTxt;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         menuCamvas.SetActive(true);
         choiceCanvas.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void NewGame()
@@ -52,5 +50,10 @@ public class IntroSceneManager : MonoBehaviour
         {
             previousBtn.SetActive(true);
         }
+    }
+
+    public void SetCarNameTxt(string name)
+    {
+        carNameTxt.text = name;
     }
 }

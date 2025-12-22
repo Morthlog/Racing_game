@@ -32,7 +32,7 @@ public class CarManager : MonoBehaviour
     {
         sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<IntroSceneManager>();
         carPool = new GameObject[carPrefabs.Length];
-
+        
         for (int i = 0; i < carPrefabs.Length; i++)
         {
             carPool[i]= Instantiate(carPrefabs[i]);
@@ -43,6 +43,7 @@ public class CarManager : MonoBehaviour
         carPool[carIntex].SetActive(true);
         playerData.chosenCar = carPrefabs[carIntex];
         sceneManager.SetButtons(carIntex, carPrefabs.Length);
+        sceneManager.SetCarNameTxt(playerData.chosenCar.name);
     }
 
     public void SetNextCar()
@@ -56,6 +57,7 @@ public class CarManager : MonoBehaviour
         carPool[carIntex].SetActive(true);
         playerData.chosenCar = carPrefabs[carIntex];
         sceneManager.SetButtons(carIntex, carPrefabs.Length);
+        sceneManager.SetCarNameTxt(playerData.chosenCar.name);
     }
 
     public void SetPreviousCar()
@@ -70,6 +72,7 @@ public class CarManager : MonoBehaviour
         carPool[carIntex].SetActive(true);
         playerData.chosenCar = carPrefabs[carIntex];
         sceneManager.SetButtons(carIntex, carPrefabs.Length);
+        sceneManager.SetCarNameTxt(playerData.chosenCar.name);
     }
 
 
