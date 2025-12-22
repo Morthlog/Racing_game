@@ -18,10 +18,11 @@ public class CarControl : MonoBehaviour
 
     [SerializeField]
     Light[] brakeLights;
-    public bool brakes;
+
     void Awake()
     {
         carControls = new CarInputActions(); // Initialize Input Actions
+
     }
 
     void OnEnable()
@@ -68,7 +69,7 @@ public class CarControl : MonoBehaviour
 
         bool isTryingToMoveSameDirection = (vInput > 0 && forwardSpeed > -0.1f) || (vInput < 0 && forwardSpeed < 0.1f);
 
-        brakes = (vInput < 0 && forwardSpeed > 0.1f) || (vInput > 0 && forwardSpeed < -0.1f);
+        bool brakes = (vInput < 0 && forwardSpeed > 0.1f) || (vInput > 0 && forwardSpeed < -0.1f);
         if (brakes)
         {
             SetLights(true);
@@ -77,6 +78,7 @@ public class CarControl : MonoBehaviour
         {
             SetLights(false);
         }
+
         foreach (var wheel in wheels)
         {
             // Apply steering to wheels that support steering
@@ -103,7 +105,6 @@ public class CarControl : MonoBehaviour
             }
         }
     }
-
 
     void SetLights(bool enable)
     {

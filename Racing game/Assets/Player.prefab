@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 6856539516313839261}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,16 +393,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7bd0c5a24ba1444904d73f62833cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarControl
-  motorTorque: 1000
-  brakeTorque: 1000
-  maxSpeed: 100
-  steeringRange: 30
-  steeringRangeAtMaxSpeed: 10
+  motorTorque: 1500
+  brakeTorque: 1500
+  maxSpeed: 80
+  steeringRange: 15
+  steeringRangeAtMaxSpeed: 5
   centreOfGravityOffset: -1
   brakeLights:
   - {fileID: 4276469787592402366}
   - {fileID: 1935397665779322250}
-  brakes: 0
+  currentSteerRange: 0
 --- !u!64 &6856539516313839261
 MeshCollider:
   m_ObjectHideFlags: 0
