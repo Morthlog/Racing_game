@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 
 public class CarControl : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class CarControl : MonoBehaviour
 
     private CarInputActions carControls; // Reference to the new input system
 
+    [SerializeField]
+    Light[] brakeLights;
+    public bool brakes;
     void Awake()
     {
         carControls = new CarInputActions(); // Initialize Input Actions
@@ -62,9 +66,17 @@ public class CarControl : MonoBehaviour
         float currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);
         float currentSteerRange = Mathf.Lerp(steeringRange, steeringRangeAtMaxSpeed, speedFactor);
 
-        // Determine if the player is accelerating or trying to reverse
-        bool isAccelerating = Mathf.Sign(vInput) == Mathf.Sign(forwardSpeed);
+        bool isTryingToMoveSameDirection = (vInput > 0 && forwardSpeed > -0.1f) || (vInput < 0 && forwardSpeed < 0.1f);
 
+        brakes = (vInput < 0 && forwardSpeed > -0.1f) || (vInput > 0 && forwardSpeed < 0.1f);
+        if (brakes)
+        {
+            SetLights(true);
+        }
+        else
+        {
+            SetLights(false);
+        }
         foreach (var wheel in wheels)
         {
             // Apply steering to wheels that support steering
@@ -72,8 +84,8 @@ public class CarControl : MonoBehaviour
             {
                 wheel.WheelCollider.steerAngle = hInput * currentSteerRange;
             }
-
-            if (isAccelerating)
+           
+            if (isTryingToMoveSameDirection)
             {
                 // Apply torque to motorized wheels
                 if (wheel.motorized)
@@ -81,7 +93,7 @@ public class CarControl : MonoBehaviour
                     wheel.WheelCollider.motorTorque = vInput * currentMotorTorque;
                 }
                 // Release brakes when accelerating
-                wheel.WheelCollider.brakeTorque = 0f;
+                wheel.WheelCollider.brakeTorque = 0f;               
             }
             else
             {
@@ -89,6 +101,15 @@ public class CarControl : MonoBehaviour
                 wheel.WheelCollider.motorTorque = 0f;
                 wheel.WheelCollider.brakeTorque = Mathf.Abs(vInput) * brakeTorque;
             }
+        }
+    }
+
+
+    void SetLights(bool enable)
+    {
+        foreach (var light in brakeLights)
+        {
+            light.enabled = enable;
         }
     }
 }
