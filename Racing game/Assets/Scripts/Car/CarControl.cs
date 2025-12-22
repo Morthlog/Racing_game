@@ -118,5 +118,10 @@ public class CarControl : MonoBehaviour
     {
         rigidBody.linearVelocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;
+        
+        foreach (var wheel in wheels)
+        {
+            wheel.WheelCollider.rotationSpeed = 0f;
+        }
     }
 }
