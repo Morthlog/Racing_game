@@ -68,7 +68,7 @@ public class CarControl : MonoBehaviour
 
         bool isTryingToMoveSameDirection = (vInput > 0 && forwardSpeed > -0.1f) || (vInput < 0 && forwardSpeed < 0.1f);
 
-        brakes = (vInput < 0 && forwardSpeed > -0.1f) || (vInput > 0 && forwardSpeed < 0.1f);
+        brakes = (vInput < 0 && forwardSpeed > 0.1f) || (vInput > 0 && forwardSpeed < -0.1f);
         if (brakes)
         {
             SetLights(true);
