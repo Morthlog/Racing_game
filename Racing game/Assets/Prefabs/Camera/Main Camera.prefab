@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5794307116529402874}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.118907824, y: 0, z: 0, w: 0.9929053}
+  m_LocalRotation: {x: 0.11890654, y: 0, z: 0, w: 0.9929055}
   m_LocalPosition: {x: 0, y: 2.43, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.09, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.658, y: 0, z: 0}
 --- !u!81 &5495205949346128339
 AudioListener:
   m_ObjectHideFlags: 0
@@ -152,12 +152,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
   TrackerSettings:
-    BindingMode: 2
+    BindingMode: 1
     PositionDamping: {x: 1, y: 1, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 2.43, z: -10}
+  FollowOffset: {x: 0, y: 5.64, z: -13.97}
 --- !u!114 &337363098730929793
 MonoBehaviour:
   m_ObjectHideFlags: 0
