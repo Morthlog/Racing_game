@@ -329,8 +329,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8587471135259378723}
   - component: {fileID: 8953938996146673072}
-  - component: {fileID: 4634670506749920934}
   - component: {fileID: 6856539516313839261}
+  - component: {fileID: 4634670506749920934}
+  - component: {fileID: 7773510026790983135}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -347,8 +348,8 @@ Transform:
   m_GameObject: {fileID: 8511235004534618524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.90711, y: -18.61012, z: 3.10862}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4029012863843222004}
@@ -381,28 +382,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4634670506749920934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8511235004534618524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db7bd0c5a24ba1444904d73f62833cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarControl
-  motorTorque: 1500
-  brakeTorque: 1500
-  maxSpeed: 80
-  steeringRange: 15
-  steeringRangeAtMaxSpeed: 5
-  centreOfGravityOffset: -1
-  brakeLights:
-  - {fileID: 4276469787592402366}
-  - {fileID: 1935397665779322250}
-  currentSteerRange: 0
 --- !u!64 &6856539516313839261
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -425,3 +404,38 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &4634670506749920934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8511235004534618524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7bd0c5a24ba1444904d73f62833cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarControl
+  motorTorque: 1500
+  brakeTorque: 1500
+  maxSpeed: 80
+  steeringRange: 15
+  steeringRangeAtMaxSpeed: 5
+  centreOfGravityOffset: -1
+  brakeLights:
+  - {fileID: 4276469787592402366}
+  - {fileID: 1935397665779322250}
+--- !u!114 &7773510026790983135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8511235004534618524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3abc56b57db1914dad7d099eb4d07eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarPrefabSetup
+  wheelColliderPrefab: {fileID: 6947192429415774078, guid: d5e6c1f3f7b17bd49a9c264dee9a5b73, type: 3}
+  playerData: {fileID: 11400000, guid: a8306f58e1c2dfb40a1c98cbcf2a2f8c, type: 2}

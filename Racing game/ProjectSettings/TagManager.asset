@@ -7,6 +7,7 @@ TagManager:
   - CarPrefab
   - Checkpoint
   - Body
+  - SceneManager
   layers:
   - Default
   - TransparentFX

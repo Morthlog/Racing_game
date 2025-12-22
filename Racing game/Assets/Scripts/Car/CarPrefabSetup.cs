@@ -1,13 +1,17 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CarPrefabSetup:MonoBehaviour
 {
     [SerializeField]
     GameObject wheelColliderPrefab;
     GameObject wheelsGO;
+
+    [SerializeField]
+    PlayerData playerData;
     void Awake()
     {
+        Instantiate(playerData.chosenCar, transform);
+      
         wheelsGO = GameObject.Find("wheels");
 
         CreateWheelColliderGO("wheel front right", true, true);
@@ -28,7 +32,6 @@ public class CarPrefabSetup:MonoBehaviour
                 collider.convex = true;
             }
         }
-
     }
 
     GameObject CreateWheelColliderGO(string name, bool steerable = false, bool motorized=false)
