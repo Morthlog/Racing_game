@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 6259260531206575542}
   - component: {fileID: 4561932985464768040}
   - component: {fileID: 159799079795511621}
+  - component: {fileID: 402870060399725274}
   m_Layer: 0
   m_Name: Spikes_moving_1
   m_TagString: Untagged
@@ -210,3 +211,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4892918372294959524, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!114 &402870060399725274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428785273902133245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0789b5d94226a54b92c9c51f383610f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingSpikes
