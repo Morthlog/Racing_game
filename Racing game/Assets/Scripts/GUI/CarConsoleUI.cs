@@ -24,7 +24,7 @@ public class CarConsoleUI : MonoBehaviour
 
     public void setSpeed(float val)
     {
-        currentSpeed = (int) val;
+        currentSpeed = (int) (val * 3.6);
     }
 
 }
