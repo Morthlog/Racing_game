@@ -159,8 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6327740ff285141803fcb62561e840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateOnAxis
+  rotationType: 2
   rotateOn: 2
-  rotationSpeed: 90
+  rotationSpeed: 0
+  rotationalSpeed: 0
   maxAngle: 30
   torque: 3000000
   direction: 1

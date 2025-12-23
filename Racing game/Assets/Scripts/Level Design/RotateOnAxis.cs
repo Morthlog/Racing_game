@@ -4,12 +4,16 @@ using UnityEngine.UIElements;
 public class RotateOnAxis : MonoBehaviour
 {
     private Rigidbody rb;
+    [SerializeField] private RotationType rotationType;
     [SerializeField] private Axis rotateOn;
 
-    [Header("For constant rotation (for kinematic only)")]
+    [Header("For constant rotation (Kinematic only)")]
     [SerializeField] private float rotationSpeed = 90f; // degrees per second
-    
-    [Header("For dynamic rotation (for non-kinematic only)")]
+
+    [Header("For constant rotation (Non-Kinematic only")]
+    [SerializeField] private float rotationalSpeed = 5f;
+
+    [Header("For dynamic rotation (Non-Kinematic only)")]
     [SerializeField] float maxAngle = 90f;
     [SerializeField] float torque = 50f;
     [SerializeField] int direction = 1;
@@ -23,28 +27,24 @@ public class RotateOnAxis : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rb.isKinematic) //constant rotation
+        switch (rotationType)
         {
-            Vector3 Euler = GetEulerOnAxis();
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, rotationSpeed * Time.fixedDeltaTime, 0f));
-        }
-        else
-        {
-            float angle = GetSignedAngle();
-            // Reverse direction at limits
-            if (Mathf.Abs(angle) >= maxAngle && canChangeDir)
-            {
-                direction *= -1;
-                canChangeDir = false;
-            }
-            if (Mathf.Abs(angle) < maxAngle)
-            {
-                canChangeDir = true;
-            }
-            
-            rb.AddTorque(GetVectorOnAxis() * torque * direction);
-            rb.maxAngularVelocity = 10f;
+            case RotationType.ConstantKinematic:
+                Vector3 Euler = GetEulerOnAxis();
+                rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, rotationSpeed * Time.fixedDeltaTime, 0f));
+                break;
 
+            case RotationType.ConstantNonKinematic:
+                rb.angularVelocity = new Vector3(0, 0, rotationalSpeed);
+                break;
+
+            case RotationType.DynamicNonKinematic:
+                float angle = GetSignedAngle();
+                FindDirection(angle);
+
+                rb.AddTorque(GetVectorOnAxis() * torque * direction);
+                rb.maxAngularVelocity = 10f;
+                break;
         }
         
     }
@@ -84,8 +84,28 @@ public class RotateOnAxis : MonoBehaviour
         return angle > 180f ? angle - 360f : angle;
     }
 
+    void FindDirection(float angle)
+    {
+        if (Mathf.Abs(angle) >= maxAngle && canChangeDir)
+        {
+            direction *= -1;
+            canChangeDir = false;
+        }
+        if (Mathf.Abs(angle) < maxAngle)
+        {
+            canChangeDir = true;
+        }
+    }
+
     enum Axis
     {
         X, Y, Z
+    }
+
+    enum RotationType
+    {
+        ConstantKinematic,
+        ConstantNonKinematic,
+        DynamicNonKinematic
     }
 }

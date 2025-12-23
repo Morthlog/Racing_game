@@ -27,7 +27,6 @@ public class MovingSpikes : MonoBehaviour
         }
         openPos = spikes.transform.position;
         rb = spikes.GetComponent<Rigidbody>();
-        rb.maxLinearVelocity = maxSpeed;
         if (state == RunState.Opening)
             spikes.transform.position = openPos;
     }

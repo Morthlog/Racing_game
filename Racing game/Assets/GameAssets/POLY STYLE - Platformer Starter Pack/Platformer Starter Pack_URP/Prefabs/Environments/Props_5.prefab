@@ -110,8 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6327740ff285141803fcb62561e840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateY
-  rotationSpeed: -90
+  rotationType: 0
   rotateOn: 1
+  rotationSpeed: -90
+  rotationalSpeed: 0
+  maxAngle: 0
+  torque: 0
+  direction: 0
 --- !u!64 &2472428916006742454
 MeshCollider:
   m_ObjectHideFlags: 0
