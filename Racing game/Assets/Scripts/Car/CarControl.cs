@@ -1,6 +1,5 @@
+using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.Rendering.Universal.Internal;
-using UnityEngine.Windows;
 
 public class CarControl : MonoBehaviour
 {
@@ -17,8 +16,11 @@ public class CarControl : MonoBehaviour
 
     private CarInputActions carControls; // Reference to the new input system
 
-    [SerializeField]
-    Light[] brakeLights;
+
+    [SerializeField] Light[] brakeLights;
+    [SerializeField] bool addBoost;
+    [SerializeField] int boostPower =50;
+    [SerializeField] float slowDownForce = 0.3f;
 
     void Awake()
     {
@@ -71,13 +73,12 @@ public class CarControl : MonoBehaviour
         bool isTryingToMoveSameDirection = (vInput > 0 && forwardSpeed > -0.1f) || (vInput < 0 && forwardSpeed < 0.1f);
 
         bool brakes = (vInput < 0 && forwardSpeed > 0.1f) || (vInput > 0 && forwardSpeed < -0.1f);
-        if (brakes)
+        SetLights(brakes);
+        
+
+        if (addBoost)
         {
-            SetLights(true);
-        }
-        else
-        {
-            SetLights(false);
+            rigidBody.AddRelativeForce(Vector3.forward * boostPower, ForceMode.Impulse);
         }
 
         foreach (var wheel in wheels)
@@ -105,13 +106,28 @@ public class CarControl : MonoBehaviour
                 wheel.WheelCollider.brakeTorque = Mathf.Abs(vInput) * brakeTorque;
             }
         }
+
+        SlowDownCar(inputVector);
+
     }
 
-    void SetLights(bool enable)
+    void SlowDownCar( Vector2 inputVector)
+    {
+        if (inputVector == Vector2.zero)
+        {
+            rigidBody.linearDamping = slowDownForce;
+        }
+        else
+        {
+            rigidBody.linearDamping = 0;
+        }
+    }
+
+    void SetLights(bool brakes)
     {
         foreach (var light in brakeLights)
         {
-            light.enabled = enable;
+            light.enabled = brakes;
         }
     }
 

@@ -425,6 +425,9 @@ MonoBehaviour:
   brakeLights:
   - {fileID: 4276469787592402366}
   - {fileID: 1935397665779322250}
+  addBoost: 0
+  boostPower: 50
+  slowDownForce: 0.3
 --- !u!114 &7773510026790983135
 MonoBehaviour:
   m_ObjectHideFlags: 0
