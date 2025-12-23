@@ -419,8 +419,8 @@ MonoBehaviour:
   motorTorque: 2500
   brakeTorque: 2000
   maxSpeed: 50
-  steeringRange: 15
-  steeringRangeAtMaxSpeed: 5
+  steeringRange: 25
+  steeringRangeAtMaxSpeed: 10
   centreOfGravityOffset: -1
   brakeLights:
   - {fileID: 4276469787592402366}
