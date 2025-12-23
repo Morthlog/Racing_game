@@ -45,6 +45,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint Start
       objectReference: {fileID: 0}
+    - target: {fileID: 4084195073544722878, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8694898826406197067, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.5
@@ -106,6 +110,14 @@ PrefabInstance:
     - target: {fileID: 2215046558759874288, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
       propertyPath: m_Name
       value: Checkpoint Bridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692299270344116175, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
+      propertyPath: m_Name
+      value: Checkpoint Trigger 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084195073544722878, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8694898826406197067, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,7 +4,7 @@ public class MovingSpikes : MonoBehaviour
 {
     private Vector3 openPos;
     private Vector3 closePos;
-    [SerializeField] private runState state;
+    [SerializeField] private RunState state;
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float accelaration = 5f;
     private Vector3 movement;
@@ -28,7 +28,7 @@ public class MovingSpikes : MonoBehaviour
         openPos = spikes.transform.position;
         rb = spikes.GetComponent<Rigidbody>();
         rb.maxLinearVelocity = maxSpeed;
-        if (state == runState.opening)
+        if (state == RunState.Opening)
             spikes.transform.position = openPos;
     }
 
@@ -38,41 +38,41 @@ public class MovingSpikes : MonoBehaviour
         movement = Vector3.zero;
         switch (state)
         {
-            case runState.opening:
+            case RunState.Opening:
                 movement = -spikes.transform.forward;
 
                 if (spikes.transform.position.x >= openPos.x)
                     break;
-                TransitionTo(runState.opened);
+                TransitionTo(RunState.Opened);
                 break;
 
-            case runState.closing:
+            case RunState.Closing:
                 movement = spikes.transform.forward;
 
                 if (spikes.transform.position.x <= closePos.x)
                     break;
-                TransitionTo(runState.closed);
+                TransitionTo(RunState.Closed);
                 break;
 
-            case runState.closed:
-                TryWake(runState.opening, -spikes.transform.forward);
+            case RunState.Closed:
+                TryWake(RunState.Opening, -spikes.transform.forward);
                 break;
 
-            case runState.opened:
-                TryWake(runState.closing, spikes.transform.forward);
+            case RunState.Opened:
+                TryWake(RunState.Closing, spikes.transform.forward);
                 break;
         }
 
         rb.MovePosition(rb.position + movement * maxSpeed * Time.fixedDeltaTime);
 
     }
-    void TransitionTo(runState newState)
+    void TransitionTo(RunState newState)
     {
         state = newState;
         timer = Time.time;
         movement = Vector3.zero;
     }
-    void TryWake(runState nextState, Vector3 dir)
+    void TryWake(RunState nextState, Vector3 dir)
     {
         if (Time.time - timer <= sleepTime)
             return;
@@ -81,11 +81,11 @@ public class MovingSpikes : MonoBehaviour
         movement = dir;
     }
 
-    enum runState
+    enum RunState
     {
-        opening,
-        closing,
-        closed,
-        opened
+        Opening,
+        Closing,
+        Closed,
+        Opened
     }
 }
