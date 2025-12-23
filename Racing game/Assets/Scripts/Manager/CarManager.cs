@@ -15,19 +15,6 @@ public class CarManager : MonoBehaviour
 
     [SerializeField]
     PlayerData playerData;
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
     void Start()
     {
         sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<IntroSceneManager>();
