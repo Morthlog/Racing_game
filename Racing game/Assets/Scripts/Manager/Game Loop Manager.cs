@@ -13,6 +13,8 @@ public class GameLoopManager : MonoBehaviour
     private Vector3 playerSpawnPoint;
     private Dictionary<int, Checkpoint> checkpoints;
 
+    private float rotationDiffCheckpointPlayer = 90f;
+
     private void Awake()
     {
         Debug.Log("Awake");
@@ -31,6 +33,8 @@ public class GameLoopManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerSpawnPoint = player.transform.position;
+
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Checkpoint");
         checkpoints = new Dictionary<int, Checkpoint>(gos.Length);
         for (int i = 0; i < gos.Length; i++)
@@ -39,8 +43,16 @@ public class GameLoopManager : MonoBehaviour
             checkpoints[ch.ID] = ch;
         }
 
-        playerSpawnPoint = player.GetComponent<Transform>().position;
+        GameObject checkpointTrigger = new GameObject("Trigger 0");
 
+        Checkpoint checkpoint = checkpointTrigger.AddComponent<Checkpoint>();
+        checkpointTrigger.transform.SetParent(new GameObject("Checkpoint Default").transform);
+        Vector3 r = player.transform.eulerAngles;
+        r.y -= rotationDiffCheckpointPlayer;
+        checkpointTrigger.transform.parent.transform.eulerAngles = r;
+        checkpoints[0] = checkpoint;
+
+    
         time = Time.time;
         frames = 0;
     }
@@ -79,10 +91,10 @@ public class GameLoopManager : MonoBehaviour
 
     public void toLastCheckpoint()
     {
-        Transform tr = player.GetComponent<Transform>();
+        Transform tr = player.transform;
         tr.position = playerSpawnPoint;
         Vector3 r = checkpoints[playerLastCheckpointID].transform.parent.transform.localEulerAngles;
-        r.y += 90f; // world coord difference
+        r.y += rotationDiffCheckpointPlayer;
         tr.localEulerAngles = r;
 
         player.GetComponentInChildren<CarControl>().MovementReset();
