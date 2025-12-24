@@ -3,7 +3,6 @@ using UnityEngine;
 public class ResetOnDeathPlane : MonoBehaviour
 {
     private GameObject og;
-    private Rigidbody rb;
     void Start()
     {
         og = new GameObject();
@@ -35,10 +34,4 @@ public class ResetOnDeathPlane : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        Debug.Log(gameObject.transform.position);
-        Debug.Log(gameObject.transform.localPosition);
-        Debug.Log(gameObject.tag);
-    }
 }

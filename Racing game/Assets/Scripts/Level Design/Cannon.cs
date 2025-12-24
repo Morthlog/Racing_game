@@ -87,12 +87,6 @@ public class Cannon : MonoBehaviour
         }
     }
 
-    void TryNextState(State nextState, float _timer)
-    {
-        if (Time.time - timer <= _timer)
-            return;
-        state = nextState;
-    }
     enum State
     {
         OpeningCover,
