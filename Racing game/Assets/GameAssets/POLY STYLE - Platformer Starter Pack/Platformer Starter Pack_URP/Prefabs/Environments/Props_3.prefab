@@ -160,11 +160,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RotateOnAxis
   rotationType: 1
   rotateOn: 2
+  direction: 1
   rotationSpeed: 0
   rotationalSpeed: 35
   maxAngle: 0
   torque: 0
-  direction: 0
 --- !u!1001 &5327400255763587368
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class RotateOnAxis : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private RotationType rotationType;
     [SerializeField] private Axis rotateOn;
+    [SerializeField] Direction direction = Direction.Positive;
 
     [Header("For constant rotation (Kinematic only)")]
     [SerializeField] private float rotationSpeed = 90f; // degrees per second
@@ -16,10 +17,10 @@ public class RotateOnAxis : MonoBehaviour
     [Header("For dynamic rotation (Non-Kinematic only)")]
     [SerializeField] float maxAngle = 90f;
     [SerializeField] float torque = 50f;
-    [SerializeField] int direction = 1;
     private bool canChangeDir = false;
-    
 
+    private bool canRotate = true;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,26 +28,38 @@ public class RotateOnAxis : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canRotate)
+            return;
         switch (rotationType)
         {
             case RotationType.ConstantKinematic:
                 Vector3 Euler = GetEulerOnAxis();
-                rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, rotationSpeed * Time.fixedDeltaTime, 0f));
+                rb.MoveRotation(rb.rotation * Quaternion.Euler(Euler * (rotationSpeed * (int)direction * Time.fixedDeltaTime)));
                 break;
 
             case RotationType.ConstantNonKinematic:
-                rb.angularVelocity = new Vector3(0, 0, rotationalSpeed);
+                rb.angularVelocity = GetVectorOnAxis() * (rotationalSpeed * (int)direction);
                 break;
 
             case RotationType.DynamicNonKinematic:
                 float angle = GetSignedAngle();
                 FindDirection(angle);
 
-                rb.AddTorque(GetVectorOnAxis() * torque * direction);
+                rb.AddTorque(GetVectorOnAxis() * torque * (int)direction);
                 rb.maxAngularVelocity = 10f;
                 break;
         }
         
+    }
+
+    public void SetCanRotate(bool canRotate)
+    {
+        this.canRotate = canRotate;
+    }
+
+    public void SetDirection(Direction direction)
+    {
+        this.direction = direction;
     }
 
     Vector3 GetVectorOnAxis()
@@ -72,23 +85,30 @@ public class RotateOnAxis : MonoBehaviour
         };
     }
 
-    float GetSignedAngle()
+    public float GetSignedAngle()
     {
-        float angle = rotateOn switch
+        float angle = GetAngle();
+        return angle > 180f ? angle - 360f : angle;
+    }
+
+    public float GetAngle()
+    {
+        return rotateOn switch
         {
             Axis.X => transform.localEulerAngles.x,
             Axis.Y => transform.localEulerAngles.y,
             Axis.Z => transform.localEulerAngles.z,
             _ => 0f
-        }; 
-        return angle > 180f ? angle - 360f : angle;
+        };
     }
 
     void FindDirection(float angle)
     {
         if (Mathf.Abs(angle) >= maxAngle && canChangeDir)
         {
-            direction *= -1;
+            direction = direction == Direction.Positive
+                    ? Direction.Negative
+                    : Direction.Positive;
             canChangeDir = false;
         }
         if (Mathf.Abs(angle) < maxAngle)
@@ -100,6 +120,12 @@ public class RotateOnAxis : MonoBehaviour
     enum Axis
     {
         X, Y, Z
+    }
+
+    public enum Direction
+    {
+        Positive = 1,
+        Negative = -1
     }
 
     enum RotationType

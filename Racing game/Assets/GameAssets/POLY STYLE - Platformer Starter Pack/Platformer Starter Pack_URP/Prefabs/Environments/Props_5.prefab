@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 593744698607370693}
   m_Layer: 0
   m_Name: Props_5a
-  m_TagString: Untagged
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,11 +112,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RotateY
   rotationType: 0
   rotateOn: 1
-  rotationSpeed: -90
+  direction: -1
+  rotationSpeed: 90
   rotationalSpeed: 0
   maxAngle: 0
   torque: 0
-  direction: 0
 --- !u!64 &2472428916006742454
 MeshCollider:
   m_ObjectHideFlags: 0
