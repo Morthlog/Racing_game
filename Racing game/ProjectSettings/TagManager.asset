@@ -10,6 +10,8 @@ TagManager:
   - SceneManager
   - Spikes
   - Handle
+  - DeathPlane
+  - Trigger
   layers:
   - Default
   - TransparentFX

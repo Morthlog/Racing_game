@@ -296,10 +296,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6966575765768844397}
     m_Modifications:
-    - target: {fileID: 402870060399725274, guid: 524443b7797344d49a3a83c3cf3e0a60, type: 3}
-      propertyPath: state
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5393459245724866854, guid: 524443b7797344d49a3a83c3cf3e0a60, type: 3}
       propertyPath: m_Name
       value: Spikes_moving_1a
@@ -1730,6 +1726,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4348167945465278352}
     m_Modifications:
+    - target: {fileID: 402870060399725274, guid: 524443b7797344d49a3a83c3cf3e0a60, type: 3}
+      propertyPath: state
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5393459245724866854, guid: 524443b7797344d49a3a83c3cf3e0a60, type: 3}
       propertyPath: m_Name
       value: Spikes_moving_1a
@@ -2872,6 +2872,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1847744144675134984}
     m_Modifications:
+    - target: {fileID: 402870060399725274, guid: 524443b7797344d49a3a83c3cf3e0a60, type: 3}
+      propertyPath: state
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5393459245724866854, guid: 524443b7797344d49a3a83c3cf3e0a60, type: 3}
       propertyPath: m_Name
       value: Spikes_moving_1a

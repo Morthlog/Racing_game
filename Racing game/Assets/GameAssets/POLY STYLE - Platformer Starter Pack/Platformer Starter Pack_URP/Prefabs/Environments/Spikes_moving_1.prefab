@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5050392053253892189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574373065977160911}
+  - component: {fileID: 7517021239343794006}
+  - component: {fileID: 2227185318329319007}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574373065977160911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050392053253892189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.28}
+  m_LocalScale: {x: 1.7184623, y: 1.7607, z: 0.89194}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9154870057917676570}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7517021239343794006
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050392053253892189}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2227185318329319007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050392053253892189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560ce900cf0ebbc4eb64899a6064b168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InTrigger
 --- !u!1 &5393459245724866854
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +246,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6975670680373123124}
+  - {fileID: 1574373065977160911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6259260531206575542
@@ -275,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0789b5d94226a54b92c9c51f383610f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingSpikes
-  state: 1
+  state: 3
   maxSpeed: 10
   accelaration: 5
   sleepTime: 1.5
@@ -331,13 +398,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Attack
       objectReference: {fileID: 0}
+    - target: {fileID: 7713572572111421026, guid: e738bbcf6e3837b4d8a8f03d46bb42a8, type: 3}
+      propertyPath: m_TagString
+      value: Trigger
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7713572572111421026, guid: e738bbcf6e3837b4d8a8f03d46bb42a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 421992073025293654}
   m_SourcePrefab: {fileID: 100100000, guid: e738bbcf6e3837b4d8a8f03d46bb42a8, type: 3}
 --- !u!4 &1715178688621794860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4039910709984541033, guid: e738bbcf6e3837b4d8a8f03d46bb42a8, type: 3}
   m_PrefabInstance: {fileID: 3448961873292291909}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4958799563798761767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7713572572111421026, guid: e738bbcf6e3837b4d8a8f03d46bb42a8, type: 3}
+  m_PrefabInstance: {fileID: 3448961873292291909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &421992073025293654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4958799563798761767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560ce900cf0ebbc4eb64899a6064b168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InTrigger

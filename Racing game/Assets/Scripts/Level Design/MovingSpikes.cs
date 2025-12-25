@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSpikes : MonoBehaviour
+public class MovingSpikes : MonoBehaviour, TriggerController
 {
     private Vector3 openPos;
     private Vector3 closePos;
@@ -12,6 +13,9 @@ public class MovingSpikes : MonoBehaviour
     private Rigidbody rb;
     private float timer;
     [SerializeField] private float sleepTime = 1f; // in sec
+
+    private Dictionary<GameObject, int> triggerCount;
+    private int maxTriggers = 2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +33,8 @@ public class MovingSpikes : MonoBehaviour
         rb = spikes.GetComponent<Rigidbody>();
         if (state == RunState.Opening)
             spikes.transform.position = openPos;
+
+        triggerCount = new Dictionary<GameObject, int>();
     }
 
     // Update is called once per frame
@@ -78,6 +84,24 @@ public class MovingSpikes : MonoBehaviour
 
         state = nextState;
         movement = dir;
+    }
+
+    public void OnObjectEnter(GameObject go)
+    {
+        if (triggerCount.ContainsKey(go))
+            triggerCount[go]++;
+        else
+            triggerCount[go] = 1;
+
+        if (triggerCount[go] < maxTriggers)
+            return;
+        if (TryGetComponent<IDamageable>(out var obj))
+            obj.GetSquished();            
+    }
+
+    public void OnObjectExit(GameObject go) 
+    {
+        triggerCount[go]--;
     }
 
     enum RunState
