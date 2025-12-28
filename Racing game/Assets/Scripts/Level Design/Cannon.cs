@@ -25,11 +25,10 @@ public class Cannon : MonoBehaviour
             else if (transform.CompareTag("Handle"))
                 handle = transform.gameObject;
         }
-        ammoTemplate.gameObject.SetActive(false);
+        ammoTemplate.SetActive(false);
         for (int i = 0; i < ammo.Length; i++)
         {
-            ammo[i] = Instantiate(ammoTemplate);
-            ammo[i].transform.SetParent(transform, false);
+            ammo[i] = Instantiate(ammoTemplate, transform, false);
         }
         
         rotateHandle = handle.GetComponent<RotateOnAxis>();

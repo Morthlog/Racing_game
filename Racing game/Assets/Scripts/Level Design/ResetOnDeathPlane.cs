@@ -2,36 +2,48 @@ using UnityEngine;
 
 public class ResetOnDeathPlane : MonoBehaviour
 {
-    private GameObject og;
+    private TransformData defTrans;
     void Start()
     {
-        og = new GameObject();
-        copyTransform(og, gameObject);
+        defTrans = new TransformData();
+        defTrans.localPosition = transform.localPosition;
+        defTrans.rotation = transform.rotation;
+        defTrans.localScale = transform.localScale;
     }
 
     private void OnReset()
     {
-        copyTransform(gameObject, og);
+        ResetTransform();
         if (gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            ResetRigidbody(rb);
         }
         gameObject.SetActive(false);
     }
 
-    void copyTransform(GameObject og, GameObject other)
+    void ResetTransform()
     {
-        og.transform.position = other.transform.position;
-        og.transform.rotation = other.transform.rotation;
-        og.transform.localScale = other.transform.localScale;
+         transform.SetLocalPositionAndRotation(defTrans.localPosition, defTrans.rotation);
+         transform.localScale = defTrans.localScale;
+    }
+
+    void ResetRigidbody(Rigidbody rb)
+    {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("DeathPlane"))
             OnReset();
+    }
 
+    private struct TransformData
+    {
+        public Vector3 localPosition;
+        public Quaternion rotation;
+        public Vector3 localScale;
     }
 
 }
