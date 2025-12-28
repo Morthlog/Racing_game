@@ -3,18 +3,28 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    
+    [SerializeField] private int id;
+    [SerializeField] private int nextCheckpointID = 0;
     [Header("Tags to check")]
     [SerializeField] string[] allowedTags = {"Player"};
     [SerializeField] private string contactOn = "Body";
 
-    private int id;
-
     public int ID { get { return id; } }
-    void Awake()
-    {
-        id = int.Parse(this.name[^1].ToString());
-    }
 
+    public void SetID (int id)
+    {
+        this.id = id;
+    }    
+
+    public void SetNextID(int nextCheckpointID)
+    {
+        this.nextCheckpointID = nextCheckpointID;
+    }
+    public int NextID()
+    {
+        return nextCheckpointID;
+    }
     private void OnTriggerEnter(Collider other)
     {
         foreach (string tag in allowedTags)

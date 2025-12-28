@@ -46,15 +46,7 @@ public class GameLoopManager : MonoBehaviour
             checkpoints[ch.ID] = ch;
         }
 
-        GameObject checkpointTrigger = new GameObject("Trigger 0");
-
-        Checkpoint checkpoint = checkpointTrigger.AddComponent<Checkpoint>();
-        checkpointTrigger.transform.SetParent(new GameObject("Checkpoint Default").transform);
-        Vector3 r = player.transform.eulerAngles;
-        r.y -= rotationDiffCheckpointPlayer;
-        checkpointTrigger.transform.parent.transform.eulerAngles = r;
-        checkpoints[0] = checkpoint;
-
+        AddDefaultCheckpoint();
     
         time = Time.time;
         frames = 0;
@@ -80,10 +72,11 @@ public class GameLoopManager : MonoBehaviour
     public void OnCheckpointHit(GameObject go, int checkpointID)
     {
         Debug.Log($"Triggered by {go.name} on {checkpointID}");
-        if (checkpointID - playerLastCheckpointID == 1)
+        int nextID = checkpoints[playerLastCheckpointID].NextID();
+        if (nextID == checkpointID)
         {
             Debug.Log("Hit correct checkpoint");
-            playerLastCheckpointID++;
+            playerLastCheckpointID = checkpointID;
             playerSpawnPoint = checkpoints[checkpointID].GetComponent<Transform>().position;
         }
         else
@@ -144,5 +137,19 @@ public class GameLoopManager : MonoBehaviour
     private void StartTimer()
     {
 
+    }
+
+    private void AddDefaultCheckpoint()
+    {
+        GameObject checkpointTrigger = new GameObject("Trigger 0");
+
+        Checkpoint checkpoint = checkpointTrigger.AddComponent<Checkpoint>();
+        checkpointTrigger.transform.SetParent(new GameObject("Checkpoint Default").transform);
+        Vector3 r = player.transform.eulerAngles;
+        r.y -= rotationDiffCheckpointPlayer;
+        checkpointTrigger.transform.parent.transform.eulerAngles = r;
+        checkpoint.SetID(0);
+        checkpoint.SetNextID(1);
+        checkpoints[0] = checkpoint;
     }
 }

@@ -66,6 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b1a2cb19fd9c24d9b72aea2c593d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::checkpoint
+  id: 1
+  nextCheckpointID: 2
   allowedTags:
   - Player
   contactOn: Body
