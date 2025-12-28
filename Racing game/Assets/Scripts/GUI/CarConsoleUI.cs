@@ -9,7 +9,7 @@ public class CarConsoleUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        speedometer = GetComponentInChildren<TextMeshProUGUI>();
+        speedometer = GameObject.FindGameObjectWithTag("CarConsoleUI").GetComponent<TextMeshProUGUI>();
         carRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
     }
 

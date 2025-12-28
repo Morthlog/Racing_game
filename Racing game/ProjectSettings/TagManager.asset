@@ -12,6 +12,8 @@ TagManager:
   - Handle
   - DeathPlane
   - Trigger
+  - CarConsoleUI
+  - Countdown
   layers:
   - Default
   - TransparentFX

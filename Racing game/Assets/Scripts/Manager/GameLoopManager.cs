@@ -15,6 +15,9 @@ public class GameLoopManager : MonoBehaviour
 
     private float rotationDiffCheckpointPlayer = 90f;
 
+    private bool iPaused = false;
+    private bool allowMovement = false;
+
     private void Awake()
     {
         Debug.Log("Awake");
@@ -111,5 +114,35 @@ public class GameLoopManager : MonoBehaviour
         }
 
         return prev.tag;
+    }
+
+    public bool IPaused()
+    {
+        return iPaused;
+    }
+
+    public void SetPaused(bool paused)
+    { 
+        iPaused = paused; 
+    }
+
+    public bool AllowMovement()
+    {
+        return allowMovement;
+    }
+
+    public void StartRound()
+    {
+        SetAllowMovement(true);
+        StartTimer();
+    }
+    public void SetAllowMovement(bool allowMovement)
+    {
+        this.allowMovement = allowMovement;
+    }
+
+    private void StartTimer()
+    {
+
     }
 }
