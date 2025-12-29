@@ -35,6 +35,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
             spikes.transform.position = openPos;
 
         triggerCount = new Dictionary<GameObject, int>();
+        timer = Time.time;
     }
 
     // Update is called once per frame

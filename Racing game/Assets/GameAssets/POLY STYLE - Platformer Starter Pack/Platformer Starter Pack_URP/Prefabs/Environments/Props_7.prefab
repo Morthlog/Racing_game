@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &6768743221385502464
 Transform:
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RotateOnAxis
   rotationType: 2
   rotateOn: 2
+  direction: 1
   rotationSpeed: 0
   rotationalSpeed: 0
   maxAngle: 30
   torque: 3000000
-  direction: 1
