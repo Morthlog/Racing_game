@@ -13,11 +13,15 @@ public class GameLoopManager : MonoBehaviour
     private Vector3 playerSpawnPoint;
     private Dictionary<int, Checkpoint> checkpoints;
 
-    private float rotationDiffCheckpointPlayer = 90f;
+    private float rotationDiffCheckpointPlayer = 90f; // relative difference between Checkpoint and Player rotation in WC
 
     private bool iPaused = false;
     private bool allowMovement = false;
 
+    [SerializeField] private int totalLoops = 3;
+    [SerializeField] private int currentLoop = 1;
+    private bool hasHitFirstCheckpoint = false;
+    
     private void Awake()
     {
         Debug.Log("Awake");
@@ -43,6 +47,15 @@ public class GameLoopManager : MonoBehaviour
         for (int i = 0; i < gos.Length; i++)
         {
             Checkpoint ch = gos[i].GetComponentInChildren<Checkpoint>();
+            if (checkpoints.TryGetValue(ch.ID, out Checkpoint duplicate))
+            {
+                Debug.LogError(
+                    $"Duplicate Checkpoint ID {ch.ID} (ORIGINAL)", duplicate.gameObject);
+
+                Debug.LogError(
+                    $"Duplicate Checkpoint ID {ch.ID} (CURRENT)", ch.gameObject);
+            }
+                
             checkpoints[ch.ID] = ch;
         }
 
@@ -72,19 +85,49 @@ public class GameLoopManager : MonoBehaviour
     public void OnCheckpointHit(GameObject go, int checkpointID)
     {
         Debug.Log($"Triggered by {go.name} on {checkpointID}");
-        int nextID = checkpoints[playerLastCheckpointID].NextID();
-        if (nextID == checkpointID)
+        int[] nextIDs = checkpoints[playerLastCheckpointID].NextIDs();
+        bool correctCheckpoint = false;
+        foreach (int id in nextIDs)
         {
-            Debug.Log("Hit correct checkpoint");
-            playerLastCheckpointID = checkpointID;
-            playerSpawnPoint = checkpoints[checkpointID].GetComponent<Transform>().position;
+            if (id == checkpointID)
+            {
+                Debug.Log("Hit correct checkpoint");
+                playerLastCheckpointID = checkpointID;
+                playerSpawnPoint = checkpoints[checkpointID].GetComponent<Transform>().position;
+                correctCheckpoint = true;
+
+                if (checkpoints[checkpointID].IsStart())
+                    UpdateCurrentLoop();
+
+                break;
+            }
         }
-        else
+        if (!correctCheckpoint)
         {
             Debug.Log("Checkpoint was hit too soon");
         }
     }
 
+    private void UpdateCurrentLoop()
+    {
+        String output = "Current loop ";
+        if (hasHitFirstCheckpoint) // Has officially hit the start checkpoint
+            currentLoop++;
+        else
+            hasHitFirstCheckpoint = true;
+        output += currentLoop;
+        if (currentLoop > totalLoops)
+        {
+            FinishRace();
+            return;
+        }
+        Debug.Log(output);
+    }
+
+    private void FinishRace()
+    {
+        Debug.Log("Race is over");
+    }
     public void toLastCheckpoint()
     {
         Transform tr = player.transform;
@@ -94,6 +137,11 @@ public class GameLoopManager : MonoBehaviour
         tr.localEulerAngles = r;
 
         player.GetComponentInChildren<CarControl>().MovementReset();
+    }
+
+    public void ResetLoops()
+    {
+        
     }
 
     public string getParentTag(GameObject obj)
@@ -149,7 +197,7 @@ public class GameLoopManager : MonoBehaviour
         r.y -= rotationDiffCheckpointPlayer;
         checkpointTrigger.transform.parent.transform.eulerAngles = r;
         checkpoint.SetID(0);
-        checkpoint.SetNextID(1);
+        checkpoint.SetNextIDs(new int[3] {1, 0, 0});
         checkpoints[0] = checkpoint;
     }
 }

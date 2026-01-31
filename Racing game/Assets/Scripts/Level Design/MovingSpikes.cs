@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Move the spikes forwards and backwards in local space to simulate opening and closing
 public class MovingSpikes : MonoBehaviour, TriggerController
 {
     private Vector3 openPos;
@@ -19,8 +20,8 @@ public class MovingSpikes : MonoBehaviour, TriggerController
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        closePos = gameObject.transform.position;
-        
+        closePos = Vector3.zero;
+
         foreach (Transform transform in gameObject.transform)
         {
             if (transform.CompareTag("Spikes"))
@@ -29,10 +30,8 @@ public class MovingSpikes : MonoBehaviour, TriggerController
                 break;
             }
         }
-        openPos = spikes.transform.position;
+        openPos = spikes.transform.localPosition;
         rb = spikes.GetComponent<Rigidbody>();
-        if (state == RunState.Opening)
-            spikes.transform.position = openPos;
 
         triggerCount = new Dictionary<GameObject, int>();
         timer = Time.time;
@@ -45,31 +44,31 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         switch (state)
         {
             case RunState.Opening:
-                movement = -spikes.transform.forward;
+                movement = -Vector3.forward;
 
-                if (spikes.transform.position.x >= openPos.x)
+                if (spikes.transform.localPosition.z >= openPos.z)
                     break;
                 TransitionTo(RunState.Opened);
                 break;
 
             case RunState.Closing:
-                movement = spikes.transform.forward;
+                movement = Vector3.forward;
 
-                if (spikes.transform.position.x <= closePos.x)
+                if (spikes.transform.localPosition.z <= closePos.z)
                     break;
                 TransitionTo(RunState.Closed);
                 break;
 
             case RunState.Closed:
-                TryWake(RunState.Opening, -spikes.transform.forward);
+                TryWake(RunState.Opening, -Vector3.forward);
                 break;
 
             case RunState.Opened:
-                TryWake(RunState.Closing, spikes.transform.forward);
+                TryWake(RunState.Closing, Vector3.forward);
                 break;
         }
-
-        rb.MovePosition(rb.position + movement * maxSpeed * Time.fixedDeltaTime);
+        Vector3 worldMovement = spikes.transform.TransformDirection(movement);
+        rb.MovePosition(rb.position + worldMovement * maxSpeed * Time.fixedDeltaTime);
 
     }
     void TransitionTo(RunState newState)
@@ -97,10 +96,10 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         if (triggerCount[go] < maxTriggers)
             return;
         if (TryGetComponent<IDamageable>(out var obj))
-            obj.GetSquished();            
+            obj.GetSquished();
     }
 
-    public void OnObjectExit(GameObject go) 
+    public void OnObjectExit(GameObject go)
     {
         triggerCount[go]--;
     }

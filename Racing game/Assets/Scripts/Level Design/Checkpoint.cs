@@ -5,23 +5,27 @@ public class Checkpoint : MonoBehaviour
 {
     
     [SerializeField] private int id;
-    [SerializeField] private int nextCheckpointID = 0;
+    [SerializeField] private int[] nextCheckpointID = new int[3];
     [Header("Tags to check")]
     [SerializeField] string[] allowedTags = {"Player"};
     [SerializeField] private string contactOn = "Body";
-
+    [SerializeField] private bool isStart = false;
     public int ID { get { return id; } }
 
+    public bool IsStart()
+    {
+        return isStart;
+    }
     public void SetID (int id)
     {
         this.id = id;
     }    
 
-    public void SetNextID(int nextCheckpointID)
+    public void SetNextIDs(int[] nextCheckpointID)
     {
         this.nextCheckpointID = nextCheckpointID;
     }
-    public int NextID()
+    public int[] NextIDs()
     {
         return nextCheckpointID;
     }

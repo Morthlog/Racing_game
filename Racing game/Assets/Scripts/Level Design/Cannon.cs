@@ -13,6 +13,7 @@ public class Cannon : MonoBehaviour
     private float timer;
     [SerializeField] float reloadingCooldown = 10f;
     [SerializeField] float shootingCooldown = 5f;
+    [SerializeField] float delayStart = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,11 +33,13 @@ public class Cannon : MonoBehaviour
         }
         
         rotateHandle = handle.GetComponent<RotateOnAxis>();
+        rotateHandle.SetCanRotate(false);
         closedRotation = rotateHandle.GetAngle();
         openedRotation = closedRotation - 90f;
 
         state = State.OpenCover;
         timer = Time.time;
+        timer += delayStart;
     }
 
     // Update is called once per frame

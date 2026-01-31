@@ -113,7 +113,7 @@ MonoBehaviour:
   rotationType: 0
   rotateOn: 1
   direction: -1
-  rotationSpeed: 90
+  rotationSpeed: 75
   rotationalSpeed: 0
   maxAngle: 0
   torque: 0

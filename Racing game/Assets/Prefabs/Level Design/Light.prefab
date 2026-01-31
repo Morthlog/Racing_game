@@ -127,6 +127,82 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &2013124176539932630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946113448143156170}
+  - component: {fileID: 8329202144725560315}
+  m_Layer: 0
+  m_Name: Adaptive Probe Volume (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2946113448143156170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013124176539932630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.31646, y: -2.8827765, z: -2.0829313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8627692323329839998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8329202144725560315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013124176539932630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
+  mode: 2
+  size: {x: 130.40176, y: 27.983059, z: 28.07259}
+  overrideRendererFilters: 0
+  minRendererVolumeSize: 0.1
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lowestSubdivLevelOverride: 0
+  highestSubdivLevelOverride: 3
+  overridesSubdivLevels: 0
+  mightNeedRebaking: 0
+  cachedTransform:
+    e00: 0.4
+    e01: 0
+    e02: 0
+    e03: 6.2525344
+    e10: 0
+    e11: -0.000000047683717
+    e12: 0.40000007
+    e13: 1.3787047
+    e20: 0
+    e21: -0.40000007
+    e22: -0.000000047683717
+    e23: 2.48286
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  cachedHashCode: 826163776
+  fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
 --- !u!1 &3408324198473378144
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,10 +234,13 @@ Transform:
   m_Children:
   - {fileID: 1829130640183493584}
   - {fileID: 7056304769568526578}
-  - {fileID: 7509450540718536705}
+  - {fileID: 8180290888160084160}
+  - {fileID: 2946113448143156170}
+  - {fileID: 3071390430305326321}
+  - {fileID: 8093489689974890038}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &5693690978768739820
+--- !u!1 &5152874518115587979
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,76 +248,226 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7509450540718536705}
-  - component: {fileID: 1072415053016556482}
+  - component: {fileID: 8180290888160084160}
+  - component: {fileID: 1618404659872410236}
   m_Layer: 0
-  m_Name: Light Probe Group
+  m_Name: Adaptive Probe Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7509450540718536705
+--- !u!4 &8180290888160084160
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5693690978768739820}
+  m_GameObject: {fileID: 5152874518115587979}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 19.577011, y: -15.21258, z: -0.36125565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8627692323329839998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!220 &1072415053016556482
-LightProbeGroup:
+--- !u!114 &1618404659872410236
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5693690978768739820}
+  m_GameObject: {fileID: 5152874518115587979}
   m_Enabled: 1
-  m_SourcePositions:
-  - {x: 19.5, y: -24.500002, z: -2.5}
-  - {x: 15.5, y: -24.5, z: -2.5}
-  - {x: 19.5, y: -0.48464411, z: -2.5}
-  - {x: 15.5, y: -0.48464411, z: -2.5}
-  - {x: 17.5, y: -24.5, z: -0.5}
-  - {x: 19.5, y: -24.5, z: -0.5}
-  - {x: 15.5, y: -22, z: -2.5}
-  - {x: 19.5, y: -22, z: -2.5}
-  - {x: 15.5, y: -15.36039, z: -2.5}
-  - {x: 19.5, y: -15.36039, z: -2.5}
-  - {x: 15.5, y: -10, z: -2.5}
-  - {x: 19.5, y: -10, z: -2.5}
-  - {x: 15.5, y: -4.5, z: -2.4999995}
-  - {x: 19.5, y: -4.5, z: -2.4999995}
-  - {x: 15.5, y: -4.5, z: -0.5}
-  - {x: 19.5, y: -0.48464411, z: -0.5}
-  - {x: 19.5, y: -0.48464411, z: -0.5}
-  - {x: 15.5, y: -4.5, z: -0.5}
-  - {x: 15.5, y: -0.48464411, z: -0.5}
-  - {x: 19.5, y: -4.5, z: -0.5}
-  - {x: 19.5, y: -10, z: -0.5}
-  - {x: 15.5, y: -10, z: -0.5}
-  - {x: 19.5, y: -15.36039, z: -0.5}
-  - {x: 15.5, y: -15.36039, z: -0.5}
-  - {x: 19.5, y: -23, z: -1.5}
-  - {x: 17.5, y: -23, z: -1.5}
-  - {x: 18.5, y: -22, z: -0.5}
-  - {x: 15.5, y: -22, z: -0.5}
-  - {x: 18.5, y: -23, z: -0.5}
-  - {x: 17.5, y: -22, z: -0.5}
-  - {x: 15.5, y: -23, z: -1.5}
-  - {x: 15.5, y: -24.5, z: -0.5}
-  - {x: 15.5, y: -23, z: -0.5}
-  - {x: 19.5, y: -22, z: -0.5}
-  - {x: 19.5, y: -23, z: -0.5}
-  - {x: 17.5, y: -23, z: -0.5}
-  m_Dering: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
+  mode: 2
+  size: {x: 48.665115, y: 89.6355, z: 19.465208}
+  overrideRendererFilters: 0
+  minRendererVolumeSize: 0.1
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lowestSubdivLevelOverride: 0
+  highestSubdivLevelOverride: 3
+  overridesSubdivLevels: 0
+  mightNeedRebaking: 0
+  cachedTransform:
+    e00: 0.4
+    e01: 0
+    e02: 0
+    e03: -19.475002
+    e10: 0
+    e11: -0.000000047683717
+    e12: 0.40000007
+    e13: 13.708579
+    e20: 0
+    e21: -0.40000007
+    e22: -0.000000047683717
+    e23: 0.76125586
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  cachedHashCode: 1934928281
+  fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
+--- !u!1 &5901923802496560600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3071390430305326321}
+  - component: {fileID: 2569754047067321392}
+  m_Layer: 0
+  m_Name: Adaptive Probe Volume (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3071390430305326321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901923802496560600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -37.73125, y: -7.315007, z: -2.0832934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8627692323329839998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2569754047067321392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901923802496560600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
+  mode: 2
+  size: {x: 30.259857, y: 98.36131, z: 28.07259}
+  overrideRendererFilters: 0
+  minRendererVolumeSize: 0.1
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lowestSubdivLevelOverride: 0
+  highestSubdivLevelOverride: 3
+  overridesSubdivLevels: 0
+  mightNeedRebaking: 0
+  cachedTransform:
+    e00: 0.4
+    e01: 0
+    e02: 0
+    e03: 37.83326
+    e10: 0
+    e11: -0.000000047683717
+    e12: 0.40000007
+    e13: 5.811007
+    e20: 0
+    e21: -0.40000007
+    e22: -0.000000047683717
+    e23: 2.4832938
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  cachedHashCode: 1696078334
+  fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
+--- !u!1 &7775263191429615153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8093489689974890038}
+  - component: {fileID: 4417680751792907298}
+  m_Layer: 0
+  m_Name: Adaptive Probe Volume (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8093489689974890038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775263191429615153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -35.357468, y: -41.192, z: -2.0800018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8627692323329839998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4417680751792907298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775263191429615153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
+  mode: 2
+  size: {x: 42.129105, y: 118.15533, z: 28.07259}
+  overrideRendererFilters: 0
+  minRendererVolumeSize: 0.1
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lowestSubdivLevelOverride: 0
+  highestSubdivLevelOverride: 3
+  overridesSubdivLevels: 0
+  mightNeedRebaking: 1
+  cachedTransform:
+    e00: 0.4
+    e01: 0
+    e02: 0
+    e03: 37.83326
+    e10: 0
+    e11: -0.000000047683717
+    e12: 0.40000007
+    e13: 5.811007
+    e20: 0
+    e21: -0.40000007
+    e22: -0.000000047683717
+    e23: 2.4832938
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  cachedHashCode: 1696078334
+  fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
 --- !u!1 &7812477075840962067
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +495,7 @@ Transform:
   m_GameObject: {fileID: 7812477075840962067}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -10}
+  m_LocalPosition: {x: 0, y: -0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
