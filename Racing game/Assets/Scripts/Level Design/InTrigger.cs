@@ -13,7 +13,7 @@ public class InTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (controller != null && GameLoopManager.instance.getParentTag(other.gameObject) == "Player")
+        if (controller != null && GameLoopManager.instance.GetParentTag(other.gameObject) == "Player")
         {
             controller.OnObjectEnter(other.gameObject);
         }
@@ -21,7 +21,7 @@ public class InTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (controller != null && GameLoopManager.instance.getParentTag(other.gameObject) == "Player")
+        if (controller != null && GameLoopManager.instance.GetParentTag(other.gameObject) == "Player")
         {
             controller.OnObjectExit(other.gameObject);
         }

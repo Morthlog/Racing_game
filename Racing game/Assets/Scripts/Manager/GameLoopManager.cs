@@ -1,10 +1,15 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 
 public class GameLoopManager : MonoBehaviour
 {
+    [Header("Lives")]
+    [SerializeField] private int initialLives = 3;
+    [SerializeField] private int currentLives;
+
     public static GameLoopManager instance;
     private float time;
     private int frames;
@@ -17,11 +22,15 @@ public class GameLoopManager : MonoBehaviour
 
     private bool iPaused = false;
     private bool allowMovement = false;
-
+    [SerializeField] GameObject startPoint;
     [SerializeField] private int totalLoops = 3;
     [SerializeField] private int currentLoop = 1;
+    [SerializeField] VoidEventChannelSO playerRespawned;
     private bool hasHitFirstCheckpoint = false;
-    
+
+    bool isGameover = false;
+    [SerializeField] VoidEventChannelSO gameover;
+
     private void Awake()
     {
         Debug.Log("Awake");
@@ -36,11 +45,12 @@ public class GameLoopManager : MonoBehaviour
 
     }
 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerSpawnPoint = player.transform.position;
+        playerSpawnPoint =startPoint.transform.position;
 
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Checkpoint");
         checkpoints = new Dictionary<int, Checkpoint>(gos.Length);
@@ -68,10 +78,10 @@ public class GameLoopManager : MonoBehaviour
     // Update is called once per frames
     void Update()
     {
-        //fpsCounter();
+        //FpsCounter();
     }
 
-    private void fpsCounter()
+    private void FpsCounter()
     {
         frames++;
         if (Time.time - time > 1)
@@ -128,11 +138,16 @@ public class GameLoopManager : MonoBehaviour
     {
         Debug.Log("Race is over");
     }
-    public void toLastCheckpoint()
+    public void ToLastCheckpoint()
+    {
+        TransferToCheckpoint(playerLastCheckpointID, playerSpawnPoint);
+    }
+
+    private void TransferToCheckpoint(int id, Vector3 spawnpoint)
     {
         Transform tr = player.transform;
-        tr.position = playerSpawnPoint;
-        Vector3 r = checkpoints[playerLastCheckpointID].transform.parent.transform.localEulerAngles;
+        tr.position = spawnpoint;
+        Vector3 r = checkpoints[id].transform.parent.transform.localEulerAngles;
         r.y += rotationDiffCheckpointPlayer;
         tr.localEulerAngles = r;
 
@@ -144,7 +159,7 @@ public class GameLoopManager : MonoBehaviour
         
     }
 
-    public string getParentTag(GameObject obj)
+    public string GetParentTag(GameObject obj)
     {
         Transform current = obj.transform;
         Transform prev = null;
@@ -199,5 +214,42 @@ public class GameLoopManager : MonoBehaviour
         checkpoint.SetID(0);
         checkpoint.SetNextIDs(new int[3] {1, 0, 0});
         checkpoints[0] = checkpoint;
+    }
+
+    public void OnPlayerDied()
+    {
+        StartCoroutine(ResetPlayer());
+    }
+
+    private IEnumerator ResetPlayer()
+    {
+        yield return new WaitForSeconds(2);
+        Health playerHealth = player.GetComponent<Health>();
+        if (isGameover)
+        {
+            TransferToCheckpoint(1, startPoint.transform.position);
+        }
+        else 
+        {
+            ToLastCheckpoint();
+        }
+        playerRespawned.RaiseEvent();
+        player.GetComponent<CarSetup>().OnRestart();
+        playerHealth.ResetHealth();
+    }
+
+    public void ResetLives()
+    {
+        currentLives = initialLives;
+    }
+
+    void UpdateLives()
+    {
+        currentLives = currentLives > 0 ? currentLives - 1 : 0;
+        if (currentLives == 0)
+        {
+            gameover.RaiseEvent();
+            isGameover = true;
+        }
     }
 }

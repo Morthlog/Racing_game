@@ -33,7 +33,7 @@ public class Checkpoint : MonoBehaviour
     {
         foreach (string tag in allowedTags)
         {
-            if (other.CompareTag(contactOn) && GameLoopManager.instance.getParentTag(other.gameObject) == tag)
+            if (other.CompareTag(contactOn) && GameLoopManager.instance.GetParentTag(other.gameObject) == tag)
             {
                 GameLoopManager.instance.OnCheckpointHit(other.gameObject, ID);
             }

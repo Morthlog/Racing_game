@@ -88,6 +88,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
 
     public void OnObjectEnter(GameObject go)
     {
+        var damageable = go.GetComponent<IDamageable>() ?? go.GetComponentInParent<IDamageable>();
         if (triggerCount.ContainsKey(go))
             triggerCount[go]++;
         else
@@ -95,8 +96,9 @@ public class MovingSpikes : MonoBehaviour, TriggerController
 
         if (triggerCount[go] < maxTriggers)
             return;
-        if (TryGetComponent<IDamageable>(out var obj))
-            obj.GetSquished();
+        if (damageable == null) return;
+
+        damageable.GetSquished();
     }
 
     public void OnObjectExit(GameObject go)

@@ -1,29 +1,29 @@
 using UnityEngine;
 
-public class CarPrefabSetup:MonoBehaviour
+public class CarSetup : MonoBehaviour
 {
-    [SerializeField]
-    GameObject wheelColliderPrefab;
+    [SerializeField] GameObject wheelColliderPrefab;
+    [SerializeField] PlayerData playerData;
+    [SerializeField] GameObject lights;
     GameObject wheelsGO;
+    GameObject car;
 
-    [SerializeField]
-    PlayerData playerData;
     void Awake()
     {
-        Instantiate(playerData.chosenCar, transform);
-      
+        car = Instantiate(playerData.chosenCar, transform);
+
         wheelsGO = GameObject.Find("wheels");
 
         CreateWheelColliderGO("wheel front right", true, true);
         CreateWheelColliderGO("wheel front left", true, true);
         CreateWheelColliderGO("wheel back right");
-        CreateWheelColliderGO("wheel back left");   
+        CreateWheelColliderGO("wheel back left");
 
 
         MeshCollider[] meshColliders = GetComponentsInChildren<MeshCollider>();
         foreach (MeshCollider collider in meshColliders)
-        {    
-            if(collider.name.ToLower().Contains("wheel"))
+        {
+            if (collider.name.ToLower().Contains("wheel"))
             {
                 collider.enabled = false;
             }
@@ -39,19 +39,50 @@ public class CarPrefabSetup:MonoBehaviour
         }
     }
 
-    GameObject CreateWheelColliderGO(string name, bool steerable = false, bool motorized=false)
+    GameObject CreateWheelColliderGO(string name, bool steerable = false, bool motorized = false)
     {
         Transform currentWheel = wheelsGO.transform.Find(name);
         GameObject wheelColliderGO = Instantiate(wheelColliderPrefab, currentWheel.position, Quaternion.identity, wheelsGO.transform);
         wheelColliderGO.name = name + " collider";
 
-        WheelControl wheelControl= wheelColliderGO.GetComponent<WheelControl>();
+        WheelControl wheelControl = wheelColliderGO.GetComponent<WheelControl>();
         wheelControl.steerable = steerable;
         wheelControl.motorized = motorized;
         wheelControl.wheelModel = currentWheel.transform;
-        
+
         return wheelColliderGO;
     }
 
+    private void DisableCar()
+    {
+        car.SetActive(false);
+    }
+
+    private void EnableCar()
+    {
+        car.SetActive(true);
+    }
+
+    private void EnableLights()
+    {
+        lights.SetActive(true);
+    }
+
+    private void DisableLights()
+    {
+        lights.SetActive(false);
+    }
+
+    public void OnDeath()
+    {
+        DisableCar();
+        DisableLights();
+    }
+
+    public void OnRestart()
+    {
+        EnableCar();
+        EnableLights();
+    }
 
 }

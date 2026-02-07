@@ -8,11 +8,11 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IDamageable>(out var damageable))
-        {
-            Debug.Log($"Hit on {other.name} for {damage}");
-            damageable.TakeDamage(damage);
-        }
-            
+        var damageable = other.GetComponent<IDamageable>() ??other.GetComponentInParent<IDamageable>();
+
+        if (damageable == null) return;
+        
+        Debug.Log($"Hit on {other.name} for {damage}");
+        damageable.TakeDamage(damage);       
     }
 }

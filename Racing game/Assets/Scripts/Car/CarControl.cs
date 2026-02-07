@@ -1,10 +1,10 @@
-using System.ComponentModel;
 using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
     [Header("Car Properties")]
-    public float motorTorque = 2000f;
+    public float defaultMotorTorque = 2000f;
+    public float boostMotorTorque = 4000f;
     public float brakeTorque = 2000f;
     public float maxSpeed = 20f;
     public float steeringRange = 30f;
@@ -55,6 +55,12 @@ public class CarControl : MonoBehaviour
     // FixedUpdate is called at a fixed time interval
     void FixedUpdate()
     {
+        float motorTorque = defaultMotorTorque;
+        if (addBoost)
+        {
+            motorTorque = boostMotorTorque;
+        }
+
         // Read the Vector2 input from the new Input System
         Vector2 inputVector = carControls.Car.Movement.ReadValue<Vector2>();
 
@@ -76,11 +82,6 @@ public class CarControl : MonoBehaviour
         SetLights(brakes);
         
 
-        if (addBoost)
-        {
-            rigidBody.AddRelativeForce(Vector3.forward * boostPower, ForceMode.Impulse);
-        }
-
         foreach (var wheel in wheels)
         {
             // Apply steering to wheels that support steering
@@ -88,7 +89,7 @@ public class CarControl : MonoBehaviour
             {
                 wheel.WheelCollider.steerAngle = hInput * currentSteerRange;
             }
-           
+
             if (isTryingToMoveSameDirection)
             {
                 // Apply torque to motorized wheels
@@ -97,7 +98,7 @@ public class CarControl : MonoBehaviour
                     wheel.WheelCollider.motorTorque = vInput * currentMotorTorque;
                 }
                 // Release brakes when accelerating
-                wheel.WheelCollider.brakeTorque = 0f;               
+                wheel.WheelCollider.brakeTorque = 0f;
             }
             else
             {
