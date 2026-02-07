@@ -8,7 +8,7 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var damageable = other.GetComponent<IDamageable>() ??other.GetComponentInParent<IDamageable>();
+        var damageable = other.GetComponentInParent<IDamageable>();
 
         if (damageable == null) return;
         

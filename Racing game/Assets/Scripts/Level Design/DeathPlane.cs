@@ -6,7 +6,7 @@ public class DeathPlane : MonoBehaviour
     {
         if (GameLoopManager.instance.GetParentTag(other.gameObject) == "Player")
         {
-            var damageable = other.GetComponent<IDamageable>() ?? other.GetComponentInParent<IDamageable>();
+            var damageable = other.GetComponentInParent<IDamageable>();
 
             if (damageable == null) return;
 

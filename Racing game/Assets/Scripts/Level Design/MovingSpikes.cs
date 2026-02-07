@@ -88,7 +88,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
 
     public void OnObjectEnter(GameObject go)
     {
-        var damageable = go.GetComponent<IDamageable>() ?? go.GetComponentInParent<IDamageable>();
+        var damageable = go.GetComponentInParent<IDamageable>();
         if (triggerCount.ContainsKey(go))
             triggerCount[go]++;
         else
