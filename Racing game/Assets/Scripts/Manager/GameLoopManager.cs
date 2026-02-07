@@ -145,11 +145,11 @@ public class GameLoopManager : MonoBehaviour
 
     private void TransferToCheckpoint(int id, Vector3 spawnpoint)
     {
-        Transform tr = player.transform;
-        tr.position = spawnpoint;
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        rb.MovePosition(spawnpoint);
         Vector3 r = checkpoints[id].transform.parent.transform.localEulerAngles;
         r.y += rotationDiffCheckpointPlayer;
-        tr.localEulerAngles = r;
+        rb.MoveRotation(Quaternion.Euler(r));
 
         player.GetComponentInChildren<CarControl>().MovementReset();
     }

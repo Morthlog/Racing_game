@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // Move the spikes forwards and backwards in local space to simulate opening and closing
@@ -15,7 +16,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
     private float timer;
     [SerializeField] private float sleepTime = 1f; // in sec
 
-    private Dictionary<GameObject, int> triggerCount;
+    private Dictionary<string, Dictionary<GameObject, int>> triggerCount;
     private int maxTriggers = 2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,7 +34,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         openPos = spikes.transform.localPosition;
         rb = spikes.GetComponent<Rigidbody>();
 
-        triggerCount = new Dictionary<GameObject, int>();
+        triggerCount = new Dictionary<string, Dictionary<GameObject, int>>();
         timer = Time.time;
     }
 
@@ -89,21 +90,36 @@ public class MovingSpikes : MonoBehaviour, TriggerController
     public void OnObjectEnter(GameObject go)
     {
         var damageable = go.GetComponentInParent<IDamageable>();
-        if (triggerCount.ContainsKey(go))
-            triggerCount[go]++;
-        else
-            triggerCount[go] = 1;
-
-        if (triggerCount[go] < maxTriggers)
-            return;
         if (damageable == null) return;
 
+        string parent = GameLoopManager.instance.GetParentTag(go);
+        if (!triggerCount.ContainsKey(parent))
+            triggerCount[parent] = new Dictionary<GameObject, int>();
+
+        Dictionary<GameObject, int> inner = triggerCount[parent];
+
+        if (inner.ContainsKey(go))
+            inner[go]++;
+        else
+            inner[go] = 1;
+
+        if (inner[go] < maxTriggers)
+            return;
+
         damageable.GetSquished();
+
+        var keys = inner.Keys.ToList();
+        foreach (var key in keys)
+        {
+            inner[key] = 0;
+        }
     }
 
-    public void OnObjectExit(GameObject go)
+    public void OnObjectExit(GameObject go) // not called if object is disabled
     {
-        triggerCount[go]--;
+        string parent = GameLoopManager.instance.GetParentTag(go);
+
+        triggerCount[parent][go]--;
     }
 
     enum RunState
