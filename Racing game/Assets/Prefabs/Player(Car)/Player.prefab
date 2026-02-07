@@ -5763,13 +5763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb497213b61cd954ab8be542d5eb6db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  initialLives: 3
-  currentLives: 0
   initialHealth: 200
   currentHealth: 200
-  invincibilityTime: 5
+  invincibilityTime: 0.5
   isInvincible: 0
-  gameover: {fileID: 11400000, guid: 2971e0daf8c549145a191fcd5291cf66, type: 2}
   playerDied: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
 --- !u!114 &7126447788438725137
 MonoBehaviour:
