@@ -62,8 +62,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void GetSquished()
     {
-        isInvincible = false;
-        TakeDamage(int.MaxValue);
+        Die();
     }
 
     void NormalizeHealthAndSendEvent()
@@ -80,6 +79,12 @@ public class Health : MonoBehaviour, IDamageable
         }
 
         invincibilityRoutine = StartCoroutine(InvincibilityTimer());
+    }
+
+    public void Die()
+    {
+        isInvincible = false;
+        TakeDamage(int.MaxValue);
     }
 
     private IEnumerator InvincibilityTimer()
@@ -115,4 +120,6 @@ public class Health : MonoBehaviour, IDamageable
         healthPackUsed.OnEventRaised -= IncreaseHealth;
         shieldUsed.OnEventRaised -= ActivateShield;
     }
+
+
 }

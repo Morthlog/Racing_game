@@ -10,7 +10,7 @@ public class DeathPlane : MonoBehaviour
 
             if (damageable == null) return;
 
-            damageable.TakeDamage(int.MaxValue);
+            damageable.Die();
         }
     }
 }
