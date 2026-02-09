@@ -122,9 +122,15 @@ public class GameLoopManager : MonoBehaviour
     {
         String output = "Current loop ";
         if (hasHitFirstCheckpoint) // Has officially hit the start checkpoint
+        {
             currentLoop++;
+            TimerManager.instance.OnLap();
+        }
         else
+        {
             hasHitFirstCheckpoint = true;
+        }
+            
         output += currentLoop;
         if (currentLoop > totalLoops)
         {
@@ -137,6 +143,7 @@ public class GameLoopManager : MonoBehaviour
     private void FinishRace()
     {
         Debug.Log("Race is over");
+        TimerManager.instance.StopTimer();
     }
     public void ToLastCheckpoint()
     {
@@ -199,7 +206,7 @@ public class GameLoopManager : MonoBehaviour
 
     private void StartTimer()
     {
-
+        TimerManager.instance.StartTimer();
     }
 
     private void AddDefaultCheckpoint()

@@ -15,6 +15,7 @@ TagManager:
   - CarConsoleUI
   - Countdown
   - CameraBound
+  - Timer
   layers:
   - Default
   - TransparentFX
