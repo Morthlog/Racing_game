@@ -1,12 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class CarSetup : MonoBehaviour
 {
     [SerializeField] GameObject wheelColliderPrefab;
     [SerializeField] PlayerData playerData;
-    [SerializeField] GameObject lights;
+    [SerializeField] GameObject lights, shield;
     GameObject wheelsGO;
     GameObject car;
+
+    [Header("Events")]
+    [SerializeField] VoidEventChannelSO playerDied;
+    [SerializeField] IntEventChannelSO shieldUsed;
 
     void Awake()
     {
@@ -84,5 +89,27 @@ public class CarSetup : MonoBehaviour
         EnableCar();
         EnableLights();
     }
+    void ActivateShield(int duration)
+    {
+        shield.SetActive(true);
+        StartCoroutine(DeactivateShield(duration));
+    }
 
+
+    IEnumerator DeactivateShield(int duration)
+    {
+        yield return new WaitForSeconds(duration);
+        shield.SetActive(false );
+    }
+    private void OnEnable()
+    {
+        playerDied.OnEventRaised += OnDeath;
+        shieldUsed.OnEventRaised += ActivateShield;
+    }
+
+    private void OnDisable()
+    {
+        playerDied.OnEventRaised -= OnDeath;
+        shieldUsed.OnEventRaised -= ActivateShield;
+    }
 }

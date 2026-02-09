@@ -1,123 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &77214004321708634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 916180874608017914}
-  - component: {fileID: 3341228458407741116}
-  - component: {fileID: 8759972922237647212}
-  - component: {fileID: 2354474939878747934}
-  m_Layer: 0
-  m_Name: EventListeners
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &916180874608017914
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77214004321708634}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1488054331586113603}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3341228458407741116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77214004321708634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a757f9284176408419af91123d996eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VoidEventListener
-  channel: {fileID: 11400000, guid: f345efd93b5cb0649ad2c977a2ed038d, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6985405735481159979}
-        m_TargetAssemblyTypeName: CameraControl, Assembly-CSharp
-        m_MethodName: InactiveView
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8759972922237647212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77214004321708634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a757f9284176408419af91123d996eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VoidEventListener
-  channel: {fileID: 11400000, guid: af975b98840a94b4ab88557cffc51f7a, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6985405735481159979}
-        m_TargetAssemblyTypeName: CameraControl, Assembly-CSharp
-        m_MethodName: ActiveView
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &2354474939878747934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77214004321708634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a757f9284176408419af91123d996eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VoidEventListener
-  channel: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6985405735481159979}
-        m_TargetAssemblyTypeName: CameraControl, Assembly-CSharp
-        m_MethodName: InactiveView
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5794307116529402874
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +38,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4425395923984329063}
-  - {fileID: 916180874608017914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 13.658, y: 0, z: 0}
 --- !u!81 &5495205949346128339
@@ -374,6 +255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cdcede4fb81ea4d8cad242c7667844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraControl
+  speedEffects: {fileID: 7117340531768637662}
+  enteredCameraLimit: {fileID: 11400000, guid: f345efd93b5cb0649ad2c977a2ed038d, type: 2}
+  playerRespawned: {fileID: 11400000, guid: af975b98840a94b4ab88557cffc51f7a, type: 2}
+  playerDied: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
+  speedBoostUsed: {fileID: 11400000, guid: 35f283c8e2dbf5d45a8fe8d258ed3a2c, type: 2}
 --- !u!1 &7117340531768637662
 GameObject:
   m_ObjectHideFlags: 0

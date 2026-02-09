@@ -23,13 +23,18 @@ public class GameLoopManager : MonoBehaviour
     private bool iPaused = false;
     private bool allowMovement = false;
     [SerializeField] GameObject startPoint;
+    [Header("Laps")]
     [SerializeField] private int totalLoops = 3;
     [SerializeField] private int currentLoop = 1;
-    [SerializeField] VoidEventChannelSO playerRespawned;
-    private bool hasHitFirstCheckpoint = false;
 
-    bool isGameover = false;
+    [Header("Events")]
+    [SerializeField] VoidEventChannelSO playerRespawned;
+    [SerializeField] VoidEventChannelSO lapCompleted;
     [SerializeField] VoidEventChannelSO gameover;
+
+    private bool hasHitFirstCheckpoint = false;
+    bool isGameover = false;
+    
 
     private void Awake()
     {
@@ -73,6 +78,8 @@ public class GameLoopManager : MonoBehaviour
     
         time = Time.time;
         frames = 0;
+
+        ResetLives();
     }
 
     // Update is called once per frames
@@ -122,8 +129,9 @@ public class GameLoopManager : MonoBehaviour
     {
         String output = "Current loop ";
         if (hasHitFirstCheckpoint) // Has officially hit the start checkpoint
-        {
+        {   
             currentLoop++;
+            lapCompleted.RaiseEvent();
             TimerManager.instance.OnLap();
         }
         else
@@ -226,6 +234,7 @@ public class GameLoopManager : MonoBehaviour
     public void OnPlayerDied()
     {
         StartCoroutine(ResetPlayer());
+        UpdateLives();
     }
 
     private IEnumerator ResetPlayer()

@@ -111,4 +111,5 @@ MonoBehaviour:
   totalLoops: 3
   currentLoop: 1
   playerRespawned: {fileID: 11400000, guid: af975b98840a94b4ab88557cffc51f7a, type: 2}
+  lapCompleted: {fileID: 11400000, guid: bac7895f8a0c2c74d8204fce44c942c8, type: 2}
   gameover: {fileID: 11400000, guid: 2971e0daf8c549145a191fcd5291cf66, type: 2}

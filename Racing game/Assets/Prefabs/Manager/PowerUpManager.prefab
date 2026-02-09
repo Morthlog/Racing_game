@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5114479996578772407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8497113863454533112}
+  - component: {fileID: 1435659295193413058}
+  m_Layer: 0
+  m_Name: PowerUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8497113863454533112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114479996578772407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2481.3716, y: 196.1668, z: 24.09355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1435659295193413058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114479996578772407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077a84064699aa84082142685b40ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupManager
+  powerUpPicked: {fileID: 11400000, guid: 14d13747ceb6e1747a7bd65b44eda510, type: 2}
+  increaseHealth: {fileID: 11400000, guid: 9b2018dc9f1472341a79a9be817de319, type: 2}
+  shieldUsed: {fileID: 11400000, guid: ca42d3df30d9e774584e5fce3b1c6d8b, type: 2}
+  speedBoostUsed: {fileID: 11400000, guid: 35f283c8e2dbf5d45a8fe8d258ed3a2c, type: 2}
+  playerDied: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
+  healthBoost: 10
+  speedBoostDuration: 4
+  shieldDuration: 4

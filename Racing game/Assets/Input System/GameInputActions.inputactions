@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "CarInputActions",
+    "name": "GameInputActions",
     "maps": [
         {
             "name": "Car",
@@ -71,6 +71,54 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "PowerUps",
+            "id": "668e2cb3-e2f6-4b3f-8bc6-a681a1c81463",
+            "actions": [
+                {
+                    "name": "UseSpeed",
+                    "type": "Button",
+                    "id": "69f60a46-34cc-476c-b294-ba8b6ba2714e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseShield",
+                    "type": "Button",
+                    "id": "507c97ae-99c7-47ab-9311-c1d9a61b1cbc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "484987cd-b984-4edc-aa9b-002dad1d441c",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03b91e58-4404-4262-ad29-4649990be164",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseShield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8683414637657733549}
   - component: {fileID: 3745948285588689662}
+  - component: {fileID: 8276619514916707844}
   m_Layer: 0
   m_Name: VolumeSpeedEffects
   m_TagString: Untagged
@@ -49,3 +50,16 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+--- !u!114 &8276619514916707844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3965120251314774478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfa105b516e2e84589c2ef29cdab31c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  speedBoostUsed: {fileID: 11400000, guid: 35f283c8e2dbf5d45a8fe8d258ed3a2c, type: 2}

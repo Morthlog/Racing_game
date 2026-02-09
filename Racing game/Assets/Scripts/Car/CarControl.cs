@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class CarControl : MonoBehaviour
 {
@@ -6,6 +9,7 @@ public class CarControl : MonoBehaviour
     public float defaultMotorTorque = 2000f;
     public float boostMotorTorque = 4000f;
     public float brakeTorque = 2000f;
+    [SerializeField] float boostTargetSpeed = 25f;
     public float maxSpeed = 20f;
     public float steeringRange = 30f;
     public float steeringRangeAtMaxSpeed = 10f;
@@ -14,28 +18,19 @@ public class CarControl : MonoBehaviour
     private WheelControl[] wheels;
     private Rigidbody rigidBody;
 
-    private CarInputActions carControls; // Reference to the new input system
+    private GameInputActions actions; // Reference to the new input system
 
 
     [SerializeField] Light[] brakeLights;
     [SerializeField] bool addBoost;
-    [SerializeField] int boostPower =50;
     [SerializeField] float slowDownForce = 0.3f;
+
+    [Header("Events")]
+    [SerializeField] private IntEventChannelSO speedBoostUsed;
 
     void Awake()
     {
-        carControls = new CarInputActions(); // Initialize Input Actions
-
-    }
-
-    void OnEnable()
-    {
-        carControls.Enable();
-    }
-
-    void OnDisable()
-    {
-        carControls.Disable();
+        actions = new GameInputActions(); // Initialize Input Actions
     }
 
     // Start is called before the first frame update
@@ -52,17 +47,45 @@ public class CarControl : MonoBehaviour
         wheels = GetComponentsInChildren<WheelControl>();
     }
 
+    void OnEnable()
+    {
+        actions.Car.Enable();
+        speedBoostUsed.OnEventRaised += EnableSpeedBoost;
+    }
+
+    void OnDisable()
+    {
+        actions.Car.Disable();
+        speedBoostUsed.OnEventRaised -= EnableSpeedBoost;
+    }
+
+
+    IEnumerator DisableSpeedBoost(int duration)
+    {
+        yield return new WaitForSeconds(duration);
+        addBoost = false;
+    }
+
+    void EnableSpeedBoost(int duration)
+    {
+        addBoost= true;
+        StartCoroutine(DisableSpeedBoost(duration));
+    }
+
+
     // FixedUpdate is called at a fixed time interval
     void FixedUpdate()
     {
         float motorTorque = defaultMotorTorque;
+
         if (addBoost)
         {
-            motorTorque = boostMotorTorque;
+            //motorTorque = boostMotorTorque;
+            ApplyBoostHardSet();
         }
 
         // Read the Vector2 input from the new Input System
-        Vector2 inputVector = carControls.Car.Movement.ReadValue<Vector2>();
+        Vector2 inputVector = actions.Car.Movement.ReadValue<Vector2>();
 
         // Get player input for acceleration and steering
         float vInput = inputVector.y; // Forward/backward input
@@ -110,6 +133,20 @@ public class CarControl : MonoBehaviour
 
         SlowDownCar(inputVector);
 
+    }
+    void ApplyBoostHardSet()
+    {
+        Vector3 v = rigidBody.linearVelocity;
+        Vector3 forward = transform.forward;
+
+        float currentForward = Vector3.Dot(v, forward);
+        float target = boostTargetSpeed;
+
+        if (currentForward >= target) return;
+
+        // Διατηρεί πλευρική/κάθετη συνιστώσα, αντικαθιστά μόνο τη forward
+        Vector3 lateral = v - forward * currentForward;
+        rigidBody.linearVelocity = lateral + forward * target;
     }
 
     void SlowDownCar( Vector2 inputVector)

@@ -7,6 +7,13 @@ public class CameraControl : MonoBehaviour
     private CinemachineStoryboard storyboard;
     private CinemachineFollow cinemachineFollow;
     Coroutine coroutine;
+    [SerializeField] GameObject speedEffects;
+
+    [Header("Events")]
+    [SerializeField] private VoidEventChannelSO enteredCameraLimit;
+    [SerializeField] private VoidEventChannelSO playerRespawned;
+    [SerializeField] private VoidEventChannelSO playerDied;
+    [SerializeField] private IntEventChannelSO speedBoostUsed;
 
     void Awake()
     {
@@ -66,5 +73,33 @@ public class CameraControl : MonoBehaviour
     {
         cinemachineFollow.enabled = true;
         FadeIn(3f);
+    }
+
+    public void OnSpeedboost(int duration)
+    {
+        speedEffects.SetActive(true);
+        StartCoroutine(DisableEffects(duration));
+    }
+
+    IEnumerator DisableEffects(int duration)
+    {
+        yield return new WaitForSeconds(duration);
+        speedEffects.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        enteredCameraLimit.OnEventRaised += InactiveView;
+        playerRespawned.OnEventRaised += ActiveView;
+        playerDied.OnEventRaised += InactiveView;
+        speedBoostUsed.OnEventRaised += OnSpeedboost;
+    }
+
+    private void OnDisable()
+    {
+        enteredCameraLimit.OnEventRaised -= InactiveView;
+        playerRespawned.OnEventRaised -= ActiveView;
+        playerDied.OnEventRaised -= InactiveView;
+        speedBoostUsed.OnEventRaised -= OnSpeedboost;
     }
 }

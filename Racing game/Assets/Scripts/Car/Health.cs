@@ -11,39 +11,65 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private int currentHealth;
 
     [Header("Invincibility")]
-    [SerializeField] private float invincibilityTime = 1.0f;
+    [SerializeField]  float defaultInvincibilityTime=0.5f;
+    private float currentInvincibilityTime = 1.0f;
     [SerializeField] private bool isInvincible = false;
 
+    [Header("Events")]
+    [SerializeField] FloatEventChannelSO normalizedHealth;
+    [SerializeField] VoidEventChannelSO playerDied;
+    [SerializeField] IntEventChannelSO healthPackUsed;
+    [SerializeField] IntEventChannelSO shieldUsed;
 
     private Coroutine invincibilityRoutine;
-
-    [SerializeField] VoidEventChannelSO playerDied;
-
 
     private void Awake()
     {
         currentHealth = initialHealth;
         isInvincible = false;
+        ResetInvincibilityTime();
     }
 
+    void ResetInvincibilityTime()
+    {
+        currentInvincibilityTime = defaultInvincibilityTime;
+    }
     public void TakeDamage(int dmg)
     {
         if (isInvincible) return;
 
-        currentHealth -= dmg;
-        if (currentHealth <= 0) 
-        { 
-            currentHealth = 0;
-            playerDied.RaiseEvent();   
-        }
-
+        DecreaseHealth(dmg);
         StartInvincibility();
     }
+
+    void DecreaseHealth(int value)
+    {
+        currentHealth -= value;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            playerDied.RaiseEvent();
+        }
+        NormalizeHealthAndSendEvent();
+    }
+
+    void IncreaseHealth(int value)
+    {
+        currentHealth += value;
+        NormalizeHealthAndSendEvent();
+    }
+
 
     public void GetSquished()
     {
         isInvincible = false;
         TakeDamage(int.MaxValue);
+    }
+
+    void NormalizeHealthAndSendEvent()
+    {
+        float healthNormalized = (float) currentHealth / initialHealth;
+        normalizedHealth.RaiseEvent(healthNormalized);
     }
 
     private void StartInvincibility()
@@ -60,8 +86,8 @@ public class Health : MonoBehaviour, IDamageable
     {
         isInvincible = true;
 
-        yield return new WaitForSeconds(invincibilityTime);
-
+        yield return new WaitForSeconds(currentInvincibilityTime);
+        ResetInvincibilityTime();
         isInvincible = false;
         invincibilityRoutine = null;
     }                       
@@ -69,5 +95,24 @@ public class Health : MonoBehaviour, IDamageable
     public void ResetHealth()
     {
         currentHealth = initialHealth;
+        NormalizeHealthAndSendEvent();
+    }
+
+    void ActivateShield(int duration)
+    {
+        currentInvincibilityTime = duration;
+        StartInvincibility();
+    }
+
+    private void OnEnable()
+    {
+        healthPackUsed.OnEventRaised += IncreaseHealth;
+        shieldUsed.OnEventRaised += ActivateShield;
+    }
+
+    private void OnDisable()
+    {
+        healthPackUsed.OnEventRaised -= IncreaseHealth;
+        shieldUsed.OnEventRaised -= ActivateShield;
     }
 }
