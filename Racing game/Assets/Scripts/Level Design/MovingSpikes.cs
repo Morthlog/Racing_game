@@ -12,12 +12,18 @@ public class MovingSpikes : MonoBehaviour, TriggerController
     [SerializeField] private float accelaration = 5f;
     private Vector3 movement;
     private GameObject spikes;
+    private GameObject spikesTrigger;
     private Rigidbody rb;
     private float timer;
     [SerializeField] private float sleepTime = 1f; // in sec
+    [SerializeField] private float pauseOnShieldTime = 2f; // in sec
+    private bool canMove = true;
 
     private Dictionary<string, Dictionary<GameObject, int>> triggerCount;
     private int maxTriggers = 2;
+
+    [Header("Events")]
+    [SerializeField] VoidEventChannelSO shieldEnded;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +37,15 @@ public class MovingSpikes : MonoBehaviour, TriggerController
                 break;
             }
         }
+
+        foreach (Transform transform in spikes.transform)
+        {
+            if (transform.CompareTag("Trigger"))
+            {
+                spikesTrigger = transform.gameObject;
+                break;
+            }
+        }
         openPos = spikes.transform.localPosition;
         rb = spikes.GetComponent<Rigidbody>();
 
@@ -41,6 +56,10 @@ public class MovingSpikes : MonoBehaviour, TriggerController
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+            return;
+        if (!TryWake(state, movement))
+            return;
         movement = Vector3.zero;
         switch (state)
         {
@@ -75,19 +94,20 @@ public class MovingSpikes : MonoBehaviour, TriggerController
     void TransitionTo(RunState newState)
     {
         state = newState;
-        timer = Time.time;
+        timer = Time.time + sleepTime;
         movement = Vector3.zero;
     }
-    void TryWake(RunState nextState, Vector3 dir)
+    bool TryWake(RunState nextState, Vector3 dir)
     {
-        if (Time.time - timer <= sleepTime)
-            return;
+        if (Time.time <= timer)
+            return false;
 
         state = nextState;
         movement = dir;
+        return true;
     }
 
-    public void OnObjectEnter(GameObject go)
+    public void OnObjectEnter(GameObject origin, GameObject go)
     {
         var damageable = go.GetComponentInParent<IDamageable>();
         if (damageable == null) return;
@@ -95,6 +115,12 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         string parent = GameLoopManager.instance.GetParentTag(go);
         if (!triggerCount.ContainsKey(parent))
             triggerCount[parent] = new Dictionary<GameObject, int>();
+
+        if (origin == spikesTrigger && go.CompareTag("Shield"))
+        {
+            PauseMovement();
+            return;
+        }
 
         Dictionary<GameObject, int> inner = triggerCount[parent];
 
@@ -115,8 +141,13 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         }
     }
 
-    public void OnObjectExit(GameObject go) // not called if object is disabled
+    public void OnObjectExit(GameObject origin, GameObject go) // not called if object is disabled
     {
+        if (origin == spikesTrigger && go.CompareTag("Shield"))
+        {
+            EnableMovementAfterTime();
+            return;
+        }
         string parent = GameLoopManager.instance.GetParentTag(go);
 
         triggerCount[parent][go]--;
@@ -128,5 +159,25 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         Closing,
         Closed,
         Opened
+    }
+
+    private void PauseMovement()
+    {
+        canMove = false;
+        shieldEnded.OnEventRaised += EnableMovementAfterTime;
+    }
+
+    public void EnableMovementAfterTime()
+    {
+        shieldEnded.OnEventRaised -= EnableMovementAfterTime;
+        if (canMove)
+            return;
+        timer = Time.time + pauseOnShieldTime;
+        canMove = true;
+    }
+
+    private void OnDisable()
+    {
+        shieldEnded.OnEventRaised -= EnableMovementAfterTime;
     }
 }
