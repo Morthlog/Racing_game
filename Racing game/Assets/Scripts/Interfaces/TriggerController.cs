@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface TriggerController
 {
-    void OnObjectEnter(GameObject go);
+    void OnObjectEnter(GameObject origin, GameObject go);
 
-    void OnObjectExit(GameObject go);
+    void OnObjectExit(GameObject origin, GameObject go);
 }

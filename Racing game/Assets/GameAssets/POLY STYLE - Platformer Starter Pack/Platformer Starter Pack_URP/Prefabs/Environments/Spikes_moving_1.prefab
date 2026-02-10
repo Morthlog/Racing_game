@@ -346,6 +346,8 @@ MonoBehaviour:
   maxSpeed: 10
   accelaration: 5
   sleepTime: 1.5
+  pauseOnShieldTime: 2
+  shieldEnded: {fileID: 11400000, guid: 36da173d5abcb114792938d880c9602d, type: 2}
 --- !u!1001 &3448961873292291909
 PrefabInstance:
   m_ObjectHideFlags: 0
