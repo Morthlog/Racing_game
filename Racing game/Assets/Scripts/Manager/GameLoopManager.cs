@@ -132,7 +132,6 @@ public class GameLoopManager : MonoBehaviour
         {   
             currentLoop++;
             lapCompleted.RaiseEvent();
-            TimerManager.instance.OnLap();
         }
         else
         {
