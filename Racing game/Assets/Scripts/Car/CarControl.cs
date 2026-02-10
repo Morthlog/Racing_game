@@ -76,6 +76,7 @@ public class CarControl : MonoBehaviour
     // FixedUpdate is called at a fixed time interval
     void FixedUpdate()
     {
+        if (!GameLoopManager.instance.AllowMovement()) return;
         float motorTorque = defaultMotorTorque;
 
         if (addBoost)
@@ -134,6 +135,7 @@ public class CarControl : MonoBehaviour
         SlowDownCar(inputVector);
 
     }
+
     void ApplyBoostHardSet()
     {
         Vector3 v = rigidBody.linearVelocity;
@@ -148,6 +150,7 @@ public class CarControl : MonoBehaviour
         Vector3 lateral = v - forward * currentForward;
         rigidBody.linearVelocity = lateral + forward * target;
     }
+
 
     void SlowDownCar( Vector2 inputVector)
     {
