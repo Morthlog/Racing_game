@@ -16,6 +16,7 @@ TagManager:
   - Countdown
   - CameraBound
   - Timer
+  - Shield
   layers:
   - Default
   - TransparentFX
