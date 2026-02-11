@@ -7,7 +7,6 @@ public class CarControl : MonoBehaviour
 {
     [Header("Car Properties")]
     public float defaultMotorTorque = 2000f;
-    public float boostMotorTorque = 4000f;
     public float brakeTorque = 2000f;
     [SerializeField] float boostTargetSpeed = 25f;
     public float maxSpeed = 20f;
@@ -27,6 +26,9 @@ public class CarControl : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] private IntEventChannelSO speedBoostUsed;
+
+    [SerializeField] private bool timelineDriveEnabled = false;
+    [SerializeField] private Vector2 timelineDriveInput = Vector2.zero;
 
     void Awake()
     {
@@ -76,7 +78,9 @@ public class CarControl : MonoBehaviour
     // FixedUpdate is called at a fixed time interval
     void FixedUpdate()
     {
-        if (!GameLoopManager.instance.AllowMovement()) return;
+        if (GameLoopManager.instance && !GameLoopManager.instance.AllowMovement()) return;
+
+
         float motorTorque = defaultMotorTorque;
 
         if (addBoost)
@@ -86,7 +90,8 @@ public class CarControl : MonoBehaviour
         }
 
         // Read the Vector2 input from the new Input System
-        Vector2 inputVector = actions.Car.Movement.ReadValue<Vector2>();
+        Vector2 inputVector = timelineDriveEnabled ? timelineDriveInput: actions.Car.Movement.ReadValue<Vector2>();
+
 
         // Get player input for acceleration and steering
         float vInput = inputVector.y; // Forward/backward input
@@ -182,4 +187,24 @@ public class CarControl : MonoBehaviour
             wheel.WheelCollider.rotationSpeed = 0f;
         }
     }
+
+
+    public void TimelineStop()
+    {
+        timelineDriveEnabled = false;
+        timelineDriveInput = Vector2.zero;
+    }
+
+    public void TimelineMoveForward()
+    {
+        timelineDriveEnabled = true;
+        timelineDriveInput = new Vector2(0f, 1f); // full throttle forward
+    }
+
+    public void FreezeMovement()
+    {
+        rigidBody.linearVelocity = Vector3.zero;
+        rigidBody.isKinematic = true;
+    }
+
 }

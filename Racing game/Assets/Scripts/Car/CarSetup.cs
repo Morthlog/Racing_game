@@ -17,7 +17,8 @@ public class CarSetup : MonoBehaviour
     {
         car = Instantiate(playerData.chosenCar, transform);
 
-        wheelsGO = GameObject.Find("wheels");
+        wheelsGO = car.GetComponentInChildren<Transform>(true).Find("wheels").gameObject;
+
 
         CreateWheelColliderGO("wheel front right", true, true);
         CreateWheelColliderGO("wheel front left", true, true);
