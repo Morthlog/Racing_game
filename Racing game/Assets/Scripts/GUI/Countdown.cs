@@ -7,6 +7,9 @@ public class Countdown : MonoBehaviour
     Animator animator;
     string[] texts;
     int textIndex = 0;
+    [Header("Events")]
+    [SerializeField] private VoidEventChannelSO countdownCounting;
+    [SerializeField] private VoidEventChannelSO countdownDone;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +34,15 @@ public class Countdown : MonoBehaviour
     {
         textMeshProUGUI.text = texts[textIndex];
         if (textIndex == texts.Length - 1)
+        {
             CountdownManager.instance.AllowMovement();
+            countdownDone.RaiseEvent();
+        }
+        else
+        {
+            countdownCounting.RaiseEvent();
+        }
+            
     }
 
     public void IDone()
