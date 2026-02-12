@@ -26,7 +26,7 @@ public class IntroSceneManager : MonoBehaviour
 
     public void ChangeLevel()
     {
-        SceneManager.LoadScene("Main Game");
+        SceneManager.LoadSceneAsync("Main Game");
     }
 
 
