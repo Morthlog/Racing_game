@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 206421527247335204}
   - component: {fileID: -338309172185691683}
   m_Layer: 0
-  m_Name: Game Loop Manager
+  m_Name: MainGameSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
