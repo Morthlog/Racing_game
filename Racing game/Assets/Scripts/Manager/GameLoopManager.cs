@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLoopManager : MonoBehaviour
 {
@@ -151,6 +152,7 @@ public class GameLoopManager : MonoBehaviour
     {
         Debug.Log("Race is over");
         TimerManager.instance.StopTimer();
+        SceneManager.LoadSceneAsync("Celebration");
     }
     public void ToLastCheckpoint()
     {
