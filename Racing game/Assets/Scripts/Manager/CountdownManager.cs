@@ -15,7 +15,6 @@ public class CountdownManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
 
