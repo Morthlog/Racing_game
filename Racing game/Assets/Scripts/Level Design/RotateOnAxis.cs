@@ -20,7 +20,7 @@ public class RotateOnAxis : MonoBehaviour
     private bool canChangeDir = false;
 
     private bool canRotate = true;
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -114,6 +114,25 @@ public class RotateOnAxis : MonoBehaviour
         if (Mathf.Abs(angle) < maxAngle)
         {
             canChangeDir = true;
+        }
+    }
+
+    public void PauseMovement()
+    {
+        SetCanRotate(false);
+        if (!(rotationType == RotationType.ConstantKinematic))
+        {
+            rb.isKinematic = true;
+        }
+            
+    }
+    
+    public void UnpauseMovement()
+    {
+        SetCanRotate(true);
+        if (!(rotationType == RotationType.ConstantKinematic))
+        {
+            rb.isKinematic = false;
         }
     }
 

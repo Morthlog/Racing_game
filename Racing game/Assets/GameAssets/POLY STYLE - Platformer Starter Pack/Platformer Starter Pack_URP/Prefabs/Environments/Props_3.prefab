@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2894415143089034094}
   - component: {fileID: 88519469005820264}
   - component: {fileID: 676217750778131078}
+  - component: {fileID: 1186672314037018756}
   - component: {fileID: 448203695264006582}
   - component: {fileID: 7988549182820723236}
   m_Layer: 0
@@ -105,7 +106,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5326168351634955486}
   serializedVersion: 5
-  m_Mass: 3000
+  m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -124,6 +125,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
+--- !u!114 &1186672314037018756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326168351634955486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c043cdbc30c2a4786a1234428c1759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseRotationOnShieldHit
+  shieldEnded: {fileID: 11400000, guid: 36da173d5abcb114792938d880c9602d, type: 2}
 --- !u!114 &448203695264006582
 MonoBehaviour:
   m_ObjectHideFlags: 0
