@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    Dictionary<string, float> playerProfiles=new();
+    Dictionary<string, SortedSet<float> > playerProfiles=new();
     public static GameManager instance;
 
+    public string currentProfileName;
+    public SortedSet<float> currentProfileTimes;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -17,6 +19,11 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        GenerateMockData();
     }
 
     public bool IsProfileNameValid(string profileName)
@@ -30,9 +37,50 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public void AddProfile(string profile)
+    public void AddProfile(string profileName)
     {
+        currentProfileName = profileName;
+        currentProfileTimes = new SortedSet<float>();
+        playerProfiles.Add(profileName, currentProfileTimes);
+    }
 
-        playerProfiles.Add(profile, 0);
+    public void AddTime(float time)
+    {
+        currentProfileTimes.Add(time);
+        if (currentProfileTimes.Count > 10)
+        {
+            currentProfileTimes.Remove(currentProfileTimes.Max);
+        }
+    }
+
+    public void GenerateMockData()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            string name = "Player_" + i;
+
+            AddProfile(name);
+
+            for (int j = 0; j < 5; j++)
+            {
+                float randomTime = Random.Range(10.0f, 100.0f);
+
+                randomTime = Mathf.Round(randomTime * 100f) / 100f;
+
+                AddTime(randomTime);
+            }
+        }
+    }
+
+    public Dictionary<string, SortedSet<float>> GetAllProfiles()
+    {
+        var copy = new Dictionary<string, SortedSet<float>>();
+
+        foreach (var entry in playerProfiles)
+        {
+            copy.Add(entry.Key, new SortedSet<float>(entry.Value));
+        }
+
+        return copy;
     }
 }

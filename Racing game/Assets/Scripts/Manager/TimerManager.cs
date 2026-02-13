@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TimerManager : MonoBehaviour
@@ -40,5 +41,10 @@ public class TimerManager : MonoBehaviour
     public void OnLap()
     {
         timer.HighlightTimer();
+    }
+
+    public float GetTime()
+    {
+        return timer.GetTime();
     }
 }

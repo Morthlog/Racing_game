@@ -72,4 +72,8 @@ public class Timer : MonoBehaviour
         textMeshProUGUI.text = formatted;
     }
 
+    public float GetTime()
+    {
+        return currentTime;
+    }
 }
