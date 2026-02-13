@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class DeathPlane : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (GameLoopManager.instance.GetParentTag(other.gameObject) == "Player")
+        if (MainGameSceneManager.instance.GetParentTag(other.gameObject) == "Player")
         {
             var damageable = other.GetComponentInParent<IDamageable>();
 
