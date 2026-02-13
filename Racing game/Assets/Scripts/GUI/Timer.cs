@@ -33,7 +33,7 @@ public class Timer : MonoBehaviour
         if (highlighting) StopHighlight();
 
 
-        drawTime(currentTime);
+        DrawTime(currentTime);
 
     }
 
@@ -52,7 +52,7 @@ public class Timer : MonoBehaviour
         textMeshProUGUI.color = highlightColor;
         highlightTimer = 0;
         highlighting = true;
-        drawTime(lapTime);
+        DrawTime(lapTime);
     }
 
     public void StopHighlight()
@@ -62,16 +62,10 @@ public class Timer : MonoBehaviour
         lapTime = 0;
     }
 
-    private void drawTime(float currentTime)
-    {
-        int minutes = Mathf.FloorToInt(currentTime / 60f);
-        int seconds = Mathf.FloorToInt(currentTime % 60f);
-        int milliseconds = Mathf.FloorToInt((currentTime * 1000f) % 1000f);
-
-        string formatted = $"{minutes:00}:{seconds:00}:{milliseconds:000}";
-        textMeshProUGUI.text = formatted;
+    private void DrawTime(float currentTime)
+    {  
+        textMeshProUGUI.text = Utilities.FormatTime(currentTime);
     }
-
     public float GetTime()
     {
         return currentTime;
