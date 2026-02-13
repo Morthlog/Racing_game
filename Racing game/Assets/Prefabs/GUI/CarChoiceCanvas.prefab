@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5122502686330545250}
   - component: {fileID: 4581004581649203531}
   m_Layer: 5
-  m_Name: ChoiceCanvas
+  m_Name: CarChoiceCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

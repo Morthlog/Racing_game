@@ -153,6 +153,8 @@ public class GameLoopManager : MonoBehaviour
         Debug.Log("Race is over");
         TimerManager.instance.StopTimer();
         GameManager.instance.AddTime(TimerManager.instance.GetTime());
+
+
         SceneManager.LoadSceneAsync("Celebration");
     }
     public void ToLastCheckpoint()

@@ -1,15 +1,21 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroSceneManager : MonoBehaviour
 {
     [SerializeField] GameObject menuCamvas, choiceCanvas;
     [SerializeField] GameObject nextBtn, previousBtn;
     [SerializeField] GameObject errorWrapper;
-    [SerializeField] GameObject profilePanel;
+    [SerializeField] GameObject profileCreationPanel;
+    [SerializeField] GameObject profileSelectionPanel;
     [SerializeField] TMP_InputField profileInputField;
     [SerializeField] TextMeshProUGUI carNameTxt;
+
+
+    [SerializeField] GameObject loadedProfileBtnPrefab;
+    [SerializeField] GameObject viewportContainer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,17 +24,17 @@ public class IntroSceneManager : MonoBehaviour
         choiceCanvas.SetActive(false);
     }
 
-    void EnableNewGamePanel()
+    void GoToCarSelection()
     {
         menuCamvas.SetActive(false);
-        choiceCanvas.SetActive(true);
+        profileSelectionPanel.SetActive(false);
+        choiceCanvas.SetActive(true);      
     }
 
     public void ChangeLevel()
     {
         SceneManager.LoadSceneAsync("Main Game");
     }
-
 
     public void SetButtons(int carIntex, int carPoolLength)
     {
@@ -80,11 +86,31 @@ public class IntroSceneManager : MonoBehaviour
         if (!ValidateNameAndShowError()) return;
 
         GameManager.instance.AddProfile(profileInputField.text);
-        EnableNewGamePanel();
+        GoToCarSelection();
     }
 
-    public void EnableProfilePanel()
+    public void EnableProfileCreationPanel()
     {
-        profilePanel.SetActive(true);
+        profileCreationPanel.SetActive(true);
+    }
+
+    public void EnableProfileSelectionPanel()
+    {
+        profileSelectionPanel.SetActive(true);
+    }
+
+    public void PopulateProfileList()
+    {
+        foreach (var (profileName, times) in GameManager.instance.GetAllProfiles())
+        {
+            GameObject profileBtnWrapper = Instantiate(loadedProfileBtnPrefab, viewportContainer.transform);
+
+            Button currentBtn = profileBtnWrapper.GetComponent<Button>();
+            profileBtnWrapper.name = profileName;
+            currentBtn.GetComponentInChildren<TextMeshProUGUI>().text = profileName;
+            currentBtn.onClick.AddListener(() => GameManager.instance.SetCurrentProfileName(profileName));
+            currentBtn.onClick.AddListener(() => GameManager.instance.SetCurrentProfileTimes(times));
+            currentBtn.onClick.AddListener(() => GoToCarSelection());
+        }
     }
 }
