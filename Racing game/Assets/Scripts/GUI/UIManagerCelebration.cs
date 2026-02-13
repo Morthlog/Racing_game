@@ -34,7 +34,7 @@ public class UIManagerCelebration : MonoBehaviour
             ScoreEntryController entry = entryController.GetComponent<ScoreEntryController>();
             entry.HidePlayerNameWrapper();
             entry.SetRankTxt(rank.ToString());
-            entry.SetTimeTxt(time.ToString());
+            entry.SetTimeTxt(Utilities.FormatTime(time));
             rank++;
         }
         personalTimesInitialized = true;
@@ -58,7 +58,7 @@ public class UIManagerCelebration : MonoBehaviour
             entryController.SetPlayerName(profileName);
             entryController.SetRankTxt(rank.ToString());
             float bestProfileTime = times.Min;
-            entryController.SetTimeTxt(bestProfileTime.ToString());
+            entryController.SetTimeTxt(Utilities.FormatTime(bestProfileTime));
             rank++;
         }
         globalTimesInitialized = true;
