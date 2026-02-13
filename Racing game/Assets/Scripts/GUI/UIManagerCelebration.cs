@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIManagerCelebration : MonoBehaviour
 {
-    [SerializeField] GameObject personalRecordContainer, globalLeaderboardContainer;
-
+    [SerializeField] GameObject personalRecordContainer, globalLeaderboardScrollView;
+    [SerializeField] GameObject globalLeaderboardViewportContainer;
     [SerializeField] GameObject scoreEntryItemPrefab;
     [SerializeField] Button personalTimesBtn, globalTimesBtn;
     bool personalTimesInitialized;
@@ -19,7 +19,7 @@ public class UIManagerCelebration : MonoBehaviour
 
     public void ShowPersonalTimes()
     {
-        globalLeaderboardContainer.SetActive(false);
+        globalLeaderboardScrollView.SetActive(false);
         personalRecordContainer.SetActive(true);
 
         SetButtonHighlight(globalTimesBtn, false);
@@ -42,7 +42,7 @@ public class UIManagerCelebration : MonoBehaviour
     public void ShowGlobalTimes()
     {
         personalRecordContainer.SetActive(false);
-        globalLeaderboardContainer.SetActive(true);
+        globalLeaderboardScrollView.SetActive(true);
 
         SetButtonHighlight(globalTimesBtn, true);
         SetButtonHighlight(personalTimesBtn, false);
@@ -52,7 +52,7 @@ public class UIManagerCelebration : MonoBehaviour
         Dictionary<string, SortedSet<float>> profiles = GameManager.instance.GetAllProfiles();
         foreach (var (profileName, times) in profiles)
         {
-            GameObject scoreEntryObject = Instantiate(scoreEntryItemPrefab, globalLeaderboardContainer.transform);
+            GameObject scoreEntryObject = Instantiate(scoreEntryItemPrefab, globalLeaderboardViewportContainer.transform);
 
             ScoreEntryController entryController = scoreEntryObject.GetComponent<ScoreEntryController>();
             entryController.SetPlayerName(profileName);
