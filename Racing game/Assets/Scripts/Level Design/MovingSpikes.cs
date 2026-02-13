@@ -112,7 +112,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         var damageable = go.GetComponentInParent<IDamageable>();
         if (damageable == null) return;
 
-        string parent = GameLoopManager.instance.GetParentTag(go);
+        string parent = MainGameSceneManager.instance.GetParentTag(go);
         if (!triggerCount.ContainsKey(parent))
             triggerCount[parent] = new Dictionary<GameObject, int>();
 
@@ -148,7 +148,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
             EnableMovementAfterTime();
             return;
         }
-        string parent = GameLoopManager.instance.GetParentTag(go);
+        string parent = MainGameSceneManager.instance.GetParentTag(go);
 
         triggerCount[parent][go]--;
     }

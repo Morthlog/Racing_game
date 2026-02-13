@@ -5,13 +5,13 @@ using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameLoopManager : MonoBehaviour
+public class MainGameSceneManager : MonoBehaviour
 {
     [Header("Lives")]
     [SerializeField] private int initialLives = 3;
     [SerializeField] private int currentLives;
 
-    public static GameLoopManager instance;
+    public static MainGameSceneManager instance;
     private float time;
     private int frames;
     private int playerLastCheckpointID = 0;
@@ -271,5 +271,15 @@ public class GameLoopManager : MonoBehaviour
             gameover.RaiseEvent();
             isGameover = true;
         }
+    }
+
+    public int GetCurrentLoop()
+    {
+        return currentLoop;
+    }
+
+    public int GetTotalLoops()
+    {
+        return totalLoops;
     }
 }

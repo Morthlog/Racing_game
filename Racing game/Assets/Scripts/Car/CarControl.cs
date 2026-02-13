@@ -78,7 +78,7 @@ public class CarControl : MonoBehaviour
     // FixedUpdate is called at a fixed time interval
     void FixedUpdate()
     {
-        if (GameLoopManager.instance && !GameLoopManager.instance.AllowMovement()) return;
+        if (MainGameSceneManager.instance && !MainGameSceneManager.instance.AllowMovement()) return;
 
 
         float motorTorque = defaultMotorTorque;
