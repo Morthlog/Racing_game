@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.ComponentModel;
-using Unity.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable
@@ -20,7 +17,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] VoidEventChannelSO playerDied;
     [SerializeField] IntEventChannelSO healthPackUsed;
     [SerializeField] IntEventChannelSO shieldUsed;
-
+    [SerializeField] VoidEventChannelSO playerDamaged;
     private Coroutine invincibilityRoutine;
 
     private void Awake()
@@ -38,6 +35,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (isInvincible) return;
 
+        playerDamaged.RaiseEvent();
         DecreaseHealth(dmg);
         StartInvincibility();
     }
@@ -62,6 +60,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void GetSquished()
     {
+
         Die();
     }
 
