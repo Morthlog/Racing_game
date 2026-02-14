@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 8095077010129436165}
   - component: {fileID: 3041569731764997357}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: RaceStatsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,6 +471,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1643691488203484576}
   - {fileID: 3554442819964850570}
   - {fileID: 2250147784962895116}
   m_Father: {fileID: 1852319569983033027}
@@ -616,7 +617,7 @@ GameObject:
   - component: {fileID: 9021394500899007429}
   - component: {fileID: 7171118439599275191}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,7 +636,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2633403618179270831}
-  - {fileID: 1643691488203484576}
   - {fileID: 2053186495011695868}
   m_Father: {fileID: 1852319569983033027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 7169204720152111657}
   - component: {fileID: 1298729919552640635}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SpeedCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,7 +1234,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8487425161238027861}
+    m_TransformParent: {fileID: 1696371509472653891}
     m_Modifications:
     - target: {fileID: 3209740489416336194, guid: 0f61edc22e88ffd45af46d2578879608, type: 3}
       propertyPath: m_Name
@@ -1290,15 +1290,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6875930726707302563, guid: 0f61edc22e88ffd45af46d2578879608, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6875930726707302563, guid: 0f61edc22e88ffd45af46d2578879608, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6875930726707302563, guid: 0f61edc22e88ffd45af46d2578879608, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6875930726707302563, guid: 0f61edc22e88ffd45af46d2578879608, type: 3}
       propertyPath: m_AnchoredPosition.x
