@@ -5011,9 +5011,17 @@ PrefabInstance:
       propertyPath: torque
       value: 1500000
       objectReference: {fileID: 0}
+    - target: {fileID: 4202872014601117676, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
+      propertyPath: direction
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5003257899507768075, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
       propertyPath: m_Name
       value: Props_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453474317236180132, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
+      propertyPath: damage
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6768743221385502464, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5969,6 +5977,10 @@ PrefabInstance:
     - target: {fileID: 5003257899507768075, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
       propertyPath: m_Name
       value: Props_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453474317236180132, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
+      propertyPath: damage
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6768743221385502464, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
       propertyPath: m_LocalPosition.x

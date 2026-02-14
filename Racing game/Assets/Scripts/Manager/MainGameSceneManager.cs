@@ -47,8 +47,6 @@ public class MainGameSceneManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
-
     }
 
     
