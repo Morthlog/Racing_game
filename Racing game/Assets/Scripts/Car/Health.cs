@@ -35,18 +35,23 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (isInvincible) return;
 
-        playerDamaged.RaiseEvent();
+       
         DecreaseHealth(dmg);
         StartInvincibility();
     }
 
     void DecreaseHealth(int value)
     {
+        if (currentHealth == 0) return;
         currentHealth -= value;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             playerDied.RaiseEvent();
+        }
+        else
+        {
+            playerDamaged.RaiseEvent();
         }
         NormalizeHealthAndSendEvent();
     }
