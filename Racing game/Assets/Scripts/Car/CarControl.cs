@@ -229,6 +229,6 @@ public class CarControl : MonoBehaviour
         }
 
         float averageRPM = totalRPM / count;
-        return count > 0 ? averageRPM : 0f;
+        return averageRPM;
     }
 }
