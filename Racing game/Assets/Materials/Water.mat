@@ -60,18 +60,18 @@ Material:
     m_Ints: []
     m_Floats:
     - _Depth: 1.65
-    - _Displacement: 0.5
-    - _Metallic: 0
-    - _Normal_Strength: 1
+    - _Displacement: 0.6
+    - _Metallic: 0.05
+    - _Normal_Strength: 1.25
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Reflection_Divide: 1.4
     - _Reflection_Divide_Normal: 1.4
     - _Reflection_Strength: 0.6
-    - _Smoothness: 0.752
+    - _Smoothness: 0.85
     - _Strength: 0.55
     - _Tiling: 10
-    - _Water_Cycle_Length: 2.5
+    - _Water_Cycle_Length: 3.25
     - _Water_Speed: 2
     m_Colors:
     - _Deep_Water_Color: {r: 0.12941176, g: 0.4679576, b: 0.6392157, a: 1}
