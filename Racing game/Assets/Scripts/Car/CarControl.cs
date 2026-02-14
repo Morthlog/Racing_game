@@ -207,4 +207,28 @@ public class CarControl : MonoBehaviour
         rigidBody.isKinematic = true;
     }
 
+    public bool IsGasPedalPressed()
+    {
+        if (Math.Abs(actions.Car.Movement.ReadValue<Vector2>().y) <0.1f)
+            return false;
+        return true;
+    }
+
+    public float GetAverageWheelRPM()
+    {
+        float totalRPM = 0;
+        int count = 0;
+
+        foreach (var wheel in wheels)
+        {
+            if (!wheel.motorized)
+            {
+                totalRPM += Mathf.Abs(wheel.WheelCollider.rpm);
+                count++;
+            }
+        }
+
+        float averageRPM = totalRPM / count;
+        return count > 0 ? averageRPM : 0f;
+    }
 }
