@@ -226,7 +226,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f834b4dd-d460-4e40-ba77-0e9e52ccdce6"",
-                    ""path"": ""<Keyboard>/#(P)"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
