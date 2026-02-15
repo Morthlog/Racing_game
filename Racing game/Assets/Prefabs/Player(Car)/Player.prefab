@@ -11379,8 +11379,7 @@ MonoBehaviour:
   timelineDriveEnabled: 0
   timelineDriveInput: {x: 0, y: 0}
   stuckSecondThreshold: 5
-  maxAccelerationThreshold: 50
-  resetToSpeedKmH: 0
+  maxAccelerationThreshold: 600
 --- !u!114 &7773510026790983135
 MonoBehaviour:
   m_ObjectHideFlags: 0

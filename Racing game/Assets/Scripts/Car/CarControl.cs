@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.UIElements;
 
 public class CarControl : MonoBehaviour
 {
@@ -33,8 +31,13 @@ public class CarControl : MonoBehaviour
     [SerializeField] private Vector2 timelineDriveInput = Vector2.zero;
     [SerializeField] private float stuckSecondThreshold=3;
 
+    [Header("Acceleration Settings")]
+    [SerializeField] float maxAccelerationThreshold = 50f;
+    private Vector3 lastVelocity;
+
     private float stuckTimerCounter;
 
+    private Coroutine currentBoostCoroutine;
     void Awake()
     {
         actions = new GameInputActions(); // Initialize Input Actions
@@ -71,12 +74,18 @@ public class CarControl : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         addBoost = false;
+        currentBoostCoroutine = null;
     }
 
     void EnableSpeedBoost(int duration)
     {
-        addBoost= true;
-        StartCoroutine(DisableSpeedBoost(duration));
+        if (currentBoostCoroutine != null)
+        {
+            StopCoroutine(currentBoostCoroutine);
+        }
+
+        addBoost = true;
+        currentBoostCoroutine = StartCoroutine(DisableSpeedBoost(duration));
     }
 
 
@@ -102,6 +111,7 @@ public class CarControl : MonoBehaviour
         float hInput = inputVector.x; // Steering input
 
         StuckCheck(vInput);
+        DetectAccelerationSpike();
 
         // Calculate current speed along the car's forward axis
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
@@ -144,7 +154,28 @@ public class CarControl : MonoBehaviour
         }
 
         SlowDownCar(inputVector);
+    }
 
+    void DetectAccelerationSpike()
+    {
+        Vector3 currentVelocity = rigidBody.linearVelocity;
+
+        Vector3 velocityDiff = currentVelocity - lastVelocity;
+
+        float totalAcc = velocityDiff.magnitude / Time.fixedDeltaTime;
+        if (totalAcc > maxAccelerationThreshold)
+        {
+            addBoost = false;
+            Debug.LogWarning("Abnormal acceleration detected");
+            if (currentBoostCoroutine != null)
+            {
+                StopCoroutine(currentBoostCoroutine);
+                currentBoostCoroutine = null;
+            }
+            rigidBody.angularVelocity= Vector3.zero;
+            rigidBody.linearVelocity= Vector3.zero;
+        }
+        lastVelocity = currentVelocity;
     }
 
     void StuckCheck(float vInput)
@@ -174,8 +205,10 @@ public class CarControl : MonoBehaviour
 
         if (currentForward >= target) return;
 
-        Vector3 lateral = v - forward * currentForward;
-        rigidBody.linearVelocity = lateral + forward * target;
+        float speedNeeded = target - currentForward;
+
+        Vector3 forceToApply = forward * speedNeeded;
+        rigidBody.AddForce(forceToApply, ForceMode.VelocityChange);
     }
 
 
