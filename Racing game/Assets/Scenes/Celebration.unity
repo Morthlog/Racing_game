@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 834657630306594990, guid: dfaaecbda4677fd4b98a0042bfc98eaf, type: 3}
+      propertyPath: DefaultBlend.Style
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1176111098237574763, guid: dfaaecbda4677fd4b98a0042bfc98eaf, type: 3}
       propertyPath: m_Name
       value: CinemachineBrain
@@ -7799,9 +7803,9 @@ MonoBehaviour:
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 4
   Damping:
-    Enabled: 0
+    Enabled: 1
     Position: {x: 0, y: 0, z: 0}
-    Angular: 0
+    Angular: 10
   AutomaticDolly:
     Enabled: 0
     Method:
