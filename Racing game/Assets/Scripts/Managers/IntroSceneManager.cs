@@ -31,11 +31,6 @@ public class IntroSceneManager : MonoBehaviour
         choiceCanvas.SetActive(true);      
     }
 
-    public void ChangeLevel()
-    {
-        SceneManager.LoadSceneAsync("Main Game");
-    }
-
     public void SetButtons(int carIntex, int carPoolLength)
     {
         if (carIntex + 1 == carPoolLength)

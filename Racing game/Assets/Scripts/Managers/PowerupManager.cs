@@ -80,9 +80,9 @@ public class PowerupManager : MonoBehaviour
     {
         powerUpPicked.OnEventRaised += OnPowerupPicked;
 
-        actions.PowerUps.UseShield.performed += OnUseShield;
-        actions.PowerUps.UseSpeed.performed += OnUseSpeedBoost;
         actions.PowerUps.Enable();
+        actions.PowerUps.UseShield.performed += OnUseShield;
+        actions.PowerUps.UseSpeed.performed += OnUseSpeedBoost;      
     }
 
     private void OnDisable()

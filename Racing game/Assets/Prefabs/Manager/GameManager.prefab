@@ -45,3 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   currentProfileName: 
+  newGame: {fileID: 11400000, guid: d558461859c593d4dbe70e352f0c074a, type: 2}
+  restartGame: {fileID: 11400000, guid: d494692492c161b4191433b2cf46b12b, type: 2}
+  quitGame: {fileID: 11400000, guid: 931d1238bd49f9647823d43737870908, type: 2}
+  gamePaused: {fileID: 11400000, guid: 68e7da6102e9eeb4cb8fabcf896d6b89, type: 2}

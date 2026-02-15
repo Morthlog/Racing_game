@@ -245,7 +245,7 @@ public class MainGameSceneManager : MonoBehaviour
         Health playerHealth = player.GetComponent<Health>();
         if (isGameover)
         {
-            TransferToCheckpoint(1, startPoint.transform.position);
+            GameManager.instance.FreezeGame();
         }
         else 
         {

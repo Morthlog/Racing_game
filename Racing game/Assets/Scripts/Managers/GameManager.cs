@@ -1,7 +1,11 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +14,16 @@ public class GameManager : MonoBehaviour
 
     public string currentProfileName;
     public SortedSet<float> currentProfileTimes;
+
+    [Header("Events")]
+    [SerializeField] VoidEventChannelSO newGame;
+    [SerializeField] VoidEventChannelSO restartGame;
+    [SerializeField] VoidEventChannelSO quitGame;
+    [SerializeField] BoolEventChannelSO gamePaused;
+
+    private GameInputActions actions;
+
+    bool isGamePaused=false;
 
     private void Awake()
     {
@@ -21,6 +35,8 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        actions = new GameInputActions();
     }
 
     private void Start()
@@ -78,7 +94,7 @@ public class GameManager : MonoBehaviour
 
             for (int j = 0; j < 5; j++)
             {
-                float randomTime = Random.Range(10.0f, 100.0f);
+                float randomTime = UnityEngine.Random.Range(10.0f, 100.0f);
 
                 randomTime = Mathf.Round(randomTime * 100f) / 100f;
 
@@ -117,5 +133,70 @@ public class GameManager : MonoBehaviour
 
             playerProfiles = JsonConvert.DeserializeObject<Dictionary<string, SortedSet<float>>>(json);
         }
+    }
+
+    private void ChangeLevelToMain()
+    {
+        ChangeLevel("Main Game");
+    }
+
+    private void ChangeLevelToIntro()
+    {
+        ChangeLevel("Intro");
+    }
+
+    public void ChangeLevel(string levelName)
+    {
+        SceneManager.LoadSceneAsync(levelName);
+        UnFreezeGame();
+    }
+
+    public void FreezeGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void UnFreezeGame()
+    {
+        Time.timeScale = 1f;
+    }
+
+
+    private void HandlePauseGame(InputAction.CallbackContext context)
+    {
+
+        isGamePaused = !isGamePaused;
+        gamePaused.RaiseEvent(isGamePaused);
+
+        if (isGamePaused)
+        {
+            FreezeGame();
+        }
+        else
+        {
+            UnFreezeGame();
+        }      
+    }
+
+    private void OnEnable()
+    {
+        newGame.OnEventRaised += ChangeLevelToIntro;
+        restartGame.OnEventRaised += ChangeLevelToMain;
+        quitGame.OnEventRaised += Application.Quit;
+
+        actions.Menu.Enable();
+        actions.Menu.Pause.performed += HandlePauseGame;
+    }
+
+
+    private void OnDisable()
+    {
+        if (instance != this) return;//used to prevent errors when object is destroyed
+        newGame.OnEventRaised -= ChangeLevelToIntro;
+        restartGame.OnEventRaised -= ChangeLevelToMain;
+        quitGame.OnEventRaised -= Application.Quit;
+
+        actions.Menu.Pause.performed -= HandlePauseGame;
+        actions.Menu.Disable();
     }
 }

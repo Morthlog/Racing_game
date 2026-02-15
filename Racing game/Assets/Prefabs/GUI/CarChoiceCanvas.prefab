@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8098401176228673629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -226,9 +226,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: IntroSceneManager, Assembly-CSharp
-        m_MethodName: ChangeLevel
+      - m_Target: {fileID: 11400000, guid: d494692492c161b4191433b2cf46b12b, type: 2}
+        m_TargetAssemblyTypeName: VoidEventChannelSO, Assembly-CSharp
+        m_MethodName: RaiseEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

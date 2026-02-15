@@ -81,14 +81,4 @@ public class UIManagerCelebration : MonoBehaviour
 
         targetButton.colors = cb;
     }
-
-    public void ReturnToIntroScene()
-    {
-        SceneManager.LoadSceneAsync("Intro");
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadSceneAsync("Main Game");
-    }
 }
