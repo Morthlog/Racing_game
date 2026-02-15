@@ -26,9 +26,12 @@ public class CarControl : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] private IntEventChannelSO speedBoostUsed;
+    [SerializeField] private VoidEventChannelSO carStuck;
 
     [SerializeField] private bool timelineDriveEnabled = false;
     [SerializeField] private Vector2 timelineDriveInput = Vector2.zero;
+    [SerializeField] private float stuckSecondThreshold=3;
+    private float stuckTimerCounter;
 
     void Awake()
     {
@@ -80,7 +83,6 @@ public class CarControl : MonoBehaviour
     {
         if (MainGameSceneManager.instance && !MainGameSceneManager.instance.AllowMovement()) return;
 
-
         float motorTorque = defaultMotorTorque;
 
         if (addBoost)
@@ -96,6 +98,8 @@ public class CarControl : MonoBehaviour
         // Get player input for acceleration and steering
         float vInput = inputVector.y; // Forward/backward input
         float hInput = inputVector.x; // Steering input
+
+        StuckCheck(vInput);
 
         // Calculate current speed along the car's forward axis
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
@@ -141,6 +145,23 @@ public class CarControl : MonoBehaviour
 
     }
 
+    void StuckCheck(float vInput)
+    {
+        if (Math.Abs (vInput) > 0.1f && rigidBody.linearVelocity.magnitude < 1f)
+        {
+            stuckTimerCounter += Time.fixedDeltaTime;
+            if (stuckTimerCounter >= stuckSecondThreshold)
+            {
+                carStuck.RaiseEvent();
+                stuckTimerCounter = 0f;
+            }
+        }
+        else
+        {
+            stuckTimerCounter = 0f;
+        }
+    }
+
     void ApplyBoostHardSet()
     {
         Vector3 v = rigidBody.linearVelocity;
@@ -151,7 +172,6 @@ public class CarControl : MonoBehaviour
 
         if (currentForward >= target) return;
 
-        // Διατηρεί πλευρική/κάθετη συνιστώσα, αντικαθιστά μόνο τη forward
         Vector3 lateral = v - forward * currentForward;
         rigidBody.linearVelocity = lateral + forward * target;
     }

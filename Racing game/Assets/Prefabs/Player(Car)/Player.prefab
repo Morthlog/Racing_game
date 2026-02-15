@@ -11375,8 +11375,10 @@ MonoBehaviour:
   addBoost: 0
   slowDownForce: 0.3
   speedBoostUsed: {fileID: 11400000, guid: 35f283c8e2dbf5d45a8fe8d258ed3a2c, type: 2}
+  carStuck: {fileID: 11400000, guid: f9e4b4d93fb20484a922b393a0d796c3, type: 2}
   timelineDriveEnabled: 0
   timelineDriveInput: {x: 0, y: 0}
+  stuckSecondThreshold: 5
 --- !u!114 &7773510026790983135
 MonoBehaviour:
   m_ObjectHideFlags: 0

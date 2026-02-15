@@ -32,6 +32,7 @@ public class MainGameSceneManager : MonoBehaviour
     [SerializeField] VoidEventChannelSO playerRespawned;
     [SerializeField] VoidEventChannelSO lapCompleted;
     [SerializeField] VoidEventChannelSO gameover;
+    [SerializeField] VoidEventChannelSO carStuck;
 
     private bool hasHitFirstCheckpoint = false;
     bool isGameover = false;
@@ -279,5 +280,15 @@ public class MainGameSceneManager : MonoBehaviour
     public int GetTotalLoops()
     {
         return totalLoops;
+    }
+
+    private void OnEnable()
+    {
+        carStuck.OnEventRaised += ToLastCheckpoint;
+    }
+
+    private void OnDisable()
+    {
+        carStuck.OnEventRaised -= ToLastCheckpoint;
     }
 }
