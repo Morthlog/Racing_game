@@ -1,65 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &328723390769150775
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5657625900968117324}
-  - component: {fileID: 7590188966399032120}
-  m_Layer: 0
-  m_Name: EventListeners
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5657625900968117324
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328723390769150775}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 206421527247335204}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7590188966399032120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328723390769150775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a757f9284176408419af91123d996eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VoidEventListener
-  channel: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -338309172185691683}
-        m_TargetAssemblyTypeName: GameLoopManager, Assembly-CSharp
-        m_MethodName: OnPlayerDied
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &3775259044931121070
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,8 +29,7 @@ Transform:
   m_LocalPosition: {x: 15.96237, y: -1.43863, z: -16.70595}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5657625900968117324}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-338309172185691683
@@ -114,3 +53,4 @@ MonoBehaviour:
   lapCompleted: {fileID: 11400000, guid: bac7895f8a0c2c74d8204fce44c942c8, type: 2}
   gameover: {fileID: 11400000, guid: 2971e0daf8c549145a191fcd5291cf66, type: 2}
   carStuck: {fileID: 11400000, guid: f9e4b4d93fb20484a922b393a0d796c3, type: 2}
+  playerDied: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}

@@ -162,20 +162,33 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private bool isGameOver = false;
+
+    public void SetGameOver(bool value)
+    {
+        isGameOver = value;
+        if (isGameOver)
+        {
+            FreezeGame();
+        }
+    }
+
+    public bool IsGameOver()
+    {
+        return isGameOver;
+    }
+
     private void HandlePauseGame(InputAction.CallbackContext context)
     {
+        if (isGameOver) return;
 
         isGamePaused = !isGamePaused;
         gamePaused.RaiseEvent(isGamePaused);
 
         if (isGamePaused)
-        {
             FreezeGame();
-        }
         else
-        {
             UnFreezeGame();
-        }      
     }
 
     private void OnEnable()

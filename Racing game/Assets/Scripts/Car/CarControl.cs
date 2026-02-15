@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UIElements;
 
 public class CarControl : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class CarControl : MonoBehaviour
     [SerializeField] private bool timelineDriveEnabled = false;
     [SerializeField] private Vector2 timelineDriveInput = Vector2.zero;
     [SerializeField] private float stuckSecondThreshold=3;
+
     private float stuckTimerCounter;
 
     void Awake()

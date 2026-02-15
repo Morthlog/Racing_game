@@ -21,7 +21,6 @@ public class MainGameSceneManager : MonoBehaviour
 
     private float rotationDiffCheckpointPlayer = 90f; // relative difference between Checkpoint and Player rotation in WC
 
-    private bool iPaused = false;
     private bool allowMovement = false;
     [SerializeField] GameObject startPoint;
     [Header("Laps")]
@@ -33,6 +32,7 @@ public class MainGameSceneManager : MonoBehaviour
     [SerializeField] VoidEventChannelSO lapCompleted;
     [SerializeField] VoidEventChannelSO gameover;
     [SerializeField] VoidEventChannelSO carStuck;
+    [SerializeField] VoidEventChannelSO playerDied;
 
     private bool hasHitFirstCheckpoint = false;
     bool isGameover = false;
@@ -190,16 +190,6 @@ public class MainGameSceneManager : MonoBehaviour
         return prev.tag;
     }
 
-    public bool IPaused()
-    {
-        return iPaused;
-    }
-
-    public void SetPaused(bool paused)
-    { 
-        iPaused = paused; 
-    }
-
     public bool AllowMovement()
     {
         return allowMovement;
@@ -236,6 +226,7 @@ public class MainGameSceneManager : MonoBehaviour
 
     public void OnPlayerDied()
     {
+        if (isGameover) return;
         StartCoroutine(ResetPlayer());
         UpdateLives();
     }
@@ -243,16 +234,11 @@ public class MainGameSceneManager : MonoBehaviour
     private IEnumerator ResetPlayer()
     {
         yield return new WaitForSeconds(2);
-        Health playerHealth = player.GetComponent<Health>();
-        if (isGameover)
-        {
-            GameManager.instance.FreezeGame();
-        }
-        else 
-        {
-            ToLastCheckpoint();
-        }
+
+        Health playerHealth = player.GetComponent<Health>();      
+        ToLastCheckpoint();
         playerRespawned.RaiseEvent();
+        GameManager.instance.SetGameOver(false);
         player.GetComponent<CarSetup>().OnRestart();
         playerHealth.ResetHealth();
     }
@@ -268,6 +254,7 @@ public class MainGameSceneManager : MonoBehaviour
         if (currentLives == 0)
         {
             gameover.RaiseEvent();
+            GameManager.instance.SetGameOver(true);
             isGameover = true;
         }
     }
@@ -285,10 +272,12 @@ public class MainGameSceneManager : MonoBehaviour
     private void OnEnable()
     {
         carStuck.OnEventRaised += ToLastCheckpoint;
+        playerDied.OnEventRaised += OnPlayerDied;
     }
 
     private void OnDisable()
     {
         carStuck.OnEventRaised -= ToLastCheckpoint;
+        playerDied.OnEventRaised -= OnPlayerDied;
     }
 }
