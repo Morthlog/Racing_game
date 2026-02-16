@@ -33,10 +33,13 @@ public class MainGameSceneManager : MonoBehaviour
     [SerializeField] VoidEventChannelSO gameover;
     [SerializeField] VoidEventChannelSO carStuck;
     [SerializeField] VoidEventChannelSO playerDied;
+    [SerializeField] VoidEventChannelSO outOfCameraLimits;
 
     private bool hasHitFirstCheckpoint = false;
     bool isGameover = false;
-    
+    private bool isOutOfBounds;
+    private bool isRespawning = false;
+    private Coroutine outOfBoundsCoroutine;
 
     private void Awake()
     {
@@ -50,12 +53,12 @@ public class MainGameSceneManager : MonoBehaviour
         instance = this;
     }
 
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerSpawnPoint =startPoint.transform.position;
+        playerSpawnPoint = startPoint.transform.position;
 
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Checkpoint");
         checkpoints = new Dictionary<int, Checkpoint>(gos.Length);
@@ -70,12 +73,12 @@ public class MainGameSceneManager : MonoBehaviour
                 Debug.LogError(
                     $"Duplicate Checkpoint ID {ch.ID} (CURRENT)", ch.gameObject);
             }
-                
+
             checkpoints[ch.ID] = ch;
         }
 
         AddDefaultCheckpoint();
-    
+
         time = Time.time;
         frames = 0;
 
@@ -129,7 +132,7 @@ public class MainGameSceneManager : MonoBehaviour
     {
         String output = "Current loop ";
         if (hasHitFirstCheckpoint) // Has officially hit the start checkpoint
-        {   
+        {
             currentLoop++;
             lapCompleted.RaiseEvent();
         }
@@ -137,7 +140,7 @@ public class MainGameSceneManager : MonoBehaviour
         {
             hasHitFirstCheckpoint = true;
         }
-            
+
         output += currentLoop;
         if (currentLoop > totalLoops)
         {
@@ -152,7 +155,6 @@ public class MainGameSceneManager : MonoBehaviour
         Debug.Log("Race is over");
         TimerManager.instance.StopTimer();
         GameManager.instance.AddTime(TimerManager.instance.GetTime());
-
 
         SceneManager.LoadSceneAsync("Celebration");
     }
@@ -170,11 +172,6 @@ public class MainGameSceneManager : MonoBehaviour
         rb.MoveRotation(Quaternion.Euler(r));
 
         player.GetComponentInChildren<CarControl>().MovementReset();
-    }
-
-    public void ResetLoops()
-    {
-        
     }
 
     public string GetParentTag(GameObject obj)
@@ -220,27 +217,37 @@ public class MainGameSceneManager : MonoBehaviour
         r.y -= rotationDiffCheckpointPlayer;
         checkpointTrigger.transform.parent.transform.eulerAngles = r;
         checkpoint.SetID(0);
-        checkpoint.SetNextIDs(new int[3] {1, 0, 0});
+        checkpoint.SetNextIDs(new int[3] { 1, 0, 0 });
         checkpoints[0] = checkpoint;
     }
 
     public void OnPlayerDied()
     {
-        if (isGameover) return;
-        StartCoroutine(ResetPlayer());
+        if (isGameover || isRespawning) return;
+
         UpdateLives();
+        StartCoroutine(RespawnSequence(2f));
     }
 
-    private IEnumerator ResetPlayer()
+    private IEnumerator RespawnSequence(float delay)
     {
-        yield return new WaitForSeconds(2);
+        isRespawning = true;
 
-        Health playerHealth = player.GetComponent<Health>();      
+        if (delay > 0)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        
         ToLastCheckpoint();
-        playerRespawned.RaiseEvent();
+        BackInBounds();
         GameManager.instance.SetGameOver(false);
-        player.GetComponent<CarSetup>().OnRestart();
+        Health playerHealth = player.GetComponent<Health>();
         playerHealth.ResetHealth();
+        player.GetComponent<CarSetup>().OnRestart();
+
+        playerRespawned.RaiseEvent();
+
+        isRespawning = false;
     }
 
     public void ResetLives()
@@ -269,15 +276,52 @@ public class MainGameSceneManager : MonoBehaviour
         return totalLoops;
     }
 
+    void OnOutOfBounds()
+    {
+        if (isRespawning || isOutOfBounds) return;
+
+        isOutOfBounds = true;
+        outOfBoundsCoroutine = StartCoroutine(TimerToDestroy());
+    }
+
+    IEnumerator TimerToDestroy()
+    {
+        yield return new WaitForSeconds(3f); 
+
+        if (isOutOfBounds && !isRespawning)
+        {
+            StartCoroutine(RespawnSequence(0f));
+        }
+    }
+
+    public void BackInBounds()
+    {
+        if (outOfBoundsCoroutine != null)
+        {
+            StopCoroutine(outOfBoundsCoroutine);
+        }
+            
+        isOutOfBounds = false;
+    }
+
+    void OnCarStuck()
+    {
+        if (isRespawning || isOutOfBounds) return;
+        ToLastCheckpoint();
+        BackInBounds();
+    }
+
     private void OnEnable()
     {
-        carStuck.OnEventRaised += ToLastCheckpoint;
+        carStuck.OnEventRaised += OnCarStuck;
         playerDied.OnEventRaised += OnPlayerDied;
+        outOfCameraLimits.OnEventRaised += OnOutOfBounds;
     }
 
     private void OnDisable()
     {
-        carStuck.OnEventRaised -= ToLastCheckpoint;
+        carStuck.OnEventRaised -= OnCarStuck;
         playerDied.OnEventRaised -= OnPlayerDied;
+        outOfCameraLimits.OnEventRaised -= OnOutOfBounds;
     }
 }

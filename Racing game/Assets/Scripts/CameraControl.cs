@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] GameObject speedEffects;
 
     [Header("Events")]
-    [SerializeField] private VoidEventChannelSO enteredCameraLimit;
+    [SerializeField] private VoidEventChannelSO outOfCameraLimits;
     [SerializeField] private VoidEventChannelSO playerRespawned;
     [SerializeField] private VoidEventChannelSO playerDied;
     [SerializeField] private IntEventChannelSO speedBoostUsed;
@@ -89,7 +89,7 @@ public class CameraControl : MonoBehaviour
 
     private void OnEnable()
     {
-        enteredCameraLimit.OnEventRaised += InactiveView;
+        outOfCameraLimits.OnEventRaised += InactiveView;
         playerRespawned.OnEventRaised += ActiveView;
         playerDied.OnEventRaised += InactiveView;
         speedBoostUsed.OnEventRaised += OnSpeedboost;
@@ -97,7 +97,7 @@ public class CameraControl : MonoBehaviour
 
     private void OnDisable()
     {
-        enteredCameraLimit.OnEventRaised -= InactiveView;
+        outOfCameraLimits.OnEventRaised -= InactiveView;
         playerRespawned.OnEventRaised -= ActiveView;
         playerDied.OnEventRaised -= InactiveView;
         speedBoostUsed.OnEventRaised -= OnSpeedboost;

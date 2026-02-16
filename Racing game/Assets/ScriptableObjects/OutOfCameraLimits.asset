@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7da232217970c5f4286ac9387b297306, type: 3}
-  m_Name: EnteredCameraLimit
+  m_Name: OutOfCameraLimits
   m_EditorClassIdentifier: Assembly-CSharp::VoidEventChannelSO

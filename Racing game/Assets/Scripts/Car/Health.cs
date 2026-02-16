@@ -124,6 +124,4 @@ public class Health : MonoBehaviour, IDamageable
         healthPackUsed.OnEventRaised -= IncreaseHealth;
         shieldUsed.OnEventRaised -= ActivateShield;
     }
-
-
 }

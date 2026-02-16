@@ -54,3 +54,4 @@ MonoBehaviour:
   gameover: {fileID: 11400000, guid: 2971e0daf8c549145a191fcd5291cf66, type: 2}
   carStuck: {fileID: 11400000, guid: f9e4b4d93fb20484a922b393a0d796c3, type: 2}
   playerDied: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
+  outOfCameraLimits: {fileID: 11400000, guid: f345efd93b5cb0649ad2c977a2ed038d, type: 2}

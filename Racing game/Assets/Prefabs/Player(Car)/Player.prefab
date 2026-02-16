@@ -11378,7 +11378,7 @@ MonoBehaviour:
   carStuck: {fileID: 11400000, guid: f9e4b4d93fb20484a922b393a0d796c3, type: 2}
   timelineDriveEnabled: 0
   timelineDriveInput: {x: 0, y: 0}
-  stuckSecondThreshold: 5
+  stuckSecondThreshold: 3
   maxAccelerationThreshold: 600
 --- !u!114 &7773510026790983135
 MonoBehaviour:
@@ -11431,7 +11431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5cc758fb8dbbfc4f9683842e8cfa1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enteredCameraLimit: {fileID: 11400000, guid: f345efd93b5cb0649ad2c977a2ed038d, type: 2}
+  outOfCameraLimits: {fileID: 11400000, guid: f345efd93b5cb0649ad2c977a2ed038d, type: 2}
+  playerRespawned: {fileID: 11400000, guid: af975b98840a94b4ab88557cffc51f7a, type: 2}
 --- !u!114 &88514209678080075
 MonoBehaviour:
   m_ObjectHideFlags: 0
