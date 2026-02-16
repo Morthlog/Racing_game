@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private GameInputActions actions;
 
     bool isGamePaused=false;
+    private bool isGameOver = false;
 
     private void Awake()
     {
@@ -138,11 +139,13 @@ public class GameManager : MonoBehaviour
     private void ChangeLevelToMain()
     {
         ChangeLevel("Main Game");
+        SetGameOver(false);
     }
 
     private void ChangeLevelToIntro()
     {
         ChangeLevel("Intro");
+        SetGameOver(false);
     }
 
     public void ChangeLevel(string levelName)
@@ -162,8 +165,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private bool isGameOver = false;
-
     public void SetGameOver(bool value)
     {
         isGameOver = value;
@@ -171,11 +172,6 @@ public class GameManager : MonoBehaviour
         {
             FreezeGame();
         }
-    }
-
-    public bool IsGameOver()
-    {
-        return isGameOver;
     }
 
     private void HandlePauseGame(InputAction.CallbackContext context)
