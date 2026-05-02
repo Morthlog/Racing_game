@@ -505,6 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b36203d94f07a34ab6dd05134e5ad63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerManager
+  timerStarted: {fileID: 11400000, guid: 97ba7b8aea171d84783648b9d9cd98ac, type: 2}
+  timerStopped: {fileID: 11400000, guid: 7b57ca3cfbd5a8d4fa21e32d3deba6de, type: 2}
 --- !u!114 &6182449502555340132
 MonoBehaviour:
   m_ObjectHideFlags: 0

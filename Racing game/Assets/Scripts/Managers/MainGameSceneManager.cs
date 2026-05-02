@@ -15,7 +15,7 @@ public class MainGameSceneManager : MonoBehaviour
     private float time;
     private int frames;
     private int playerLastCheckpointID = 0;
-    private GameObject player;
+    public GameObject player;
     private Vector3 playerSpawnPoint;
     private Dictionary<int, Checkpoint> checkpoints;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 public class CarSetup : MonoBehaviour
 {
     [SerializeField] GameObject wheelColliderPrefab;
-    [SerializeField] PlayerData playerData;
+    [SerializeField] public PlayerData playerData;
     [SerializeField] GameObject lights, shield;
     GameObject wheelsGO;
     GameObject car;

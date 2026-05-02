@@ -6,6 +6,10 @@ public class TimerManager : MonoBehaviour
     Timer timer;
 
     public static TimerManager instance;
+
+    [Header("Events")]
+    [SerializeField] private VoidEventChannelSO timerStarted;
+    [SerializeField] private VoidEventChannelSO timerStopped;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -30,11 +34,13 @@ public class TimerManager : MonoBehaviour
 
     public void StartTimer()
     {
+        timerStarted.RaiseEvent();
         timer.StartTimer();
     }
 
     public void StopTimer()
     {
+        timerStopped.RaiseEvent();
         timer.StopTimer();
     }
 
