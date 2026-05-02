@@ -13,6 +13,7 @@ public class GhostManager : MonoBehaviour
     private GhostDataWrapper recording;
     private Dictionary<string, GhostDataWrapper> allData;
     private GameObject ghost;
+    Rigidbody rb;
     private bool ghostExists = false;
 
     private bool iRecording = false;
@@ -93,7 +94,6 @@ public class GhostManager : MonoBehaviour
         while (nextFrame.time < currTime && currentFrame < frames)
         {
             currentFrame++;
-            previousFrame = nextFrame;
             nextFrame = bestRecording.ghostData[currentFrame];
         }
         float interpolation = Mathf.InverseLerp(previousFrame.time, nextFrame.time, currTime);
@@ -101,9 +101,10 @@ public class GhostManager : MonoBehaviour
             previousFrame.position.toVector3(), nextFrame.position.toVector3(), interpolation);
         Quaternion rotation = Quaternion.Slerp(
             previousFrame.rotation.toQuaternion(), nextFrame.rotation.toQuaternion(), interpolation);
+        previousFrame = nextFrame;
 
-        ghost.transform.position = position;
-        ghost.transform.rotation = rotation;
+        rb.MovePosition(position);
+        rb.MoveRotation(rotation);
     }
 
     private void saveRecording()
@@ -149,6 +150,8 @@ public class GhostManager : MonoBehaviour
     {
         GameObject prefab = Resources.Load<GameObject>("Cars/" + carName);
         ghost = Instantiate(prefab);
+        rb = ghost.AddComponent<Rigidbody>();
+        rb.useGravity = false;
         MeshCollider[] meshColliders = ghost.GetComponentsInChildren<MeshCollider>();
         foreach (MeshCollider meshCollider in meshColliders)
         {
