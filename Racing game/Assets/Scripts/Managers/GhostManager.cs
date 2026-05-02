@@ -142,7 +142,7 @@ public class GhostManager : MonoBehaviour
 
     private string getKeyOf(GhostDataWrapper ghostDataWrapper)
     {
-        return ghostDataWrapper.profile + "_" + ghostDataWrapper.level;
+        return ghostDataWrapper.level;
     }
 
     private void initGhost(string carName)
