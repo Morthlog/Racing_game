@@ -41,12 +41,11 @@ public class GhostManager : MonoBehaviour
             ghostExists = true;
 
             initGhost(ghostDataWrapper.carName);
-        }      
+        }
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (iRecording)
         {
@@ -66,7 +65,7 @@ public class GhostManager : MonoBehaviour
         recording.ghostData.Clear();
     }
 
-    public void stopRecording() 
+    public void stopRecording()
     {
         iRecording = false;
         playingSaved = false;
@@ -94,6 +93,7 @@ public class GhostManager : MonoBehaviour
         while (nextFrame.time < currTime && currentFrame < frames)
         {
             currentFrame++;
+            previousFrame = nextFrame;
             nextFrame = bestRecording.ghostData[currentFrame];
         }
         float interpolation = Mathf.InverseLerp(previousFrame.time, nextFrame.time, currTime);
@@ -101,7 +101,6 @@ public class GhostManager : MonoBehaviour
             previousFrame.position.toVector3(), nextFrame.position.toVector3(), interpolation);
         Quaternion rotation = Quaternion.Slerp(
             previousFrame.rotation.toQuaternion(), nextFrame.rotation.toQuaternion(), interpolation);
-        previousFrame = nextFrame;
 
         rb.MovePosition(position);
         rb.MoveRotation(rotation);
@@ -112,7 +111,7 @@ public class GhostManager : MonoBehaviour
         Debug.Log("saving");
         string key = getKeyOf(recording);
         float recordingTime = recording.ghostData.Last().time;
-        if (!ghostExists || 
+        if (!ghostExists ||
             allData[key].ghostData.Last().time > recordingTime)
         {
             allData[key] = recording;
@@ -162,7 +161,7 @@ public class GhostManager : MonoBehaviour
         foreach (MeshRenderer mesh in meshes)
         {
             Material mat = mesh.material;
-            
+
             mat.shader = Shader.Find("Universal Render Pipeline/Unlit");
 
             mat.SetFloat("_Surface", 1f); // 1 = Transparent
