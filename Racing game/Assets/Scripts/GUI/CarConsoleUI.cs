@@ -11,8 +11,8 @@ public class CarConsoleUI : MonoBehaviour
     [SerializeField] private Image speedometerFillImage;
     [SerializeField] private Gradient speedGradient;
     [SerializeField] private float maxSpeed = 100f;
-    private const float fillAmmount = 0.5f;
-    [SerializeField][Range(0f, fillAmmount)] private float currentFillAmount = fillAmmount;
+    private const float maxFill = 0.5f;
+    [SerializeField][Range(0f, maxFill)] private float currentFillAmount = maxFill;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,7 +35,7 @@ public class CarConsoleUI : MonoBehaviour
     void SetSpeedometerFill(float speed)
     {
         float speedPercentage = Mathf.Clamp01(speed / maxSpeed);
-        float finalFill = speedPercentage * fillAmmount;//multiplying by fill to get final fill
+        float finalFill = speedPercentage * maxFill;//Multiply speedPercentage by maxFill to scale the final fill to the gauge's limits.
         speedometerFillImage.fillAmount = finalFill;
         speedometerFillImage.color = speedGradient.Evaluate(speedPercentage);
     }
