@@ -7,7 +7,7 @@ public class ResetOnDeathPlane : MonoBehaviour
     {
         defTrans = new TransformData();
         defTrans.localPosition = transform.localPosition;
-        defTrans.rotation = transform.rotation;
+        defTrans.rotation = transform.localRotation;
         defTrans.localScale = transform.localScale;
     }
 
