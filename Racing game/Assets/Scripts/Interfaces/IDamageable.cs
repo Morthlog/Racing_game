@@ -6,5 +6,5 @@ public interface IDamageable
     // Dissallow movement, stop any momentum, initiate death sequence
     void GetSquished();
 
-    void Die();
+    void Destroy();
 }
