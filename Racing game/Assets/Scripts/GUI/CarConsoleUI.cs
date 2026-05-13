@@ -1,11 +1,19 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarConsoleUI : MonoBehaviour
 {
     private TextMeshProUGUI speedometer;
     private int currentSpeed = 0;
     private Rigidbody carRb;
+
+    [SerializeField] private Image speedometerFillImage;
+    [SerializeField] private Gradient speedGradient;
+    [SerializeField] private float maxSpeed = 100f;
+    private const float maxFill = 0.5f;
+    [SerializeField][Range(0f, maxFill)] private float currentFillAmount = maxFill;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,11 +26,21 @@ public class CarConsoleUI : MonoBehaviour
     {
         Vector3 flatVelocity = carRb.linearVelocity;
         flatVelocity.y = 0f;
-        setSpeed(flatVelocity.magnitude);
-        speedometer.text = $"{currentSpeed} km/h";
+        SetSpeed(flatVelocity.magnitude);
+        speedometer.text = $"{currentSpeed}\nkm/h";
+
+        SetSpeedometerFill(currentSpeed);
     }
 
-    public void setSpeed(float val)
+    void SetSpeedometerFill(float speed)
+    {
+        float speedPercentage = Mathf.Clamp01(speed / maxSpeed);
+        float finalFill = speedPercentage * maxFill;//Multiply speedPercentage by maxFill to scale the final fill to the gauge's limits.
+        speedometerFillImage.fillAmount = finalFill;
+        speedometerFillImage.color = speedGradient.Evaluate(speedPercentage);
+    }
+
+    public void SetSpeed(float val)
     {
         currentSpeed = (int) (val * 3.6);
     }
