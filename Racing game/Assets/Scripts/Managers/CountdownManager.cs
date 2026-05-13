@@ -38,7 +38,7 @@ public class CountdownManager : MonoBehaviour
 
     public void AllowMovement()
     {
-        Debug.Log("GO GO GO");
+        //Debug.Log("GO GO GO");
         MainGameSceneManager.instance.StartRound();
     }
 }

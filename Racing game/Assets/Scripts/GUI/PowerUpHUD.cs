@@ -4,31 +4,41 @@ using UnityEngine;
 public class PowerUpHUD : MonoBehaviour
 {
     [Header("Events")]
-    [SerializeField] PowerUpTypeChannelSO powerPicked;
+    [SerializeField] PowerUpTypeChannelSO powerUpPicked;
     [SerializeField] IntEventChannelSO speedBoostUsed, shieldUsed;
+    [SerializeField] VoidEventChannelSO missileUsed;
 
     [Header("Tint Overlays")]
-    [SerializeField] GameObject shieldOverlay, speedBoostOverlay;
-
-    private void OnPowerPicked(PowerupType type)
+    [SerializeField] GameObject shieldOverlay;
+    [SerializeField] GameObject speedBoostOverlay;
+    [SerializeField] GameObject missileOverlay;
+    private void OnPowerUpPicked(PowerupType type)
     {
         switch (type)
         {
             case PowerupType.Shield:
-                HideShieldOverlay (type);
+                HideShieldOverlay();
                 break;
             case PowerupType.SpeedBoost:
-                HideSpeedBoostOverlay(type);
+                HideSpeedBoostOverlay();
+                break;
+            case PowerupType.Missile:
+                HideMissileOverlay();
                 break;
         }
     }
 
-    private void HideSpeedBoostOverlay(PowerupType type)
+    private void HideMissileOverlay()
+    {
+        missileOverlay.SetActive(false);
+    }
+
+    private void HideSpeedBoostOverlay()
     {
         speedBoostOverlay.SetActive (false);
     }
 
-    private void HideShieldOverlay(PowerupType type)
+    private void HideShieldOverlay()
     {
         shieldOverlay.SetActive (false);
     }
@@ -42,18 +52,25 @@ public class PowerUpHUD : MonoBehaviour
     {
         speedBoostOverlay.SetActive (true);
     }
+    private void ShowMissileOverlay()
+    {
+        missileOverlay.SetActive(true);
+    }
 
     private void OnEnable()
     {
-        powerPicked.OnEventRaised += OnPowerPicked;
+        powerUpPicked.OnEventRaised += OnPowerUpPicked;
         speedBoostUsed.OnEventRaised += ShowSpeedBoostOverlay;
         shieldUsed.OnEventRaised += ShowShieldOverlay;
+        missileUsed.OnEventRaised += ShowMissileOverlay;
+
     }
 
     private void OnDisable()
     {
-        powerPicked.OnEventRaised -= OnPowerPicked;
+        powerUpPicked.OnEventRaised -= OnPowerUpPicked;
         speedBoostUsed.OnEventRaised -= ShowSpeedBoostOverlay;
         shieldUsed.OnEventRaised -= ShowShieldOverlay;
+        missileUsed.OnEventRaised -= ShowMissileOverlay;
     }
 }

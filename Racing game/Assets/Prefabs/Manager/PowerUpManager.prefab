@@ -48,7 +48,7 @@ MonoBehaviour:
   increaseHealth: {fileID: 11400000, guid: 9b2018dc9f1472341a79a9be817de319, type: 2}
   shieldUsed: {fileID: 11400000, guid: ca42d3df30d9e774584e5fce3b1c6d8b, type: 2}
   speedBoostUsed: {fileID: 11400000, guid: 35f283c8e2dbf5d45a8fe8d258ed3a2c, type: 2}
-  playerDied: {fileID: 11400000, guid: fb0bc66fff5491e4e911aca997174658, type: 2}
+  missileUsed: {fileID: 11400000, guid: 9e8557c17365efb4d924f48d6994af35, type: 2}
   healthBoost: 10
   speedBoostDuration: 4
   shieldDuration: 4
