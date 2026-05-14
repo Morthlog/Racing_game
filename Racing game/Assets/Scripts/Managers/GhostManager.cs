@@ -59,7 +59,7 @@ public class GhostManager : MonoBehaviour
 
     public void startRecording()
     {
-        Debug.Log("Start recording");
+        //Debug.Log("Start recording");
         iRecording = true;
         playingSaved = true;
         recording.ghostData.Clear();
