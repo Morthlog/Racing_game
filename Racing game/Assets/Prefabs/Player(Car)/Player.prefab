@@ -5323,7 +5323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4728945894555461275
 Transform:
   m_ObjectHideFlags: 0
@@ -11597,5 +11597,6 @@ MonoBehaviour:
   missileUsed: {fileID: 11400000, guid: 9e8557c17365efb4d924f48d6994af35, type: 2}
   powerUpPicked: {fileID: 11400000, guid: 14d13747ceb6e1747a7bd65b44eda510, type: 2}
   missilePrefab: {fileID: 2937401139096114278, guid: ec9a72b5d3c7063478c8a04ccbae4a1b, type: 3}
+  missileBase: {fileID: 3173980321256775922}
   missileSpawnPoint: {fileID: 9135570347510879016}
   speed: 20

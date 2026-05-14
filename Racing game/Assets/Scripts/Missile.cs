@@ -5,28 +5,30 @@ public class Missile : MonoBehaviour
 {
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] float speed = 50f;
-    [SerializeField] GameObject effects;
     [SerializeField] float selfDestructionTime = 5f;
-    float timeAfterLaunch=0;
-    private string owner;    
+    float timeAfterLaunch = 0;
+    private string owner;
     private Rigidbody ridigbody;
     private bool isLaunched = false;
-    
+    private Animator animator;
+
     private void Awake()
     {
         ridigbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
+
+    public void PrepareToLaunch()
+    {
+        animator.SetBool("Launch", true);
     }
 
     public void Launch()
     {
-        //reseting first, because parent object movement causes bugs.
-        ridigbody.linearVelocity = Vector3.zero;
-
-        transform.SetParent(null);
         ridigbody.isKinematic = false;
+        transform.SetParent(null);
         ridigbody.AddForce(transform.forward* speed, ForceMode.VelocityChange);
 
-        effects.SetActive(true);
         isLaunched=true;
     }
 
@@ -48,7 +50,6 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        print(other.gameObject.name);
         if (other.transform.root.CompareTag(owner) || !isLaunched) return;
         if (other.gameObject.TryGetComponent<IDamageable>(out var damageable))
         {
