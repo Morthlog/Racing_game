@@ -157,7 +157,7 @@ public class MainGameSceneManager : MonoBehaviour
         TimerManager.instance.StopTimer();
         GameManager.instance.AddTime(TimerManager.instance.GetTime());
 
-        SceneManager.LoadSceneAsync("Celebration");
+        SceneManager.LoadSceneAsync("Main Game 2");
     }
     public void ToLastCheckpoint()
     {
