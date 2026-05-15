@@ -11,6 +11,7 @@ public class Cannon : MonoBehaviour
     private int currentShot = 0;
     private State state;
     private float timer;
+    [SerializeField] int ammoInstances = 6;
     [SerializeField] float reloadingCooldown = 10f;
     [SerializeField] float shootingCooldown = 5f;
     [SerializeField] float delayStart = 0f;
@@ -18,7 +19,7 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         GameObject ammoTemplate = null;
-        ammo = new GameObject[6];
+        ammo = new GameObject[ammoInstances];
         foreach (Transform transform in gameObject.transform)
         {
             if (transform.CompareTag("Spikes"))
