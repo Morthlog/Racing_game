@@ -46,7 +46,7 @@ AudioSource:
   m_GameObject: {fileID: 930684283480841815}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7471858335227431183, guid: 3d3b97a654e5413499a85c52d1bbc38c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: e62361d72de23ec42a8fdfd050a6f807, type: 3}
   m_PlayOnAwake: 0
@@ -173,7 +173,7 @@ AudioSource:
   m_GameObject: {fileID: 930684283480841815}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 3d3b97a654e5413499a85c52d1bbc38c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b97af50e244761c4f95e9289ac71f935, type: 3}
   m_PlayOnAwake: 0
@@ -270,7 +270,7 @@ AudioSource:
   m_GameObject: {fileID: 930684283480841815}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 3d3b97a654e5413499a85c52d1bbc38c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 6104a718cac00234c80ce173dc9fcc44, type: 3}
   m_PlayOnAwake: 0
@@ -369,6 +369,7 @@ GameObject:
   - component: {fileID: 1362772869963431048}
   - component: {fileID: 4461261390120231008}
   - component: {fileID: 2638904940436935706}
+  - component: {fileID: 6841449174346523382}
   m_Layer: 0
   m_Name: EventListeners
   m_TagString: Untagged
@@ -447,3 +448,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6841449174346523382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3088353717612994051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 878a15fc8aa3f4f4d83bbe961330fc18, type: 2}
+    - {fileID: 11400000, guid: d0656044077126f4abcf9ed94259e18c, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8886975188155995992}
+          m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
+          m_MethodName: SetAudioSnapshot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 24500006, guid: 3d3b97a654e5413499a85c52d1bbc38c, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Audio.AudioMixerSnapshot,
+              UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8886975188155995992}
+          m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
+          m_MethodName: SetAudioSnapshot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4160287223731883042, guid: 3d3b97a654e5413499a85c52d1bbc38c, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Audio.AudioMixerSnapshot,
+              UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

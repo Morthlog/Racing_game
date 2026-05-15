@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioSource backgroundMusic;
     [SerializeField] AudioSource countdownCounting;
     [SerializeField] AudioSource countdownDone;
-
     PitchChange pitchChanger;
     private float timer = 0f;
     
@@ -16,9 +16,23 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         pitchChanger = GetComponent<PitchChange>();
+        PlayBackgroundMusic();
+    }
+
+    public void PlayBackgroundMusic()
+    {
         backgroundMusic.Play();
     }
 
+    public void StopBackgroundMusic()
+    {
+        backgroundMusic.Stop();
+    }
+
+    public void SetAudioSnapshot(AudioMixerSnapshot snapshot)
+    {
+        snapshot.TransitionTo(2f);
+    }
     // Update is called once per frame
     void Update()
     {
