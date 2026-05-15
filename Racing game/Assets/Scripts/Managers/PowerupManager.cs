@@ -13,6 +13,7 @@ public class PowerupManager : MonoBehaviour
     [SerializeField] IntEventChannelSO increaseHealth;
     [SerializeField] IntEventChannelSO shieldUsed;
     [SerializeField] IntEventChannelSO speedBoostUsed;
+    [SerializeField] VoidEventChannelSO missileUsed;
 
     [Header("Powerup Settings")]
     [SerializeField] int healthBoost=10;
@@ -41,6 +42,13 @@ public class PowerupManager : MonoBehaviour
         if (powerups[PowerupType.Shield] == 0) return;
         RemoveFromInventory(PowerupType.Shield);
         shieldUsed.RaiseEvent(shieldDuration);
+    }
+
+    private void OnUseMissile(InputAction.CallbackContext context)
+    {
+        if (powerups[PowerupType.Missile] == 0) return;
+        RemoveFromInventory (PowerupType.Missile);
+        missileUsed.RaiseEvent();
     }
 
     public void AddToInventory(PowerupType type)
@@ -82,7 +90,8 @@ public class PowerupManager : MonoBehaviour
 
         actions.PowerUps.Enable();
         actions.PowerUps.UseShield.performed += OnUseShield;
-        actions.PowerUps.UseSpeed.performed += OnUseSpeedBoost;      
+        actions.PowerUps.UseSpeed.performed += OnUseSpeedBoost;
+        actions.PowerUps.FireMissile.performed += OnUseMissile;
     }
 
     private void OnDisable()
@@ -91,6 +100,8 @@ public class PowerupManager : MonoBehaviour
 
         actions.PowerUps.UseShield.performed -= OnUseShield;
         actions.PowerUps.UseSpeed.performed -= OnUseSpeedBoost;
+        actions.PowerUps.FireMissile.performed -= OnUseMissile;
+
         actions.PowerUps.Disable();
     }
 }

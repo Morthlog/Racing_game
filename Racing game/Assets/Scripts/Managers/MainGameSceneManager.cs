@@ -43,7 +43,7 @@ public class MainGameSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake");
+        //Debug.Log("Awake");
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -104,14 +104,14 @@ public class MainGameSceneManager : MonoBehaviour
 
     public void OnCheckpointHit(GameObject go, int checkpointID)
     {
-        Debug.Log($"Triggered by {go.name} on {checkpointID}");
+        //Debug.Log($"Triggered by {go.name} on {checkpointID}");
         int[] nextIDs = checkpoints[playerLastCheckpointID].NextIDs();
         bool correctCheckpoint = false;
         foreach (int id in nextIDs)
         {
             if (id == checkpointID)
             {
-                Debug.Log("Hit correct checkpoint");
+                //Debug.Log("Hit correct checkpoint");
                 playerLastCheckpointID = checkpointID;
                 playerSpawnPoint = checkpoints[checkpointID].GetComponent<Transform>().position;
                 correctCheckpoint = true;
@@ -124,7 +124,7 @@ public class MainGameSceneManager : MonoBehaviour
         }
         if (!correctCheckpoint)
         {
-            Debug.Log("Checkpoint was hit too soon");
+            //Debug.Log("Checkpoint was hit too soon");
         }
     }
 
@@ -147,7 +147,7 @@ public class MainGameSceneManager : MonoBehaviour
             FinishRace();
             return;
         }
-        Debug.Log(output);
+        //Debug.Log(output);
     }
 
     private void FinishRace()

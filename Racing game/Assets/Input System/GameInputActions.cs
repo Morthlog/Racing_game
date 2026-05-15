@@ -181,6 +181,15 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireMissile"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b7d72ef-70ec-49fa-b302-82b7a33ff9a9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,6 +212,17 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseShield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""545d1371-7430-48bc-b90e-04d3880fc0f1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireMissile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -246,6 +266,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_PowerUps = asset.FindActionMap("PowerUps", throwIfNotFound: true);
         m_PowerUps_UseSpeed = m_PowerUps.FindAction("UseSpeed", throwIfNotFound: true);
         m_PowerUps_UseShield = m_PowerUps.FindAction("UseShield", throwIfNotFound: true);
+        m_PowerUps_FireMissile = m_PowerUps.FindAction("FireMissile", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -429,6 +450,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private List<IPowerUpsActions> m_PowerUpsActionsCallbackInterfaces = new List<IPowerUpsActions>();
     private readonly InputAction m_PowerUps_UseSpeed;
     private readonly InputAction m_PowerUps_UseShield;
+    private readonly InputAction m_PowerUps_FireMissile;
     /// <summary>
     /// Provides access to input actions defined in input action map "PowerUps".
     /// </summary>
@@ -448,6 +470,10 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PowerUps/UseShield".
         /// </summary>
         public InputAction @UseShield => m_Wrapper.m_PowerUps_UseShield;
+        /// <summary>
+        /// Provides access to the underlying input action "PowerUps/FireMissile".
+        /// </summary>
+        public InputAction @FireMissile => m_Wrapper.m_PowerUps_FireMissile;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -480,6 +506,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @UseShield.started += instance.OnUseShield;
             @UseShield.performed += instance.OnUseShield;
             @UseShield.canceled += instance.OnUseShield;
+            @FireMissile.started += instance.OnFireMissile;
+            @FireMissile.performed += instance.OnFireMissile;
+            @FireMissile.canceled += instance.OnFireMissile;
         }
 
         /// <summary>
@@ -497,6 +526,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @UseShield.started -= instance.OnUseShield;
             @UseShield.performed -= instance.OnUseShield;
             @UseShield.canceled -= instance.OnUseShield;
+            @FireMissile.started -= instance.OnFireMissile;
+            @FireMissile.performed -= instance.OnFireMissile;
+            @FireMissile.canceled -= instance.OnFireMissile;
         }
 
         /// <summary>
@@ -662,6 +694,13 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseShield(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FireMissile" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFireMissile(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Menu" which allows adding and removing callbacks.

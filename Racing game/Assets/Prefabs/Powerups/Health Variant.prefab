@@ -8,49 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5116123551066800355, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 5210412199065493375, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210412199065493375, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
+      propertyPath: m_Size.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5116123551066800355, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_RayTracingMode
+    - target: {fileID: 5210412199065493375, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210412199065493375, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
+      propertyPath: m_Center.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290178065838848908, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6629548461265477943, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8449068647432487200, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -99,28 +71,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6629548461265477942, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7781413129107104583}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
---- !u!1 &8459201772902848341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6629548461265477942, guid: 5b60c123e23cdfc419c96d084b78a02f, type: 3}
-  m_PrefabInstance: {fileID: 2983067417142228579}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7781413129107104583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459201772902848341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504f54408034cd64aa96535d32926f87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowerUp
-  powerUpPicked: {fileID: 11400000, guid: 14d13747ceb6e1747a7bd65b44eda510, type: 2}
-  lapCompleted: {fileID: 11400000, guid: bac7895f8a0c2c74d8204fce44c942c8, type: 2}
-  powerupType: 1

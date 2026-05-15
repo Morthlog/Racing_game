@@ -66,7 +66,7 @@ public class Health : MonoBehaviour, IDamageable
     public void GetSquished()
     {
 
-        Die();
+        Destroy();
     }
 
     void NormalizeHealthAndSendEvent()
@@ -85,7 +85,7 @@ public class Health : MonoBehaviour, IDamageable
         invincibilityRoutine = StartCoroutine(InvincibilityTimer());
     }
 
-    public void Die()
+    public void Destroy()
     {
         isInvincible = false;
         TakeDamage(int.MaxValue);

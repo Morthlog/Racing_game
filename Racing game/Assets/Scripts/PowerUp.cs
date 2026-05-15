@@ -5,7 +5,8 @@ public enum PowerupType
 {
     Shield,
     Health,
-    SpeedBoost
+    SpeedBoost,
+    Missile
 }
 
 public class PowerUp : MonoBehaviour
@@ -16,14 +17,15 @@ public class PowerUp : MonoBehaviour
 
 
     [SerializeField] PowerupType powerupType;
-    private MeshRenderer meshRenderer;
-    BoxCollider boxCollider;
+    [SerializeField] GameObject objectToDeactivate;
+    Collider currentCollider;
 
     private void Awake()
     {
-        meshRenderer= GetComponent<MeshRenderer>();
-        boxCollider = GetComponent<BoxCollider>();
+        GetComponent<MeshRenderer>();
+        currentCollider = GetComponent<Collider>();
     }
+
     public void OnTriggerEnter(Collider other)
     {
         GameObject go = other.attachedRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
@@ -37,14 +39,14 @@ public class PowerUp : MonoBehaviour
 
     private void DisablePowerup()
     {
-        meshRenderer.enabled = false;
-        boxCollider.enabled = false;
+        currentCollider.enabled = false;
+        objectToDeactivate.SetActive(false);
     }
 
     private void EnablePowerup()
     {
-        meshRenderer.enabled = true;
-        boxCollider.enabled = true;
+        currentCollider.enabled = true;
+        objectToDeactivate.SetActive(true);
     }
 
     private void OnEnable()
