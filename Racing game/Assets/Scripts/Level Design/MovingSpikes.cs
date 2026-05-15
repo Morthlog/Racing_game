@@ -132,7 +132,7 @@ public class MovingSpikes : MonoBehaviour, TriggerController
         if (inner[go] < maxTriggers)
             return;
 
-        damageable.GetSquished();
+        damageable.Destroy();
 
         var keys = inner.Keys.ToList();
         foreach (var key in keys)

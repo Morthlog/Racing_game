@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5371044275832412567}
   - component: {fileID: 1403692765324799783}
   m_Layer: 0
-  m_Name: Dolly Spline
+  m_Name: DollySpline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

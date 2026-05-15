@@ -63,12 +63,6 @@ public class Health : MonoBehaviour, IDamageable
     }
 
 
-    public void GetSquished()
-    {
-
-        Destroy();
-    }
-
     void NormalizeHealthAndSendEvent()
     {
         float healthNormalized = (float) currentHealth / initialHealth;

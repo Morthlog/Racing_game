@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8923808175198154858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6382231141685965779}
+  - component: {fileID: 7805625951482683506}
+  m_Layer: 0
+  m_Name: Timeline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6382231141685965779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923808175198154858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.93292, y: 7.30062, z: -5.51318}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &7805625951482683506
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923808175198154858}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 8b78ba03619db5d49bd5b59f0e9f4643, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 8934177448893476982, guid: 8b78ba03619db5d49bd5b59f0e9f4643, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1943850719567799011, guid: 8b78ba03619db5d49bd5b59f0e9f4643, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2557786548226539005, guid: 8b78ba03619db5d49bd5b59f0e9f4643, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1526196107169803176, guid: 8b78ba03619db5d49bd5b59f0e9f4643, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References:
+    - f869ad49de6d3074c8f5b1c80434bd4d: {fileID: 0}
+    - 524d94729e0609f4c83760e00f3a3b79: {fileID: 0}

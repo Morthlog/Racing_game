@@ -59,6 +59,7 @@ public class MainGameSceneManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerSpawnPoint = startPoint.transform.position;
+        player.transform.position= playerSpawnPoint;
 
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Checkpoint");
         checkpoints = new Dictionary<int, Checkpoint>(gos.Length);
