@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] VoidEventChannelSO newGame;
+    [SerializeField] VoidEventChannelSO toMainGame;
     [SerializeField] VoidEventChannelSO restartLevel;
     [SerializeField] VoidEventChannelSO quitGame;
     [SerializeField] BoolEventChannelSO gamePaused;
@@ -193,6 +194,7 @@ public class GameManager : MonoBehaviour
     {
         newGame.OnEventRaised += ChangeLevelToIntro;
         restartLevel.OnEventRaised += RestartLevel;
+        toMainGame.OnEventRaised += ChangeLevelToMain;
         quitGame.OnEventRaised += Application.Quit;
 
         actions.Menu.Enable();
@@ -204,6 +206,7 @@ public class GameManager : MonoBehaviour
         if (instance != this) return;//used to prevent errors when object is destroyed
         newGame.OnEventRaised -= ChangeLevelToIntro;
         restartLevel.OnEventRaised -= RestartLevel;
+        toMainGame.OnEventRaised -= ChangeLevelToMain;
         quitGame.OnEventRaised -= Application.Quit;
 
         actions.Menu.Pause.performed -= HandlePauseGame;
