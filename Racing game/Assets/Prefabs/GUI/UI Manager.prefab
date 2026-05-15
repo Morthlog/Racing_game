@@ -1967,6 +1967,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1253180507, guid: b9b819745a89eb844be50ce8aed090c6, type: 3}
+    - target: {fileID: 8937315154837669937, guid: 03c45d4e8dcfab049bf7b878a9c0e72f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ea755e1c9de1ac4f82fb64d61671f44, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

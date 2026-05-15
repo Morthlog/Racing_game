@@ -1,11 +1,9 @@
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] VoidEventChannelSO newGame;
-    [SerializeField] VoidEventChannelSO restartGame;
+    [SerializeField] VoidEventChannelSO restartLevel;
     [SerializeField] VoidEventChannelSO quitGame;
     [SerializeField] BoolEventChannelSO gamePaused;
 
@@ -186,23 +184,26 @@ public class GameManager : MonoBehaviour
         else
             UnFreezeGame();
     }
+    void RestartLevel()
+    {
+        ChangeLevel(SceneManager.GetActiveScene().name);
+    }
 
     private void OnEnable()
     {
         newGame.OnEventRaised += ChangeLevelToIntro;
-        restartGame.OnEventRaised += ChangeLevelToMain;
+        restartLevel.OnEventRaised += RestartLevel;
         quitGame.OnEventRaised += Application.Quit;
 
         actions.Menu.Enable();
         actions.Menu.Pause.performed += HandlePauseGame;
     }
 
-
     private void OnDisable()
     {
         if (instance != this) return;//used to prevent errors when object is destroyed
         newGame.OnEventRaised -= ChangeLevelToIntro;
-        restartGame.OnEventRaised -= ChangeLevelToMain;
+        restartLevel.OnEventRaised -= RestartLevel;
         quitGame.OnEventRaised -= Application.Quit;
 
         actions.Menu.Pause.performed -= HandlePauseGame;
