@@ -52,26 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 7381187588489666605, guid: b0f78e6d1ef058444a7389a6d3df86f9, type: 3}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7381187588489666605, guid: b0f78e6d1ef058444a7389a6d3df86f9, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7381187588489666605, guid: b0f78e6d1ef058444a7389a6d3df86f9, type: 3}
-      propertyPath: m_Size.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7381187588489666605, guid: b0f78e6d1ef058444a7389a6d3df86f9, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7381187588489666605, guid: b0f78e6d1ef058444a7389a6d3df86f9, type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

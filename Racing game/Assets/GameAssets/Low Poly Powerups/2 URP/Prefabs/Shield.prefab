@@ -166,8 +166,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017919814, y: 0.017919812, z: 0.0058251894}
-  m_Center: {x: 0.000000027008355, y: -0.00023805113, z: 0}
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6422561918347374831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,4 +183,4 @@ MonoBehaviour:
   powerUpPicked: {fileID: 11400000, guid: 14d13747ceb6e1747a7bd65b44eda510, type: 2}
   lapCompleted: {fileID: 11400000, guid: bac7895f8a0c2c74d8204fce44c942c8, type: 2}
   powerupType: 0
-  objectToDeactivate: {fileID: 0}
+  objectToDeactivate: {fileID: 5050780578079279192}
