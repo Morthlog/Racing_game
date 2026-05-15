@@ -12,6 +12,8 @@ public class Missile : MonoBehaviour
     private bool isLaunched = false;
     private Animator animator;
 
+    [SerializeField] private float destructionRadius = 5.0f;
+    [SerializeField] private Color radiusGizmoColor = Color.green;
     private void Awake()
     {
         ridigbody = GetComponent<Rigidbody>();
@@ -51,11 +53,7 @@ public class Missile : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.root.CompareTag(owner) || !isLaunched) return;
-        if (other.gameObject.TryGetComponent<IDamageable>(out var damageable))
-        {
-            damageable.Destroy();     
-        }
-        
+         
         SelfDestruct();
     }
 
@@ -63,6 +61,27 @@ public class Missile : MonoBehaviour
     {
         //instantiating the effect so we can destroy this gameobject without setting timers,to wait for the effect to finish
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        DestroyEverythingInRadius();
         Destroy(gameObject);
+    }
+
+    void DestroyEverythingInRadius()
+    {
+        Vector3 center = transform.position;
+        Collider[] hitColliders = Physics.OverlapSphere(center, destructionRadius);
+
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.gameObject.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.Destroy();
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = radiusGizmoColor;
+        Gizmos.DrawWireSphere(transform.position, destructionRadius);
     }
 }
