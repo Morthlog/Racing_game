@@ -17,6 +17,7 @@ TagManager:
   - CameraBound
   - Timer
   - Shield
+  - Environment
   layers:
   - Default
   - TransparentFX
