@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: -3970642549973997266}
   - component: {fileID: 7228585336151760224}
   - component: {fileID: 4202872014601117676}
+  - component: {fileID: 802865926082509641}
   m_Layer: 0
   m_Name: Props_7
   m_TagString: Spikes
@@ -248,3 +249,16 @@ MonoBehaviour:
   rotationalSpeed: 0
   maxAngle: 30
   torque: 3000000
+--- !u!114 &802865926082509641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5003257899507768075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918e9b13ab7f2c94c973ef122e19c42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  currentHealth: 1
