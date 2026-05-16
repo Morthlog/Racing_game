@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 543660759012346051}
   - component: {fileID: 3798238505618042601}
   - component: {fileID: 5720480046815752097}
+  - component: {fileID: 9151941656088686302}
   m_Layer: 0
   m_Name: Props_5
   m_TagString: Untagged
@@ -296,6 +297,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5431765119403406774, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!114 &9151941656088686302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769912462131510987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918e9b13ab7f2c94c973ef122e19c42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  currentHealth: 1
 --- !u!1001 &1291533696773369778
 PrefabInstance:
   m_ObjectHideFlags: 0

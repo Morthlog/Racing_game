@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4561932985464768040}
   - component: {fileID: 159799079795511621}
   - component: {fileID: 402870060399725274}
+  - component: {fileID: 7267281744538037840}
   m_Layer: 0
   m_Name: Spikes_moving_1
   m_TagString: Untagged
@@ -348,6 +349,19 @@ MonoBehaviour:
   sleepTime: 1.5
   pauseOnShieldTime: 2
   shieldEnded: {fileID: 11400000, guid: 36da173d5abcb114792938d880c9602d, type: 2}
+--- !u!114 &7267281744538037840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428785273902133245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918e9b13ab7f2c94c973ef122e19c42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  currentHealth: 1
 --- !u!1001 &3448961873292291909
 PrefabInstance:
   m_ObjectHideFlags: 0
