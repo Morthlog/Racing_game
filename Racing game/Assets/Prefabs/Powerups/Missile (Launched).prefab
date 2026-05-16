@@ -282,6 +282,8 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1214259102193715662, guid: 5501a053f5380ed43bebd4d2bd3283d6, type: 3}
   speed: 100
   selfDestructionTime: 6
+  destructionRadius: 5
+  radiusGizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!95 &953078172875176918
 Animator:
   serializedVersion: 7
@@ -10438,7 +10440,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
