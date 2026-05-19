@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8683414637657733549}
   - component: {fileID: 3745948285588689662}
   - component: {fileID: 8276619514916707844}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VolumeSpeedEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsGlobal: 1
-  priority: 0
+  priority: 2
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
