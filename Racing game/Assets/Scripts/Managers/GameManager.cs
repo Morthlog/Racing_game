@@ -172,25 +172,25 @@ public class GameManager : MonoBehaviour
 
     private void ChangeLevelToMain()
     {
-        LoadLevelByName("Main Game");
-        SetGameOver(false);
+        LoadLevelByName("Main Game"); 
     }
 
     private void ChangeLevelToIntro()
     {
         LoadLevelByName("Intro");
-        SetGameOver(false);
     }
 
     public void LoadLevelByName(string levelName)
     {
         SceneManager.LoadSceneAsync(levelName);
+        SetGameOver(false);
         UnFreezeGame();
     }
 
     public void LoadLevelByIndex(int idx)
     {
         SceneManager.LoadSceneAsync(idx);
+        SetGameOver(false);
         UnFreezeGame();
     }
 
