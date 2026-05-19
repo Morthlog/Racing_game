@@ -102,15 +102,18 @@ public class IntroSceneManager : MonoBehaviour
 
     public void PopulateProfileList()
     {
-        foreach (var (profileName, times) in GameManager.instance.GetAllProfiles())
+        foreach (PlayerProfile profile in GameManager.instance.GetAllProfiles())
         {
             GameObject profileBtnWrapper = Instantiate(loadedProfileBtnPrefab, profileSelectionViewportContainer.transform);
 
             Button currentBtn = profileBtnWrapper.GetComponent<Button>();
+
+            string profileName = profile.profileName;
+
             profileBtnWrapper.name = profileName;
             currentBtn.GetComponentInChildren<TextMeshProUGUI>().text = profileName;
-            currentBtn.onClick.AddListener(() => GameManager.instance.SetCurrentProfileName(profileName));
-            currentBtn.onClick.AddListener(() => GameManager.instance.SetCurrentProfileTimes(times));
+
+            currentBtn.onClick.AddListener(() => GameManager.instance.SetCurrentProfileByName(profileName));
             currentBtn.onClick.AddListener(() => GoToCarSelection());
         }
     }

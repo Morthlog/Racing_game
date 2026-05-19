@@ -84,7 +84,10 @@ public class MainGameSceneManager : MonoBehaviour
         frames = 0;
 
         ResetLives();
+        GameManager.instance.SetLastPlayedceneName(SceneManager.GetActiveScene().name);
     }
+
+
 
     // Update is called once per frames
     void Update()
@@ -155,10 +158,14 @@ public class MainGameSceneManager : MonoBehaviour
     {
         Debug.Log("Race is over");
         TimerManager.instance.StopTimer();
-        GameManager.instance.AddTime(TimerManager.instance.GetTime());
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        float finalTime = TimerManager.instance.GetTime();
+        GameManager.instance.AddTime(currentSceneName, finalTime);
 
         SceneManager.LoadSceneAsync("Celebration");
     }
+
     public void ToLastCheckpoint()
     {
         TransferToCheckpoint(playerLastCheckpointID, playerSpawnPoint);

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManagerCelebration : MonoBehaviour
@@ -26,20 +25,34 @@ public class UIManagerCelebration : MonoBehaviour
         SetButtonHighlight(globalTimesBtn, false);
         SetButtonHighlight(personalTimesBtn, true);
 
+        // bool to not reload ui every time
         if (personalTimesInitialized) return;
 
+        var gameManager = GameManager.instance;
+
+        PlayerProfile currentProfile = gameManager.GetCurrentProfile();
+        string lastPlayedScene = gameManager.GetLastPlayedSceneName();
+        LevelData currentLevelData = currentProfile.levels.Find(l => l.levelName == lastPlayedScene);
+
+          
+        if (currentLevelData == null) return;
         int rank = 1;
-        foreach (float time in GameManager.instance.currentProfileTimes)
+
+        foreach (float time in currentLevelData.bestTimes)
         {
             GameObject entryController = Instantiate(scoreEntryItemPrefab, personalRecordContainer.transform);
             ScoreEntryController entry = entryController.GetComponent<ScoreEntryController>();
+
             entry.HidePlayerNameWrapper();
             entry.SetRankTxt(rank.ToString());
             entry.SetTimeTxt(Utilities.FormatTime(time));
+
             rank++;
         }
+
         personalTimesInitialized = true;
     }
+
     public void ShowGlobalTimes()
     {
         personalRecordContainer.SetActive(false);
@@ -49,24 +62,38 @@ public class UIManagerCelebration : MonoBehaviour
         SetButtonHighlight(personalTimesBtn, false);
 
         if (globalTimesInitialized) return;
+
         int rank = 1;
-        Dictionary<string, SortedSet<float>> profiles = GameManager.instance.GetAllProfiles();
 
-        var sortedProfiles = profiles
-            .Where(profile =>profile.Value.Count > 0) 
-            .OrderBy(profile => profile.Value.Min);
+        string lastPlayedScene = GameManager.instance.GetLastPlayedSceneName();
 
-        foreach (var (profileName, times) in sortedProfiles)
+        List<PlayerProfile> allProfiles = GameManager.instance.GetAllProfiles();
+
+        var sortedLeaderboard = allProfiles
+            .Select(profile => new
+            {
+                ProfileName = profile.profileName,
+                LevelInfo = profile.levels.Find(l => l.levelName == lastPlayedScene)
+            })
+            .Where(x => x.LevelInfo != null && x.LevelInfo.bestTimes.Count > 0)
+            .OrderBy(x => x.LevelInfo.bestTimes[0])//in index 0 is the best time due to sorting in AddTime
+            .ToList();
+
+        foreach (var entry in sortedLeaderboard)
         {
             GameObject scoreEntryObject = Instantiate(scoreEntryItemPrefab, globalLeaderboardViewportContainer.transform);
 
             ScoreEntryController entryController = scoreEntryObject.GetComponent<ScoreEntryController>();
-            entryController.SetPlayerName(profileName);
+
+            entryController.SetPlayerName(entry.ProfileName);
             entryController.SetRankTxt(rank.ToString());
-            float bestProfileTime = times.Min;
+
+            float bestProfileTime = entry.LevelInfo.bestTimes[0];
             entryController.SetTimeTxt(Utilities.FormatTime(bestProfileTime));
+
             rank++;
         }
+
         globalTimesInitialized = true;
     }
 

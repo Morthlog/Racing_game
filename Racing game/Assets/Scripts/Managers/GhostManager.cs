@@ -27,7 +27,7 @@ public class GhostManager : MonoBehaviour
     void Start()
     {
         LoadData();
-        string profileName = GameManager.instance.currentProfileName;
+        string profileName = GameManager.instance.GetCurrentProfile().profileName;
         string level = SceneManager.GetActiveScene().name;
         GameObject car = MainGameSceneManager.instance.player.GetComponent<CarSetup>().playerData.chosenCar;
         string carName = car.name;

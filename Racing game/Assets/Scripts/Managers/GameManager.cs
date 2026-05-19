@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -7,11 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    Dictionary<string, SortedSet<float>> playerProfiles = new();
+    private SaveDataList gameData = new SaveDataList();
     public static GameManager instance;
 
-    public string currentProfileName;
-    public SortedSet<float> currentProfileTimes;
+    private PlayerProfile currentProfile;
 
     [Header("Events")]
     [SerializeField] VoidEventChannelSO newGame;
@@ -22,8 +22,9 @@ public class GameManager : MonoBehaviour
 
     private GameInputActions actions;
 
-    bool isGamePaused=false;
+    private bool isGamePaused = false;
     private bool isGameOver = false;
+    private string lastPlayedSceneName;
 
     private void Awake()
     {
@@ -37,88 +38,117 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         actions = new GameInputActions();
-    }
 
-    private void Start()
-    {
+        //string path = Path.Combine(Application.persistentDataPath, "profiles.json");
+        //if (File.Exists(path))
+        //{
+        //    File.Delete(path);
+        //}
+
         LoadData();
         GenerateMockData();
+    }
+
+    
+    public void SetLastPlayedceneName(string currentSceneName)
+    {
+        this.lastPlayedSceneName = currentSceneName;
+    }
+
+    public string GetLastPlayedSceneName()
+    {
+        return lastPlayedSceneName;
     }
 
     public bool IsProfileNameValid(string profileName)
     {
         string trimmed = profileName.Trim();
 
-        if (string.IsNullOrWhiteSpace(trimmed) || playerProfiles.ContainsKey(trimmed))
+        if (string.IsNullOrWhiteSpace(trimmed))
         {
             return false;
         }
-        return true;
+
+        return !gameData.profiles.Exists(p => p.profileName.Equals(trimmed, StringComparison.OrdinalIgnoreCase));
     }
 
     public void AddProfile(string profileName)
     {
-        SetCurrentProfileName(profileName);
-        SetCurrentProfileTimes(new SortedSet<float>());
-        playerProfiles.TryAdd(profileName, currentProfileTimes);
+        string trimmed = profileName.Trim();
+        if (!IsProfileNameValid(trimmed)) return;
+
+        PlayerProfile newProfile = new PlayerProfile { profileName = trimmed };
+        gameData.profiles.Add(newProfile);
+
+        currentProfile = newProfile;
+
         SaveData();
     }
 
-    public void SetCurrentProfileName(string profileName)
+    public void SetCurrentProfileByName(string profileName)
     {
-        currentProfileName = profileName;
+        PlayerProfile profile = gameData.profiles.Find(p => p.profileName.Equals(profileName, StringComparison.OrdinalIgnoreCase));
+        if (profile == null) return;
+        
+        currentProfile = profile;
     }
 
-    public void SetCurrentProfileTimes(SortedSet<float> times)
+    public void AddTime(string levelName, float time)
     {
-        currentProfileTimes = times;
-    }
+        LevelData level = currentProfile.levels.Find(l => l.levelName == levelName);
 
-    public void AddTime(float time)
-    {
-        currentProfileTimes.Add(time);
-        if (currentProfileTimes.Count > 10)
+        if (level == null)
         {
-            currentProfileTimes.Remove(currentProfileTimes.Max);
+            level = new LevelData { levelName = levelName };
+            currentProfile.levels.Add(level);
         }
+
+        level.bestTimes.Add(time);
+        level.bestTimes.Sort();
+
+        if (level.bestTimes.Count > 10)
+        {
+            level.bestTimes.RemoveAt(level.bestTimes.Count - 1);//removing highest time
+        }
+
         SaveData();
     }
 
     public void GenerateMockData()
     {
-        for (int i = 1; i <= 5; i++)
+        int sceneCount = SceneManager.sceneCountInBuildSettings;   
+   
+        // starting index from 1 to skip the menu sceen 
+        for (int sceneIndex = 1; sceneIndex < sceneCount; sceneIndex++)
         {
-            string name = "Mock_Player_" + i;
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
+            string sceneName = Path.GetFileNameWithoutExtension(scenePath);
 
-            AddProfile(name);
-
-            for (int j = 0; j < 5; j++)
+            for (int i = 0; i < 2; i++)
             {
+                string name = "Mock_Player_" + i;
+                AddProfile(name);
                 float randomTime = UnityEngine.Random.Range(10.0f, 100.0f);
-
                 randomTime = Mathf.Round(randomTime * 100f) / 100f;
 
-                AddTime(randomTime);
+                AddTime(sceneName, randomTime);
             }
         }
     }
 
-    public Dictionary<string, SortedSet<float>> GetAllProfiles()
+    public List<PlayerProfile> GetAllProfiles()
     {
-        var copy = new Dictionary<string, SortedSet<float>>();
+        return gameData.profiles;
+    }
 
-        foreach (var entry in playerProfiles)
-        {
-            copy.Add(entry.Key, new SortedSet<float>(entry.Value));
-        }
-
-        return copy;
+    public PlayerProfile GetCurrentProfile()
+    {
+        return currentProfile;
     }
 
     public void SaveData()
     {
-        string json = JsonConvert.SerializeObject(playerProfiles, Formatting.Indented);
-
+        string json = JsonConvert.SerializeObject(gameData, Formatting.Indented);
         string path = Path.Combine(Application.persistentDataPath, "profiles.json");
         File.WriteAllText(path, json);
     }
@@ -130,8 +160,13 @@ public class GameManager : MonoBehaviour
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-
-            playerProfiles = JsonConvert.DeserializeObject<Dictionary<string, SortedSet<float>>>(json);
+            gameData = JsonConvert.DeserializeObject<SaveDataList>(json);
+            
+            // Set a current profile in case we play directly a scene for debug and not through intro scene
+            if (gameData.profiles.Count > 0)
+            {
+                currentProfile = gameData.profiles[0];
+            }
         }
     }
 
@@ -169,7 +204,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-
     public void SetGameOver(bool value)
     {
         isGameOver = value;
@@ -191,7 +225,8 @@ public class GameManager : MonoBehaviour
         else
             UnFreezeGame();
     }
-    void RestartLevel()
+
+    private void RestartLevel()
     {
         LoadLevelByName(SceneManager.GetActiveScene().name);
     }
@@ -218,4 +253,24 @@ public class GameManager : MonoBehaviour
         actions.Menu.Pause.performed -= HandlePauseGame;
         actions.Menu.Disable();
     }
+}
+
+[Serializable]
+public class LevelData
+{
+    public string levelName;
+    public List<float> bestTimes = new List<float>();
+}
+
+[Serializable]
+public class PlayerProfile
+{
+    public string profileName;
+    public List<LevelData> levels = new List<LevelData>();
+}
+
+[Serializable]
+public class SaveDataList
+{
+    public List<PlayerProfile> profiles = new List<PlayerProfile>();
 }
