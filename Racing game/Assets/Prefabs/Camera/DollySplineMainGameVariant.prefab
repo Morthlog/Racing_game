@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1056392076993017319, guid: fae8184fbfacabe4daa8a9f71bdf7816, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1056392076993017319, guid: fae8184fbfacabe4daa8a9f71bdf7816, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1056392076993017319, guid: fae8184fbfacabe4daa8a9f71bdf7816, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -124.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1056392076993017319, guid: fae8184fbfacabe4daa8a9f71bdf7816, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5226367510782399733, guid: fae8184fbfacabe4daa8a9f71bdf7816, type: 3}
       propertyPath: m_Name
-      value: Dolly Spline Variant
+      value: DollySplineMainGameVariant
       objectReference: {fileID: 0}
     - target: {fileID: 5371044275832412567, guid: fae8184fbfacabe4daa8a9f71bdf7816, type: 3}
       propertyPath: m_Enabled
