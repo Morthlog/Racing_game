@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 1; i <= 5; i++)
         {
-            string name = "Player_" + i;
+            string name = "Mock_Player_" + i;
 
             AddProfile(name);
 

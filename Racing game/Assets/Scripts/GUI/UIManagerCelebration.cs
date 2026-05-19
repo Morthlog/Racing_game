@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -50,7 +51,12 @@ public class UIManagerCelebration : MonoBehaviour
         if (globalTimesInitialized) return;
         int rank = 1;
         Dictionary<string, SortedSet<float>> profiles = GameManager.instance.GetAllProfiles();
-        foreach (var (profileName, times) in profiles)
+
+        var sortedProfiles = profiles
+            .Where(profile =>profile.Value.Count > 0) 
+            .OrderBy(profile => profile.Value.Min);
+
+        foreach (var (profileName, times) in sortedProfiles)
         {
             GameObject scoreEntryObject = Instantiate(scoreEntryItemPrefab, globalLeaderboardViewportContainer.transform);
 
