@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Game 2.unity
     guid: e22cc9b61dffb064499d5cf004baf952
   - enabled: 1
+    path: Assets/Scenes/Main Game 3.unity
+    guid: 6e6c822166495be4aae60dfe17c450cb
+  - enabled: 1
     path: Assets/Scenes/Celebration.unity
     guid: 19073a7bcbf1be0448d620cbc96a8ceb
   m_configObjects:

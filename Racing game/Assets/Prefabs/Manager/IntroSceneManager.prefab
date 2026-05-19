@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   menuCamvas: {fileID: 0}
-  choiceCanvas: {fileID: 0}
+  carChoiceCanvas: {fileID: 0}
+  levelSelectionCanvas: {fileID: 0}
   nextBtn: {fileID: 0}
   previousBtn: {fileID: 0}
   errorWrapper: {fileID: 0}
@@ -54,4 +55,4 @@ MonoBehaviour:
   profileInputField: {fileID: 0}
   carNameTxt: {fileID: 0}
   loadedProfileBtnPrefab: {fileID: 2212379765856820325, guid: 908181f9b77a08042a572b6542c86f3f, type: 3}
-  viewportContainer: {fileID: 0}
+  profileSelectionViewportContainer: {fileID: 0}

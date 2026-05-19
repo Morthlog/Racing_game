@@ -1527,7 +1527,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b600643ab17d733468e1ef395683c756, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3002,7 +3002,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1550643086480331750}
   m_HandleRect: {fileID: 8297412921574062500}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3769,7 +3769,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8125375037582224097}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -4161,11 +4161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4173,15 +4173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -655.3478
+      value: 268.65222
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -408.8945
+      value: 111.1055
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4213,7 +4213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -288.25443
+      value: 173.74557
       objectReference: {fileID: 0}
     - target: {fileID: 4890124142381989647, guid: 5b8d7ecd6f587b441bdecdc543aa5754, type: 3}
       propertyPath: m_AnchoredPosition.y

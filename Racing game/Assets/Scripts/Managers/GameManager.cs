@@ -137,19 +137,25 @@ public class GameManager : MonoBehaviour
 
     private void ChangeLevelToMain()
     {
-        ChangeLevel("Main Game");
+        LoadLevelByName("Main Game");
         SetGameOver(false);
     }
 
     private void ChangeLevelToIntro()
     {
-        ChangeLevel("Intro");
+        LoadLevelByName("Intro");
         SetGameOver(false);
     }
 
-    public void ChangeLevel(string levelName)
+    public void LoadLevelByName(string levelName)
     {
         SceneManager.LoadSceneAsync(levelName);
+        UnFreezeGame();
+    }
+
+    public void LoadLevelByIndex(int idx)
+    {
+        SceneManager.LoadSceneAsync(idx);
         UnFreezeGame();
     }
 
@@ -187,7 +193,7 @@ public class GameManager : MonoBehaviour
     }
     void RestartLevel()
     {
-        ChangeLevel(SceneManager.GetActiveScene().name);
+        LoadLevelByName(SceneManager.GetActiveScene().name);
     }
 
     private void OnEnable()

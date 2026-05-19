@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class IntroSceneManager : MonoBehaviour
 {
-    [SerializeField] GameObject menuCamvas, choiceCanvas;
+    [SerializeField] GameObject menuCamvas, carChoiceCanvas, levelSelectionCanvas;
     [SerializeField] GameObject nextBtn, previousBtn;
     [SerializeField] GameObject errorWrapper;
     [SerializeField] GameObject profileCreationPanel;
@@ -15,25 +15,25 @@ public class IntroSceneManager : MonoBehaviour
 
 
     [SerializeField] GameObject loadedProfileBtnPrefab;
-    [SerializeField] GameObject viewportContainer;
+    [SerializeField] GameObject profileSelectionViewportContainer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         menuCamvas.SetActive(true);
-        choiceCanvas.SetActive(false);
+        carChoiceCanvas.SetActive(false);
     }
 
     void GoToCarSelection()
     {
         menuCamvas.SetActive(false);
         profileSelectionPanel.SetActive(false);
-        choiceCanvas.SetActive(true);      
+        carChoiceCanvas.SetActive(true);
     }
 
-    public void SetButtons(int carIntex, int carPoolLength)
+    public void SetButtons(int carIndex, int carPoolLength)
     {
-        if (carIntex + 1 == carPoolLength)
+        if (carIndex + 1 == carPoolLength)
         {
             nextBtn.SetActive(false);
         }
@@ -43,7 +43,7 @@ public class IntroSceneManager : MonoBehaviour
         }
 
 
-        if (carIntex - 1 < 0)
+        if (carIndex - 1 < 0)
         {
             previousBtn.SetActive(false);
         }
@@ -71,7 +71,7 @@ public class IntroSceneManager : MonoBehaviour
             errorWrapper.SetActive(true);
             return false;
         }
-    
+
         errorWrapper.SetActive(false);
         return true;
     }
@@ -94,11 +94,17 @@ public class IntroSceneManager : MonoBehaviour
         profileSelectionPanel.SetActive(true);
     }
 
+    public void EnableSceneSelectionPanel()
+    {
+        carChoiceCanvas.SetActive(false);
+        levelSelectionCanvas.SetActive(true);
+    }
+
     public void PopulateProfileList()
     {
         foreach (var (profileName, times) in GameManager.instance.GetAllProfiles())
         {
-            GameObject profileBtnWrapper = Instantiate(loadedProfileBtnPrefab, viewportContainer.transform);
+            GameObject profileBtnWrapper = Instantiate(loadedProfileBtnPrefab, profileSelectionViewportContainer.transform);
 
             Button currentBtn = profileBtnWrapper.GetComponent<Button>();
             profileBtnWrapper.name = profileName;
