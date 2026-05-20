@@ -2800,11 +2800,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744061501114976370, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
       propertyPath: nextCheckpointID.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 744061501114976370, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
       propertyPath: 'nextCheckpointID.Array.data[0]'
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 744061501114976370, guid: 34351fb8b2ad12e44aecfdd6a3a0a73a, type: 3}
       propertyPath: 'nextCheckpointID.Array.data[1]'
